@@ -1,54 +1,54 @@
 export const productReducer = (state: any, action: any) => {
-  switch (action.type) {
+    switch (action.type) {
     case "getProductsRequest":
-      return {
-        ...state,
-        productsLoading: true
-      };
+        return {
+            ...state,
+            productsLoading: true
+        };
     case "getProductsSuccess":
-      return {
-        ...state,
-        products: action.payload.products,
-        productsLoading: false
-      };
+        return {
+            ...state,
+            products: action.payload.products,
+            productsLoading: false
+        };
     case "getProductsFailure":
-      return {
-        ...state,
-        products: null,
-        productsLoading: false
-      };
+        return {
+            ...state,
+            products: null,
+            productsLoading: false
+        };
     case "getProductRequest":
-      return {
-        ...state,
-        singleProductLoading: true
-      };
+        return {
+            ...state,
+            singleProductLoading: true
+        };
     case "getProductSuccess":
-      return {
-        ...state,
-        singleProduct: action.payload.singleProduct,
-        singleProductLoading: false
-      };
+        return {
+            ...state,
+            singleProduct: action.payload.singleProduct,
+            singleProductLoading: false
+        };
     case "getProductFailure":
-      return {
-        ...state,
-        singleProductLoading: false
-      };
+        return {
+            ...state,
+            singleProductLoading: false
+        };
 
     case "getProductsCategoriesRequest":
-      return {
-        ...state
-      };
+        return {
+            ...state
+        };
     case "getProductsCategoriesSuccess":
-      return {
-        ...state,
-        categories: action.payload.categories,
-      };
+        return {
+            ...state,
+            categories: action.payload.categories,
+        };
     case "getProductsCategoriesFailure":
-      return {
-        ...state,
-        categories: null,
-      };
+        return {
+            ...state,
+            categories: null,
+        };
     default:
-      return state;
-  }
+        return state;
+    }
 };

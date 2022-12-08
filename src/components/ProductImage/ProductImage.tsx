@@ -1,13 +1,18 @@
 import styled from "styled-components";
+import React from "react";
 
-const ProductImage = ({ img = "" }) => {
-  return (
-    <Wrapper>
-      <div className="main-screen">
-        <img alt="product main" src={img} />
-      </div>
-    </Wrapper>
-  );
+interface IProps {
+  img: any;
+}
+
+const ProductImage = ({ img }: IProps) => {
+    return (
+        <Wrapper>
+            <div className="main-screen">
+                <img alt="product main" src={img} />
+            </div>
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.section`

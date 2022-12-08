@@ -1,6 +1,7 @@
-import { Button, Typography } from '@mui/material';
-import { FaMinus, FaPlus } from 'react-icons/fa';
-import styled from 'styled-components';
+import { Button, Typography } from "@mui/material";
+import { FaMinus, FaPlus } from "react-icons/fa";
+import styled from "styled-components";
+import React from "react";
 
  interface IProps {
   setIncrease: any;
@@ -9,22 +10,22 @@ import styled from 'styled-components';
 }
 
 
- const AmountButtons = ({ setIncrease, setDecrease, amount }: IProps) => {
-  return (
-    <Wrapper>
-    <div className="cart-button">
-      <div className="amount-toggle">
-        <Button className = "amount-button" onClick={() => setDecrease()}>
-          <FaMinus />
-        </Button>
-        <Typography className="amount-style">{amount}</Typography>
-        <Button className = "amount-button" onClick={() => setIncrease()}>
-          <FaPlus />
-        </Button>
-      </div>
-    </div>
-    </Wrapper>
-  );
+const AmountButtons = ({ setIncrease, setDecrease, amount }: IProps) => {
+    return (
+        <Wrapper>
+            <div className="cart-button">
+                <div className="amount-toggle">
+                    <Button className = "amount-button" onClick={() => setDecrease()}>
+                        <FaMinus />
+                    </Button>
+                    <Typography className="amount-style">{amount}</Typography>
+                    <Button className = "amount-button" onClick={() => setIncrease()}>
+                        <FaPlus />
+                    </Button>
+                </div>
+            </div>
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.section`  

@@ -1,16 +1,17 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import React from "react";
 
 interface IProps {
   title: string;
 }
 
 const PageNavigation = ({ title }: IProps) => {
-  return (
-    <Wrapper>
-      <NavLink to="/">Home</NavLink>/{title}
-    </Wrapper>
-  );
+    return (
+        <Wrapper>
+            <NavLink to="/">Home</NavLink>/{title}
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.section`

@@ -4,52 +4,52 @@ import { CartContext } from "context/cart/CartContext";
 import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import React from "react";
 
 interface IProps {
   product: any;
 }
 const AddToCart = ({ product }: IProps) => {
-  const { addToCart } = useContext(CartContext);
-  const { id } = product;
-  const [amount, setAmount] = useState(1);
+    const { addToCart } = useContext(CartContext);
+    const { id } = product;
+    const [amount, setAmount] = useState(1);
 
-  const setDecrease = () => {
-    setAmount((oldAmount) => {
-      let newAmount = oldAmount - 1;
-      if (newAmount < 1) {
-        newAmount = 1;
-      }
-      return newAmount;
-    });
-  };
+    const setDecrease = () => {
+        setAmount((oldAmount) => {
+            let newAmount = oldAmount - 1;
+            if (newAmount < 1) {
+                newAmount = 1;
+            }
+            return newAmount;
+        });
+    };
 
-  const setIncrease = () => {
-    setAmount((oldAmount) => {
-      return oldAmount + 1;
-    });
-  };
+    const setIncrease = () => {
+        setAmount((oldAmount) => {
+            return oldAmount + 1;
+        });
+    };
 
-  return (
-    <Wrapper>
-      <AmountButtons
-        amount={amount}
-        setDecrease={setDecrease}
-        setIncrease={setIncrease}
-      />
-<Button component={NavLink} to="/cart"   
-  variant="contained"
-  className="button"
-
- onClick={() => addToCart(id, amount, product)}>
-  
-          <Typography fontSize="1.5rem" color="white">
-          Add To Cart
-          </Typography>
-
-</Button>
-   
-    </Wrapper>
-  );
+    return (
+        <Wrapper>
+            <AmountButtons
+                amount={amount}
+                setDecrease={setDecrease}
+                setIncrease={setIncrease}
+            />
+            <Button
+                component={NavLink}
+                to="/cart"
+                variant="contained"
+                className="button"
+                onClick={() => addToCart(id, amount, product)}
+            >
+                <Typography fontSize="1.5rem" color="white">
+                Add To Cart
+                </Typography>
+            </Button>
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.section`
@@ -83,7 +83,7 @@ const Wrapper = styled.section`
     color: #fff;
   }
 
-  .button { 
+  .button {
     width: 15rem;
     height: 3rem;
   }

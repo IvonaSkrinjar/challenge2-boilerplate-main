@@ -1,1 +1,1 @@
-export { default } from './WishlistBadge';
+export { default } from "./WishlistBadge";

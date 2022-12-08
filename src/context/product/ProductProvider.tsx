@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { ProductContext } from "./ProductContext";
 import { IProduct } from "interfaces";
 import { productReducer } from "./ProductReducer";
@@ -6,10 +6,10 @@ import { productServices } from "services/product.services";
 
 export interface ProductState {
   products: IProduct[];
-  singleProduct: {};
+  singleProduct: IProduct;
   categories: [];
   singleProductLoading: false;
-  productsLoading: false
+  productsLoading: false;
 }
 
 export type ProductContextProps = {
@@ -24,12 +24,12 @@ export type ProductContextProps = {
   productsLoading: false
 };
 
-const INITIAL_STATE: ProductState = {
-  products: [],
-  singleProduct: {},
-  categories: [],
-  singleProductLoading: false,
-  productsLoading: false
+const INITIAL_STATE = {
+    products: [],
+    singleProduct: {},
+    categories: [],
+    singleProductLoading: false,
+    productsLoading: false,
 };
 
 interface props {
@@ -37,83 +37,83 @@ interface props {
 }
 
 export const ProductProvider = ({ children }: props) => {
-  const [state, dispatch] = useReducer(productReducer, INITIAL_STATE);
+    const [state, dispatch] = useReducer(productReducer, INITIAL_STATE);
 
-  const getProducts = async () => {
-    dispatch({
-      type: "getProductsRequest",
-    });
-    await productServices
-      .getAll()
-      .then((response) => {
+    const getProducts = async () => {
         dispatch({
-          type: "getProductsSuccess",
-          payload: {
-            products: response.data,
-          },
+            type: "getProductsRequest",
         });
-      })
-      .catch((error) => {
-        console.error(error);
-        dispatch({
-          type: "getProductsFailure",
-        });
-      });
-  };
+        await productServices
+            .getAll()
+            .then((response) => {
+                dispatch({
+                    type: "getProductsSuccess",
+                    payload: {
+                        products: response.data,
+                    },
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+                dispatch({
+                    type: "getProductsFailure",
+                });
+            });
+    };
 
-  const getSingleProduct = async (productId: number) => {
-    dispatch({
-      type: "getProductRequest",
-    });
-    await productServices
-      .getById(productId)
-      .then((response) => {
+    const getSingleProduct = async (productId: number) => {
         dispatch({
-          type: "getProductSuccess",
-          payload: {
-            singleProduct: response.data,
-          },
+            type: "getProductRequest",
         });
-      })
-      .catch(() => {
-        dispatch({
-          type: "getProductFailure",
-        });
-      });
-  };
+        await productServices
+            .getById(productId)
+            .then((response) => {
+                dispatch({
+                    type: "getProductSuccess",
+                    payload: {
+                        singleProduct: response.data,
+                    },
+                });
+            })
+            .catch(() => {
+                dispatch({
+                    type: "getProductFailure",
+                });
+            });
+    };
 
-  const getProductsCategories = async () => {
-    dispatch({
-      type: "getProductsCategoriesRequest",
-    });
-    await productServices
-      .getProductsCategories()
-      .then((response) => {
+    const getProductsCategories = async () => {
         dispatch({
-          type: "getProductsCategoriesSuccess",
-          payload: {
-            categories: response.data,
-          },
+            type: "getProductsCategoriesRequest",
         });
-      })
-      .catch((error) => {
-        console.error(error);
-        dispatch({
-          type: "getProductsCategoriesFailure",
-        });
-      });
-  };
+        await productServices
+            .getProductsCategories()
+            .then((response) => {
+                dispatch({
+                    type: "getProductsCategoriesSuccess",
+                    payload: {
+                        categories: response.data,
+                    },
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+                dispatch({
+                    type: "getProductsCategoriesFailure",
+                });
+            });
+    };
 
-  useEffect(() => {
-    getProducts();
-    getProductsCategories();    
-  }, []);
+    useEffect(() => {
+        getProducts();
+        getProductsCategories();    
+    }, []);
 
-  return (
-    <ProductContext.Provider
-      value={{ ...state, getSingleProduct, getProductsCategories }}
-    >
-      {children}
-    </ProductContext.Provider>
-  );
+    return (
+        <ProductContext.Provider
+            value={{ ...state, getSingleProduct, getProductsCategories }}
+        >
+            {children}
+        </ProductContext.Provider>
+    );
 };

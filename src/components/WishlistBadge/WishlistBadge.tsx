@@ -1,12 +1,10 @@
-import React, { memo } from 'react'
-import styles from './styles.module.css';
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
-import { Typography } from '@mui/material';
+import React, { memo } from "react";
+import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 
 const WishlistBadge = () => {
-  return (
-    <FavoriteBorderRoundedIcon /> 
-  )
-}
+    return (
+        <FavoriteBorderRoundedIcon /> 
+    );
+};
 
-export default memo(WishlistBadge)
+export default memo(WishlistBadge);

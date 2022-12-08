@@ -1,144 +1,140 @@
 import styled from "styled-components";
 import numberFormatCurrency from "../../common/numberFormatCurrency";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { FilterContext } from "context/filter/FilterContext";
 import { ProductContext } from "context/product/ProductContext";
 import {
-  Autocomplete,
-  Box,
-  Button,
-  Checkbox,
-  CircularProgress,
-  FormControlLabel,
-  Slider,
-  TextField,
-  Typography,
+    Autocomplete,
+    Box,
+    Button,
+    Checkbox,
+    CircularProgress,
+    FormControlLabel,
+    Slider,
+    TextField,
+    Typography,
 } from "@mui/material";
 
 const FilterSection = () => {
-  const { categories, getProductsCategories, products, productsLoading } =
+    const { categories, products, productsLoading } =
     useContext(ProductContext);
-  const [value, setValue] = useState("");
-  const [checked] = useState([true, false]);
+    const [value, setValue] = useState("");
+    const [checked] = useState([true, false]);
 
-  const {
-    filters: { category, price, maxPrice, minPrice },
-    updateFilterValue,
-    clearFilters,
-  } = useContext(FilterContext);
+    const {
+        filters: { category, price, maxPrice, minPrice },
+        updateFilterValue,
+        clearFilters,
+    } = useContext(FilterContext);   
 
- /* useEffect(() => {
-    getProductsCategories();
-  }, []);*/
+    const categoryData = ["all", ...categories];
 
-  let categoryData = ["all", ...categories];
+    const handleSearchChanges = (event: any) => {
+        setValue(value);
+        updateFilterValue(event);
+    };
 
-  const handleSearchChanges = (event: any) => {
-    setValue(value);
-    updateFilterValue(event);
-  };
+    if (productsLoading) {
+        return <CircularProgress sx ={{width: "4rem", height: "4rem", justifyContent: "center"}}/>;
+    }
 
-  if (productsLoading) {
-    return <CircularProgress sx ={{width: "4rem", height: "4rem", justifyContent: "center"}}/>
-  }
-
-  return (
-    <Wrapper>    
-        <Autocomplete
-          id="search"
-          getOptionLabel={(option) => option.title || ""}
-          options={products}
-          sx={{
-            width: 300,  
-          }}         
-          clearOnEscape
-          onChange={(event: any, value: any | null) => {
-            handleSearchChanges({ target: { name: "text", value: value } });
-          }}
-          renderInput={(params) => (
-            <TextField            
-              {...params}
-              label={ <Typography  sx={{fontSize: "13px", color:"grey"}}> Search By Title </Typography>}
-              variant="outlined"
-              fullWidth              
-            />
-          )}        
-        />     
-
-      <div className="filter_price">
-        <Typography variant="h4" component="h4">
-          Filter By Price
-        </Typography>
-        <Typography
-          sx={{
-            fontSize: "1.5rem",
-            float: "right",
-            marginTop: "3rem",
-          }}
-        >
-          {numberFormatCurrency.formatNumber(price)}
-        </Typography>
-        <Slider
-          sx={{
-            maxWidth: "33rem",
-          }}
-          name="price"
-          defaultValue={maxPrice}
-          min={minPrice}
-          max={maxPrice}
-          value={price}
-          onChange={updateFilterValue}
-        />
-      </div>
-      <div className="filter-category">
-        <Typography variant="h4" component="h4">
-          Product Categories
-        </Typography>
-        <Box>
-          <div className="category-button">
-            {categoryData.map((c, index) => {
-              return (
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={category === c.toLowerCase() ? true : false}
-                      onChange={(event: any, value: any | null) => {
-                        handleSearchChanges({
-                          target: {
-                            name: "category",
-                            checked: checked,
-                            value: c,
-                          },
-                        });
-                      }}
+    return (
+        <Wrapper>    
+            <Autocomplete
+                id="search"
+                getOptionLabel={(option) => option.title || ""}
+                options={products}
+                sx={{
+                    width: 300,  
+                }}         
+                clearOnEscape
+                onChange={(event: any, value: any | null) => {
+                    handleSearchChanges({ target: { name: "text", value: value } });
+                }}
+                renderInput={(params) => (
+                    <TextField            
+                        {...params}
+                        label={ <Typography  sx={{fontSize: "13px", color:"grey"}}> Search By Title </Typography>}
+                        variant="outlined"
+                        fullWidth              
                     />
-                  }
-                  label={
-                    <Typography fontSize="1.5rem" color="grey">
-                      {c}
-                    </Typography>
-                  }
-                  key={index}
-                />
-              );
-            })}
-          </div>
-        </Box>
-      </div>
+                )}        
+            />     
 
-      <div className="filter-clear">
-        <Button
-          variant="contained"
-          className="clear-button"
-          onClick={clearFilters}
-        >
-          <Typography fontSize="1.5rem" color="white">
+            <div className="filter_price">
+                <Typography variant="h4" component="h4">
+          Filter By Price
+                </Typography>
+                <Typography
+                    sx={{
+                        fontSize: "1.5rem",
+                        float: "right",
+                        marginTop: "3rem",
+                    }}
+                >
+                    {numberFormatCurrency.formatNumber(price)}
+                </Typography>
+                <Slider
+                    sx={{
+                        maxWidth: "33rem",
+                    }}
+                    name="price"
+                    defaultValue={maxPrice}
+                    min={minPrice}
+                    max={maxPrice}
+                    value={price}
+                    onChange={updateFilterValue}
+                />
+            </div>
+            <div className="filter-category">
+                <Typography variant="h4" component="h4">
+          Product Categories
+                </Typography>
+                <Box>
+                    <div className="category-button">
+                        {categoryData.map((c, index) => {
+                            return (
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={category === c.toLowerCase() ? true : false}
+                                            onChange={(event: any, value: any | null) => {
+                                                handleSearchChanges({
+                                                    target: {
+                                                        name: "category",
+                                                        checked: checked,
+                                                        value: c,
+                                                    },
+                                                });
+                                            }}
+                                        />
+                                    }
+                                    label={
+                                        <Typography fontSize="1.5rem" color="grey">
+                                            {c}
+                                        </Typography>
+                                    }
+                                    key={index}
+                                />
+                            );
+                        })}
+                    </div>
+                </Box>
+            </div>
+
+            <div className="filter-clear">
+                <Button
+                    variant="contained"
+                    className="clear-button"
+                    onClick={clearFilters}
+                >
+                    <Typography fontSize="1.5rem" color="white">
             Clear Filters
-          </Typography>
-        </Button>
-      </div>
-    </Wrapper>
-  );
+                    </Typography>
+                </Button>
+            </div>
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.section`

@@ -3,54 +3,55 @@ import { IProduct } from "interfaces";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import numberFormatCurrency from "../../common/numberFormatCurrency";
+import React from "react";
 
 interface IProps {
   products: IProduct[];
 }
 const ListView = ({ products }: IProps) => {
-  return (
-    <Wrapper className="section">
-      <div className="container grid">
-        {products.map((product: any) => {
-          const { id, title, image, price, description } = product;
-          return (
-            <div className="card grid grid-two-column">
-              <figure>
-                <img alt="product" src={image} />
-              </figure>
+    return (
+        <Wrapper className="section">
+            <div className="container grid">
+                {products.map((product: any) => {
+                    const { id, title, image, price, description } = product;
+                    return (
+                        <div className="card grid grid-two-column" key ={product.id}>
+                            <figure>
+                                <img alt="product" src={image} />
+                            </figure>
 
-              <div className="card-data">
-                <Typography component="h3" variant="h3">
-                  {title}
-                </Typography>
-                <Typography sx={{ fontSize: "15px", color: "grey" }}>
-                  {numberFormatCurrency.formatNumber(price)}
-                </Typography>
-                <Typography sx={{ fontSize: "15px" }}>
-                  {description.slice(0, 90)}...
-                </Typography>
-                <Button
-                  component={NavLink}
-                  to={`/product/${id}`}
-                  variant="contained"
-                  className="button"
-                >
-                  <Typography fontSize="1.5rem" color="white">
-                    Read More
-                  </Typography>
-                </Button>
-              </div>
+                            <div className="card-data">
+                                <Typography component="h3" variant="h3">
+                                    {title}
+                                </Typography>
+                                <Typography sx={{ fontSize: "15px", color: "grey" }}>
+                                    {numberFormatCurrency.formatNumber(price)}
+                                </Typography>
+                                <Typography sx={{ fontSize: "15px" }}>
+                                    {description.slice(0, 90)}...
+                                </Typography>
+                                <Button
+                                    component={NavLink}
+                                    to={`/product/${id}`}
+                                    variant="contained"
+                                    className="button"                                    
+                                >
+                                    <Typography fontSize="1.5rem" color="white">
+                              Read More
+                                    </Typography>
+                                </Button>
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
-          );
-        })}
-      </div>
-    </Wrapper>
-  );
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.section`
   padding: 9rem 0;
-  display: fles;
+  display: flex;
   .container {
     max-width: 120rem;
   }

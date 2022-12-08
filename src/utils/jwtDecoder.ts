@@ -4,6 +4,6 @@ export default function getRolesFromToken(token:string) {
     const decodedJwtJsonData = window.atob(jwtData);
     const decodedJwtData = JSON.parse(decodedJwtJsonData);
     
-    return decodedJwtData
-  }
+    return decodedJwtData;
+}
   

@@ -1,34 +1,40 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { AppLayout } from "components/Layouts";
 import Headline from "components/Headline";
 import { CartContext } from "context/cart/CartContext";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { CartContent } from "components/CartContent";
+import { Button } from "@mui/material";
 
 const CartPage = () => {
-  const { cart } = useContext(CartContext);
-  if (cart.length < 1) {
-    return (
-      <Wrapper className="page-100">
-        <div className="empty">
-          <h2>No products in the cart.</h2>
-          <NavLink to={"/"} className="btn">
+    const { cart } = useContext(CartContext);
+    if (cart.length < 1) {
+        return (
+            <Wrapper className="page-100">
+                <div className="empty">
+                    <h2>No products in the cart.</h2>
+                    <Button
+                        component={NavLink}
+                        to={"/"}
+                        variant="contained"
+                        className="start-button"
+                    >
             Start Shopping
-          </NavLink>
-        </div>
-      </Wrapper>
+                    </Button>
+                </div>
+            </Wrapper>
+        );
+    }
+
+    return (
+        <Wrapper className="page">
+            <AppLayout>
+                <Headline title="Cart" />
+                <CartContent />
+            </AppLayout>
+        </Wrapper>
     );
-  }
-  
-  return (
-    <Wrapper className="page">
-      <AppLayout>
-        <Headline title="Cart" />
-        <CartContent />
-      </AppLayout>
-    </Wrapper>
-  );
 };
 
 const Wrapper = styled.section`
@@ -67,6 +73,10 @@ const Wrapper = styled.section`
       grid-row-gap: 15px;
       row-gap: 15px;
     }
+  }
+  .clear-button {
+    width: 45rem;
+    height: 7rem;
   }
 `;
 

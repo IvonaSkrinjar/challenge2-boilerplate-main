@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { ProductContext } from "context/product/ProductContext";
@@ -12,63 +12,63 @@ import { NotFoundPage } from "pages";
 import { CircularProgress, Typography } from "@mui/material";
 
 const Product = () => {
-  const { getSingleProduct, singleProduct, singleProductLoading } = useContext(ProductContext);
+    const { getSingleProduct, singleProduct, singleProductLoading } = useContext(ProductContext);
 
-  const { id } = useParams();
+    const { id } = useParams();
 
-  const {
-    title,
-    price,
-    description,
-    category,
-    rating = {
-      rate: null,
-      count: null,
-    },
-    image,
-  } = singleProduct;
+    const {
+        title,
+        price,
+        description,
+        category,
+        rating = {
+            rate: null,
+            count: null,
+        },
+        image,
+    } = singleProduct;
 
-  useEffect(() => {
-    getSingleProduct(id);
-  }, []);
+    useEffect(() => {
+        getSingleProduct(id);
+    }, []);
 
-  if (singleProductLoading) {
-    return <CircularProgress className="page_loading" sx ={{width: "4rem", height: "4rem", justifyContent: "center"}}/>
-  }
+    if (singleProductLoading) {
+        return <CircularProgress className="page_loading" sx ={{width: "4rem", height: "4rem", justifyContent: "center"}}/>;
+    }
 
-  //grid
-  //thypograhy
-  return (
-    <Wrapper>
-      <Header />
-      <Container className="container">
-        {singleProduct ? (
-          <div className="grid grid-two-column">
-            <div className="product_images">
-              <ProductImage img={image} />
-            </div>
+    //grid
+    //thypograhy
+    return (
+        <Wrapper>
+            <Header />
+            <Container className="container">
+                {singleProduct ? (
+                    <div className="grid grid-two-column">
+                        <div className="product_images">
+                            <ProductImage img={image} />
+                        </div>
 
-            <div className="product-data">
-              <Typography component="h2" variant="h2">{title}</Typography>
-              <Star stars={rating.rate} reviews={rating.count} />
+                        <div className="product-data">
+                            <Typography component="h2" variant="h2">{title}</Typography>
+                            <Star stars={rating.rate} reviews={rating.count} />
 
-              <Typography className="product-data-price product-data-real-price">
-                {numberFormatCurrency.formatNumber(price)}
-              </Typography>
-              <Typography sx={{ fontSize: "15px" }}>{description}</Typography>
+                            <Typography className="product-data-price product-data-real-price">
+                                {numberFormatCurrency.formatNumber(price)}
+                            </Typography>
+                            <Typography sx={{ fontSize: "15px" }}>{description}</Typography>
 
-              <Typography component="h5" variant="h5">Categories: {category}</Typography>
+                            <Typography component="h5" variant="h5">Categories: {category}</Typography>
            
             
-            <AddToCart product={singleProduct} />
-            </div>
-          </div>
-        ) : (
-          <NotFoundPage />
-        )}
-      </Container>
-    </Wrapper>
-  );
+                            <AddToCart product={singleProduct} />
+                        </div>
+                    </div>
+                ) : (
+                    <NotFoundPage />
+                )}
+            </Container>
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.section`

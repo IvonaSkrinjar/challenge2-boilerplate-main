@@ -1,1 +1,1 @@
-export { default } from './CarBadge';
+export { default } from "./CarBadge";

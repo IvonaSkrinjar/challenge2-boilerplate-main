@@ -2,25 +2,26 @@ import { Grid } from "@mui/material";
 import { IProduct } from "interfaces";
 import styled from "styled-components";
 import Product from "../Product/Product";
+import React from "react";
 
 interface IProps {
   products: IProduct[];
 }
 
 const GridView = ({ products }: IProps) => {
-  return (
-    <Wrapper className="section">
-      <div className="container grid">
-        <Grid container spacing={3} columns={{ md: 15 }}>
-          {products?.map((item) => (
-            <Grid item xs={12} sm={6} md={3} lg={2} key={item.id}>
-              <Product {...item} />
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-    </Wrapper>
-  );
+    return (
+        <Wrapper className="section">
+            <div className="container grid">
+                <Grid container spacing={3} columns={{ md: 15 }}>
+                    {products?.map((item) => (
+                        <Grid item xs={12} sm={6} md={3} lg={2} key={item.id}>
+                            <Product {...item} />
+                        </Grid>
+                    ))}
+                </Grid>
+            </div>
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.section`
