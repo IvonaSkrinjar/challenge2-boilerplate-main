@@ -1,1 +1,1 @@
-export { default as CartColumns} from './CartColumns';
+export { default as CartColumns} from "./CartColumns";
