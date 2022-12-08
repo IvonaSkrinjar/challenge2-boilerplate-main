@@ -23,7 +23,7 @@ const CartItem = ({ id, image, title, price, amount }: IProps) => {
     const {  removeItem, toggleAmount } = useContext(CartContext);
 
     const setDecrease = () => {
-        toggleAmount(id, "dec");
+        toggleAmount(id, "desc");
     };
 
     const setIncrease = () => {

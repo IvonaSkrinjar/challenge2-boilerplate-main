@@ -47,7 +47,7 @@ export const cartReducer = (state: any, action: any) => {
         };
 
     case "toggleAmount":{
-        const { value } = action.payload.value;
+        const { value } = action.payload;
         const tempCartItem = state.cart.map((item: any) => {
             if (item.id === action.payload.id)
                 if (value === "inc") {

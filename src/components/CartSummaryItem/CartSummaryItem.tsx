@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 const CartSummaryItem = () => {
     const { total_amount, countCartTotal, shipping_fee } = useContext(CartContext);
-  
+    
     useEffect(() => {
         countCartTotal();   
     }, [total_amount]);

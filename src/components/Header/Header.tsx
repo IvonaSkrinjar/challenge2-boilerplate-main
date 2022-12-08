@@ -11,12 +11,7 @@ import { CartContext } from "context/cart/CartContext";
 
 export const Header = () => {
 
-    const {total_items,countCartTotal} = useContext(CartContext);
-
-    useEffect(() => {
-        countCartTotal();   
-    }, [total_items]);
-  
+    const {total_items} = useContext(CartContext); 
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Container>

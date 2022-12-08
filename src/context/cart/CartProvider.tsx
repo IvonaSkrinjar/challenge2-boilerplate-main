@@ -22,16 +22,16 @@ const getLocalStorage = () => {
     }
 };
 
-export type CartContextProps = { 
-  cart :  [];
-  addToCart: (id: number, amount: number ,item: IProduct) => void;
+export type CartContextProps = {
+  cart: [];
+  addToCart: (id: number, amount: number, item: IProduct) => void;
   removeItem: (id: number) => void;
-  countCartTotal(): any,
-  clearCart:() => void,
-  toggleAmount: (id: number, value: any) => void; 
-  total_amount: 0,
-  shipping_fee: 5,
-  total_items: 0
+  countCartTotal(): any;
+  clearCart: () => void;
+  toggleAmount: (id: number, value: any) => void;
+  total_amount: number;
+  shipping_fee: number;
+  total_items: number;
 };
 
 const INITIAL_STATE = {
@@ -76,7 +76,6 @@ export const CartProvider = ({ children }: props) => {
     };
 
     useEffect(() => {
-    // dispatch({ type: "countCartTotal" });
         localStorage.setItem("cart", JSON.stringify(state.cart));
     }, [state.cart]);
 
@@ -89,10 +88,7 @@ export const CartProvider = ({ children }: props) => {
                 removeItem,        
                 toggleAmount,
                 clearCart,
-                countCartTotal,
-                total_amount: 0,
-                shipping_fee: 5,
-                total_items: 0
+                countCartTotal
             }}
         >
             {children}
