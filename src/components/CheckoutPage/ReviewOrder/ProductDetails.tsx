@@ -76,7 +76,7 @@ function ProductDetails() {
                         {numberFormatCurrency.formatNumber(total_amount)}
                     </Typography>
                 </Grid>
-                <Grid item xs={12} sm={7} md={9}>
+                <Grid item xs={12} sm={12} md={9}>
                     <Typography
                         style={{ fontSize: "14px", float: "right", paddingRight: "2rem" }}
                         variant="subtitle1"

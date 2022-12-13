@@ -13,7 +13,7 @@ export default function ReviewOrder() {
             Order summary
             </Typography>
             <ProductDetails />
-            <Grid container spacing={2}>
+            <Grid container spacing={2} style={{paddingTop: "3rem"}}>
                 <ShippingDetails formValues={formValues} />
                 <PaymentDetails formValues={formValues} />
             </Grid>
