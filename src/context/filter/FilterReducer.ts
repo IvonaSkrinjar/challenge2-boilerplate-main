@@ -1,6 +1,6 @@
 export const filterReducer = (state: any, action: any) => {
     switch (action.type) {
-    case "LOAD_FILTER_PRODUCTS":{
+    case "loadFilterProducts":{
         const priceArr = action.payload.map((product: { price: any; }) => product.price);
 
         const maxPrice = Math.max(...priceArr);
@@ -12,25 +12,25 @@ export const filterReducer = (state: any, action: any) => {
             filters: { ...state.filters, maxPrice, price: maxPrice },
         };
     }
-    case "SET_GRID_VIEW":
+    case "setGridView":
         return {
             ...state,
             grid_view: true,
         };
 
-    case "SET_LIST_VIEW":
+    case "setListView":
         return {
             ...state,
             grid_view: false,
         };
 
-    case "GET_SORT_VALUE":
+    case "getSortValue":
         return {
             ...state,
             sorting_value: action.payload,
         };
 
-    case "SORTING_PRODUCTS":{        
+    case "sortingProducts":{        
         const { filter_products, sorting_value } = state;
         const tempSortProduct = [...filter_products];
 
@@ -59,7 +59,7 @@ export const filterReducer = (state: any, action: any) => {
             filter_products: newSortData,
         };
     }
-    case "UPDATE_FILTERS_VALUE":{
+    case "updateFiltersValue":{
         const { name, value } = action.payload;
 
         return {
@@ -70,7 +70,7 @@ export const filterReducer = (state: any, action: any) => {
             },
         };
     }      
-    case "FILTER_PRODUCTS":{
+    case "filterProducts":{
         const { all_products } = state;
         let tempFilterProduct = [...all_products];
 
@@ -102,7 +102,7 @@ export const filterReducer = (state: any, action: any) => {
             filter_products: tempFilterProduct,
         };
     }
-    case "CLEAR_FILTERS":
+    case "clearFilters":
         return {
             ...state,
             filters: {

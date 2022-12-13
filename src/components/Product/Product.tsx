@@ -13,8 +13,9 @@ import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded
 import { AddShoppingCart } from "@mui/icons-material";
 import React, { useContext } from "react";
 import { CartContext } from "context/cart/CartContext";
+import { IProduct } from "interfaces";
 
-const Product = (product: any) => {
+const Product = (product: IProduct) => {
     const { id, category, title, image, price } = product;
     const { addToCart } = useContext(CartContext);
     const handleAddToCart = () => addToCart(product.id, 1, product);

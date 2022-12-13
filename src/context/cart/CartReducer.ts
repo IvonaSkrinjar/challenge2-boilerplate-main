@@ -1,3 +1,4 @@
+import { ICartProduct } from "interfaces";
 
 export const cartReducer = (state: any, action: any) => {
     switch (action.type) {
@@ -33,7 +34,7 @@ export const cartReducer = (state: any, action: any) => {
     }
     case "removeItem":{
         const tempCart = state.cart.filter(
-            (item: any) => item.id !== action.payload
+            (item: ICartProduct) => item.id !== action.payload
         );
         return {
             ...state,
@@ -85,7 +86,7 @@ export const cartReducer = (state: any, action: any) => {
     }
     case "countCartTotal":{
         const { total_items, total_amount } = state.cart.reduce(
-            (total: any, cartItem: any) => {
+            (total: any, cartItem: ICartProduct) => {
                 const { amount, price } = cartItem;
                 total.total_items += amount;
                 total.total_amount += price * amount;

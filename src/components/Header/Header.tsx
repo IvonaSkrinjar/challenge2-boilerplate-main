@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect } from "react";
+import React, { memo, useContext } from "react";
 import logo from "../../assets/images/logo_transparent.png";
 import Container from "components/Container";
 import { AppBar, Badge, Box,  IconButton,Toolbar } from "@mui/material";
@@ -21,10 +21,7 @@ export const Header = () => {
                         <ul className={styles.nav_items}>
                             <NavLink to={"/"}>
                                 <li className={styles.nav_item}>Home</li>
-                            </NavLink>
-                            <NavLink to={"/example"}>
-                                <li className={styles.nav_item}>Example</li>
-                            </NavLink>
+                            </NavLink>                          
                         </ul>
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ display: { xs: "none", md: "flex" } }}>

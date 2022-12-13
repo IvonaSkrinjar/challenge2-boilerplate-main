@@ -21,10 +21,10 @@ const CartSummaryItem = () => {
                         color="textSecondary"
                         gutterBottom
                     >
-            Shopping Cart
+                     Shopping Cart
                     </Typography>
                     <Typography variant="h3" component="h3" >     
-            Order Summary
+                     Order Summary
                     </Typography>
                     <Typography variant="subtitle2">
                         <hr />
@@ -32,7 +32,7 @@ const CartSummaryItem = () => {
                     <Grid container>
                         <Grid item xs={11} sm={11} md={11} lg={11}>
                             <Typography variant="body1" component="div" sx={{fontSize: "14px"}}>
-                Subtotal:
+                            Subtotal:
                             </Typography>             
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
@@ -42,7 +42,7 @@ const CartSummaryItem = () => {
                         </Grid>
                         <Grid item xs={11} sm={11} md={11} lg={11}>
                             <Typography variant="body1" component="div" sx={{fontSize: "14px"}}>
-                Shipping:
+                             Shipping:
                             </Typography>             
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
@@ -52,7 +52,7 @@ const CartSummaryItem = () => {
                         </Grid>
                         <Grid item xs={11} sm={11} md={11} lg={11}>
                             <Typography variant="body1" component="div" sx={{fontSize: "14px"}}>
-              Order Total:
+                            Order Total:
                             </Typography>
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
@@ -68,7 +68,7 @@ const CartSummaryItem = () => {
                         variant="contained"
                         className="shopping-button"
                         size="large">
-          Proceed To Checkout
+                        Proceed To Checkout
                     </Button>
                 </CardActions>
             </Card>

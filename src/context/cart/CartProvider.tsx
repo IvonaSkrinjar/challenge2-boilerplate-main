@@ -8,7 +8,6 @@ type PaymentMathodType = "cash_delivery" | "bank_transfer" | "paypal";
 export interface CartState {
   cart: ICartProduct[], 
   shipping_fee: 5,
-  //tax: 20,
   total_amount: 0,
   total_items: 0,
   paymentMethod: PaymentMathodType;
@@ -26,9 +25,9 @@ export type CartContextProps = {
   cart: [];
   addToCart: (id: number, amount: number, item: IProduct) => void;
   removeItem: (id: number) => void;
-  countCartTotal(): any;
+  countCartTotal: () => void;
   clearCart: () => void;
-  toggleAmount: (id: number, value: any) => void;
+  toggleAmount: (id: number, value: string) => void;
   total_amount: number;
   shipping_fee: number;
   total_items: number;
@@ -38,7 +37,6 @@ const INITIAL_STATE = {
     cart: getLocalStorage(),
     total_items: 0,
     shipping_fee: 5,
-    tax: 20,
     total_amount: 0,
     paymentMethod: "cash_delivery",
 };
@@ -51,19 +49,19 @@ export const CartProvider = ({ children }: props) => {
     const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
   
 
-    const addToCart = (id: any, amount: any, product: any) => {  
+    const addToCart = (id: number, amount: number, product: ICartProduct) => {
         dispatch({
             type: "addToCart",
-            payload: { id, amount, product},
+            payload: { id, amount, product },
         });
     };
 
     const removeItem = (id: number) => {
-        dispatch({ type: "removeFromCart", payload: id });   
+        dispatch({ type: "removeItem", payload: id });   
     };
  
   
-    const toggleAmount = (id: number,value: number) => {
+    const toggleAmount = (id: number, value: number) => {
         dispatch({ type: "toggleAmount", payload: {id, value }});
     };
  

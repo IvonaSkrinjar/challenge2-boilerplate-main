@@ -1,7 +1,8 @@
 import { Container, Button, Box, CssBaseline, Grid } from "@mui/material";
 import { CartItem } from "components/CartItem";
-import OrderSummaryItem from "components/CartSummaryItem";
+import CartSummaryItem from "components/CartSummaryItem";
 import { CartContext } from "context/cart/CartContext";
+import { ICartProduct } from "interfaces";
 import React from "react";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
@@ -16,7 +17,7 @@ const CartContent = () => {
                 <CssBaseline />
                 <Container fixed>
                     <Grid container spacing={3}>
-                        {cart.map((item: any) => (
+                        {cart.map((item: ICartProduct) => (
                             <Grid item xs={12} sm={6} md={7} lg={7} key={item.id}>
                                 <Grid container>
                                     <Grid item xs>
@@ -27,36 +28,37 @@ const CartContent = () => {
                         ))}
 
                         <Grid item xs={12} sm={6} md={5} lg={5}>
-                            <OrderSummaryItem />
+                            <CartSummaryItem />
                         </Grid>
                     </Grid>
+
+                    <Box className="link-container">
+                        <Button
+                            component={NavLink}
+                            to={"/"}
+                            variant="contained"
+                            className="shopping-button"
+                        >
+                Continue Shopping
+                        </Button>
+                        <Button
+                            sx={{
+                                marginLeft: "27rem",
+                                height: "3rem",
+                                backgroundColor: "red",
+                                color: "white",
+                                "&:hover": {
+                                    backgroundColor: "#fff",
+                                    color: "#3c52b2",
+                                    opacity: 1,
+                                },
+                            }}
+                            onClick={() => clearCart()}
+                        >
+                Clear Shopping Cart
+                        </Button>
+                    </Box>
                 </Container>
-                <Box className="link-container">
-                    <Button
-                        component={NavLink}
-                        to={"/"}
-                        variant="contained"
-                        className="shopping-button"
-                    >
-            Continue Shopping
-                    </Button>
-                    <Button
-                        sx={{
-                            marginLeft: "27rem",
-                            height: "3rem",
-                            backgroundColor: "red",
-                            color: "white",
-                            "&:hover": {
-                                backgroundColor: "#fff",
-                                color: "#3c52b2",
-                                opacity: 1,
-                            },
-                        }}
-                        onClick={() => clearCart()}
-                    >
-            Clear Shopping Cart
-                    </Button>
-                </Box>
             </React.Fragment>
         </Wrapper>
     );
@@ -64,8 +66,7 @@ const CartContent = () => {
 
 const Wrapper = styled.section`  
   .link-container {
-    padding-top: 1rem;
-    margin-left: 35rem;
+    padding-top: 1rem;   
     
   }
   .link-button {

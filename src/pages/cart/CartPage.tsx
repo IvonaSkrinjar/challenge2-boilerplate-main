@@ -20,7 +20,7 @@ const CartPage = () => {
                         variant="contained"
                         className="start-button"
                     >
-            Start Shopping
+                        Start Shopping
                     </Button>
                 </div>
             </Wrapper>
@@ -30,7 +30,7 @@ const CartPage = () => {
     return (
         <Wrapper className="page">
             <AppLayout>
-                <Headline title="Cart" />
+                <Headline title="Your Shopping Cart" />
                 <CartContent />
             </AppLayout>
         </Wrapper>

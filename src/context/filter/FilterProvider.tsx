@@ -54,36 +54,36 @@ export const FilterProvider = ({ children }: props) => {
     const [state, dispatch] = useReducer(filterReducer, INITIAL_STATE);
 
     const setGridView = () => {
-        return dispatch({ type: "SET_GRID_VIEW" });
+        return dispatch({ type: "setGridView" });
     };
 
     const setListView = () => {
-        return dispatch({ type: "SET_LIST_VIEW" });
+        return dispatch({ type: "setListView" });
     };
 
     const sorting = (event: any) => {
         const userValue = event.target.value;
-        dispatch({ type: "GET_SORT_VALUE", payload: userValue });
+        dispatch({ type: "getSortValue", payload: userValue });
     };
 
     const updateFilterValue = (event: any) => {
         const name = event.target.name;
         const value = event.target.value;
 
-        return dispatch({ type: "UPDATE_FILTERS_VALUE", payload: { name, value } });
+        return dispatch({ type: "updateFiltersValue", payload: { name, value } });
     };
 
     const clearFilters = () => {
-        dispatch({ type: "CLEAR_FILTERS" });
+        dispatch({ type: "clearFilters" });
     };
 
     useEffect(() => {
-        dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products });
+        dispatch({ type: "loadFilterProducts", payload: products });
     }, [products]);
 
     useEffect(() => {
-        dispatch({ type: "FILTER_PRODUCTS" });
-        dispatch({ type: "SORTING_PRODUCTS" });
+        dispatch({ type: "filterProducts" });
+        dispatch({ type: "sortingProducts" });
     }, [products, categories, state.sorting_value, state.filters]);
 
     return (

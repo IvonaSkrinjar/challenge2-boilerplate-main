@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 
 interface IProps {
-  img: any;
+  img: string;
 }
 
 const ProductImage = ({ img }: IProps) => {

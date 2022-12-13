@@ -6,10 +6,10 @@ import { Container } from "../../components/styles/Container";
 import { numberFormatCurrency } from "../../common/numberFormatCurrency";
 import Star from "../../components/Star/Star";
 import { ProductImage } from "components/ProductImage";
-import Header from "components/Header";
 import AddToCart from "components/AddToCart";
 import { NotFoundPage } from "pages";
 import { CircularProgress, Typography } from "@mui/material";
+import { AppLayout } from "components/Layouts";
 
 const Product = () => {
     const { getSingleProduct, singleProduct, singleProductLoading } = useContext(ProductContext);
@@ -22,8 +22,8 @@ const Product = () => {
         description,
         category,
         rating = {
-            rate: null,
-            count: null,
+            rate: 0,
+            count: 0,
         },
         image,
     } = singleProduct;
@@ -36,37 +36,36 @@ const Product = () => {
         return <CircularProgress className="page_loading" sx ={{width: "4rem", height: "4rem", justifyContent: "center"}}/>;
     }
 
-    //grid
-    //thypograhy
     return (
         <Wrapper>
-            <Header />
-            <Container className="container">
-                {singleProduct ? (
-                    <div className="grid grid-two-column">
-                        <div className="product_images">
-                            <ProductImage img={image} />
-                        </div>
+            <AppLayout>
+                <Container className="container">
+                    {singleProduct ? (
+                        <div className="grid grid-two-column">
+                            <div className="product_images">
+                                <ProductImage img={image} />
+                            </div>
 
-                        <div className="product-data">
-                            <Typography component="h2" variant="h2">{title}</Typography>
-                            <Star stars={rating.rate} reviews={rating.count} />
+                            <div className="product-data">
+                                <Typography component="h2" variant="h2">{title}</Typography>
+                                <Star stars={rating.rate} reviews={rating.count} />
 
-                            <Typography className="product-data-price product-data-real-price">
-                                {numberFormatCurrency.formatNumber(price)}
-                            </Typography>
-                            <Typography sx={{ fontSize: "15px" }}>{description}</Typography>
+                                <Typography className="product-data-price product-data-real-price">
+                                    {numberFormatCurrency.formatNumber(price)}
+                                </Typography>
+                                <Typography sx={{ fontSize: "15px" }}>{description}</Typography>
 
-                            <Typography component="h5" variant="h5">Categories: {category}</Typography>
+                                <Typography component="h5" variant="h5">Categories: {category}</Typography>
            
             
-                            <AddToCart product={singleProduct} />
+                                <AddToCart product={singleProduct} />
+                            </div>
                         </div>
-                    </div>
-                ) : (
-                    <NotFoundPage />
-                )}
-            </Container>
+                    ) : (
+                        <NotFoundPage />
+                    )}
+                </Container>
+            </AppLayout>
         </Wrapper>
     );
 };

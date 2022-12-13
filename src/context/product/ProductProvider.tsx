@@ -19,9 +19,10 @@ export type ProductContextProps = {
   products: IProduct[];
   featureProducts: IProduct[];
   getProductsCategories(): [];
+  getProducts() : [];
   categories: [];
   singleProductLoading: false;
-  productsLoading: false
+  productsLoading: false;
 };
 
 const INITIAL_STATE = {
@@ -103,15 +104,15 @@ export const ProductProvider = ({ children }: props) => {
                 });
             });
     };
-
+    
     useEffect(() => {
         getProducts();
-        getProductsCategories();    
+        getProductsCategories();
     }, []);
 
     return (
         <ProductContext.Provider
-            value={{ ...state, getSingleProduct, getProductsCategories }}
+            value={{ ...state, getProducts, getSingleProduct, getProductsCategories }}
         >
             {children}
         </ProductContext.Provider>

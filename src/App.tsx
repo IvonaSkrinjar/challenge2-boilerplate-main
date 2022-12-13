@@ -1,7 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import { CartProvider } from "./context/cart/CartProvider";
 import { ProductProvider } from "./context/product/ProductProvider";
-import { HomePage, NotFoundPage, CartPage, ProductPage } from "pages";
+import {
+    HomePage,
+    NotFoundPage,
+    CartPage,
+    ProductPage,
+    CheckoutPage,
+} from "pages";
 import { GlobalStyle } from "GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import { FilterProvider } from "context/filter/FilterProvider";
@@ -35,20 +41,21 @@ function App() {
     };
  
     return (
-        <ThemeProvider theme={theme}>        
-            <GlobalStyle />    
-            <ProductProvider>     
+        <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <ProductProvider>
                 <FilterProvider>
                     <CartProvider>
-                        <Routes>        
+                        <Routes>
                             <Route path="/" element={<HomePage />} />
                             <Route path="/cart" element={<CartPage />} />
                             <Route path="/product/:id" element={<ProductPage />} />
+                            <Route path="/checkout" element={<CheckoutPage />} />
                             <Route path="*" element={<NotFoundPage />} />
-                        </Routes>     
-                    </CartProvider> 
+                        </Routes>
+                    </CartProvider>
                 </FilterProvider>
-            </ProductProvider> 
+            </ProductProvider>
         </ThemeProvider>
     );
 }

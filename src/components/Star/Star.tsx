@@ -2,8 +2,8 @@ import { Box, Rating } from "@mui/material";
 import React from "react";
 
 interface IProps {
-  stars: any;
-  reviews: any;
+  stars: number;
+  reviews: number;
 }
 
 const Star = ({ stars, reviews }: IProps) => {

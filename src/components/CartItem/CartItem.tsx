@@ -4,7 +4,7 @@ import {
     CardContent,
     CardMedia,
     Grid,
-    Box,
+    Box    
 } from "@mui/material";
 import numberFormatCurrency from "common/numberFormatCurrency";
 import AmountButtons from "components/AmountButtons";
@@ -20,7 +20,7 @@ interface IProps {
   amount: number;
 }
 const CartItem = ({ id, image, title, price, amount }: IProps) => {
-    const {  removeItem, toggleAmount } = useContext(CartContext);
+    const { removeItem, toggleAmount } = useContext(CartContext);
 
     const setDecrease = () => {
         toggleAmount(id, "desc");
@@ -42,12 +42,11 @@ const CartItem = ({ id, image, title, price, amount }: IProps) => {
                     <Typography variant="h4" component="h4">
                         {title}
                     </Typography>
-                    <Typography variant="h4" component="h4">           
-                        <DeleteTwoToneIcon
+                    <Typography variant="h4" component="h4">                        
+                        <DeleteTwoToneIcon 
                             sx={{ float: "right", marginTop: "-2rem" }}
-                            onClick={() => removeItem(id)}
+                            onClick={() => removeItem(id)}                       
                         />
-            
                     </Typography>
                     <Typography sx={{ width: "48rem" }} variant="subtitle2">
                         <hr />
@@ -67,10 +66,17 @@ const CartItem = ({ id, image, title, price, amount }: IProps) => {
                                 component="div"
                                 sx={{ fontSize: "14px" }}
                             >
-                Price
+                  Price
                             </Typography>
                         </Grid>
-                        <Grid item xs={1} sm={1} md={1} lg={1} sx={{ marginLeft: "37rem" }}>
+                        <Grid
+                            item
+                            xs={1}
+                            sm={1}
+                            md={1}
+                            lg={1}
+                            sx={{ marginLeft: "37rem" }}
+                        >
                             <Typography variant="h4" component="div">
                                 {numberFormatCurrency.formatNumber(price)}
                             </Typography>
@@ -81,7 +87,7 @@ const CartItem = ({ id, image, title, price, amount }: IProps) => {
                                 component="div"
                                 sx={{ fontSize: "14px" }}
                             >
-                Quantity
+                  Quantity
                             </Typography>
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
@@ -103,7 +109,7 @@ const CartItem = ({ id, image, title, price, amount }: IProps) => {
                                 component="div"
                                 style={{ fontWeight: "bold", fontSize: "14px" }}
                             >
-                Total Price
+                  Total Price
                             </Typography>
                         </Grid>
                         <Grid item xs={2} sm={2} md={2} lg={1}>
