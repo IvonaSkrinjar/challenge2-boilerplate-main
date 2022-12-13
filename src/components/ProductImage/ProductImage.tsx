@@ -20,7 +20,7 @@ const Wrapper = styled.section`
     display: grid;
     margin-top: -5rem;
     width: 250%;
-    height: 200px;
+    height: 150px;
     ::before {
       content: "";
       display: block;

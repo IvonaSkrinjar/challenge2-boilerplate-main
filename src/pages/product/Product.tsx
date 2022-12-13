@@ -10,6 +10,7 @@ import AddToCart from "components/AddToCart";
 import { NotFoundPage } from "pages";
 import { CircularProgress, Typography } from "@mui/material";
 import { AppLayout } from "components/Layouts";
+import { Grid } from "@material-ui/core";
 
 const Product = () => {
     const { getSingleProduct, singleProduct, singleProductLoading } = useContext(ProductContext);
@@ -39,32 +40,39 @@ const Product = () => {
     return (
         <Wrapper>
             <AppLayout>
-                <Container className="container">
-                    {singleProduct ? (
-                        <div className="grid grid-two-column">
+                {singleProduct ? (
+                    <Grid container style={{ paddingTop: "2rem" }} spacing={3}>
+                        <Grid item xs={12} sm={4} md={4}>
                             <div className="product_images">
                                 <ProductImage img={image} />
                             </div>
+                        </Grid>
 
+                        <Grid className="product-data" item xs={12} sm={6} md={6}>
                             <div className="product-data">
-                                <Typography component="h2" variant="h2">{title}</Typography>
+                                <Typography component="h2" variant="h2">
+                                    {title}
+                                </Typography>
                                 <Star stars={rating.rate} reviews={rating.count} />
 
                                 <Typography className="product-data-price product-data-real-price">
                                     {numberFormatCurrency.formatNumber(price)}
                                 </Typography>
-                                <Typography sx={{ fontSize: "15px" }}>{description}</Typography>
+                                <Typography sx={{ fontSize: "15px" }}>
+                                    {description}
+                                </Typography>
 
-                                <Typography component="h5" variant="h5">Categories: {category}</Typography>
-           
-            
+                                <Typography component="h5" variant="h5">
+                    Categories: {category}
+                                </Typography>
+
                                 <AddToCart product={singleProduct} />
                             </div>
-                        </div>
-                    ) : (
-                        <NotFoundPage />
-                    )}
-                </Container>
+                        </Grid>
+                    </Grid>
+                ) : (
+                    <NotFoundPage />
+                )}
             </AppLayout>
         </Wrapper>
     );
@@ -72,18 +80,17 @@ const Product = () => {
 
 const Wrapper = styled.section`
 
-  .container {
+   .container {
     padding: 9rem 0;
     display:flex;
   }
   }
-
   .product_images {
     display: flex;
     align-items: center;
-    gap: 4rem;
-    width: 50rem;
-    height:50rem;   
+    padding-left: 10rem;
+    width: 40rem;
+    height:40rem;   
     &:hover img {
       transform: scale(1.2);
     }
@@ -94,63 +101,15 @@ const Wrapper = styled.section`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 2rem;
-
-    .product-data-warranty {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ccc;
-      margin-bottom: 1rem;
-
-      .product-warranty-data {
-        text-align: center;
-
-        .warranty-icon {
-          background-color: rgba(220, 220, 220, 0.5);
-          border-radius: 50%;
-          width: 4rem;
-          height: 4rem;
-          padding: 0.6rem;
-        }
-        p {
-          font-size: 1.4rem;
-          padding-top: 0.4rem;
-        }
-      }
-    }
+    gap: 2rem;  
 
     .product-data-price {
       font-weight: bold;
     }
     .product-data-real-price {
-      color: rgb(98 84 243);
-      font-size: 15px;
-    }
-    .product-data-info {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      font-size: 1.8rem;
-
-      span {
-        font-weight: bold;
-      }
-    }
-
-    hr {
-      max-width: 100%;
-      width: 90%;
-      /* height: 0.2rem; */
-      border: 0.1rem solid #000;
-    }
-  }
-
-  .product-images {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+      color: #1976d2;
+      font-size: 14px;
+    }  
   }
 
   .page_loading {
