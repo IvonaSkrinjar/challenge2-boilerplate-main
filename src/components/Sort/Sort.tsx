@@ -16,8 +16,8 @@ const Sort = () => {
         sorting(event);
     };
     return (
-        <Wrapper className="sort-section">
-            <div className="sorting-list--grid">
+        <Wrapper>
+            <div className="sorting-list">
                 <button
                     className={grid_view ? "active sort-btn" : "sort-btn"}
                     onClick={setGridView}
@@ -40,28 +40,25 @@ const Sort = () => {
                 {filter_products.length < 2 && (
                     <p>{`${filter_products.length} Product Available`}</p>
                 )}
-            </div>
-
-            <div className="sort-selection">
-                <FormControl style={{ maxWidth: "20rem", float: "right" }}>
-                    <Select
-                        name="sort"
-                        id="sort"
-                        value={value}
-                        defaultValue={value}
-                        onChange={handleValueChange}
-                        sx={{
-                            fontSize: "13px",
-                            color: "grey"
-                        }}
-                    >
-                        <MenuItem value={"lowest"}>Sort By Price: low to high</MenuItem>
-                        <MenuItem value={"highest"}>Sort By Price: high to low</MenuItem>
-                        <MenuItem value={"asc"}>Sort by Title (a-z)</MenuItem>
-                        <MenuItem value={"desc"}>Sort by Title (z-a)</MenuItem>
-                    </Select>
-                </FormControl>
-            </div>
+            </div>          
+            <FormControl style={{ paddingRight: "5rem" }}>
+                <Select
+                    name="sort"
+                    id="sort"
+                    value={value}
+                    defaultValue={value}
+                    onChange={handleValueChange}
+                    sx={{
+                        fontSize: "13px",
+                        color: "grey"
+                    }}
+                >
+                    <MenuItem value={"lowest"}>Sort By Price: low to high</MenuItem>
+                    <MenuItem value={"highest"}>Sort By Price: high to low</MenuItem>
+                    <MenuItem value={"asc"}>Sort by Title (a-z)</MenuItem>
+                    <MenuItem value={"desc"}>Sort by Title (z-a)</MenuItem>
+                </Select>
+            </FormControl>           
         </Wrapper>
     );
 };
@@ -70,8 +67,9 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: space-between;
   margin-top: 5rem;
+  padding-bottom: 3rem;
 
-  .sorting-list--grid {
+  .sorting-list {
     display: flex;
     gap: 2rem;   
 
@@ -91,19 +89,7 @@ const Wrapper = styled.section`
       background-color: #212529;
       color: #fff;
     }
-  }
-
-  .sort-selection .sort-selection--style {
-    padding: 0.5rem;
-    cursor: pointer;
-
-    .sort-select--option {
-      padding: 0.5rem 0;
-      cursor: pointer;
-      height: 2rem;
-      padding: 10px;
-    }
-  }
+  }  
 `;
 
 export default Sort;

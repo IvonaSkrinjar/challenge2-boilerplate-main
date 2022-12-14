@@ -1,9 +1,10 @@
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { IProduct } from "interfaces";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import numberFormatCurrency from "../../common/numberFormatCurrency";
 import React from "react";
+import { Grid } from "@material-ui/core";
 
 interface IProps {
   products: IProduct[];
@@ -11,46 +12,64 @@ interface IProps {
 const ListView = ({ products }: IProps) => {
     return (
         <Wrapper className="section">
-            <div className="container grid">
-                {products.map((product: any) => {
-                    const { id, title, image, price, description } = product;
-                    return (
-                        <div className="card grid grid-two-column" key ={product.id}>
-                            <figure>
-                                <img alt="product" src={image} />
-                            </figure>
-
-                            <div className="card-data">
-                                <Typography component="h3" variant="h3">
-                                    {title}
+            <Grid container spacing={5}>
+                {products?.map((product) => (
+                    <>
+                        <Grid
+                            key={product.id}
+                            item
+                            xs={12}
+                            sm={3}
+                            md={3}
+                            style={{
+                                justifyContent: "center",
+                                display: "flex",
+                            }}
+                        >                          
+                            <Box
+                                component="img"
+                                sx={{
+                                    padding: "1rem 1rem 1rem 1rem",
+                                    height: "15rem",
+                                    objectFit: "contain",
+                                    "&:hover": {
+                                        transform: "scale(1.2)",
+                                    },
+                                }}
+                                alt="image"
+                                src={product.image}
+                            />
+                        </Grid>
+                        <Grid  item xs={12} sm={8} md={8}>
+                            <Typography component="h3" variant="h3">
+                                {product.title}
+                            </Typography>
+                            <Typography sx={{ fontSize: "15px", color: "grey" }}>
+                                {numberFormatCurrency.formatNumber(product.price)}
+                            </Typography>
+                            <Typography sx={{ fontSize: "15px" }}>
+                                {product.description.slice(0, 90)}...
+                            </Typography>
+                            <Button
+                                component={NavLink}
+                                to={`/product/${product.id}`}
+                                variant="contained"
+                                className="button"
+                            >
+                                <Typography fontSize="1.5rem" color="white">
+                    Read More
                                 </Typography>
-                                <Typography sx={{ fontSize: "15px", color: "grey" }}>
-                                    {numberFormatCurrency.formatNumber(price)}
-                                </Typography>
-                                <Typography sx={{ fontSize: "15px" }}>
-                                    {description.slice(0, 90)}...
-                                </Typography>
-                                <Button
-                                    component={NavLink}
-                                    to={`/product/${id}`}
-                                    variant="contained"
-                                    className="button"                                    
-                                >
-                                    <Typography fontSize="1.5rem" color="white">
-                              Read More
-                                    </Typography>
-                                </Button>
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
+                            </Button>
+                        </Grid>
+                    </>
+                ))}
+            </Grid>
         </Wrapper>
     );
 };
 
 const Wrapper = styled.section`
-  padding: 9rem 0;
+  padding: 2rem 0;
   display: flex;
   .container {
     max-width: 120rem;

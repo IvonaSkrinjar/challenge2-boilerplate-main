@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { ProductContext } from "context/product/ProductContext";
-import { Container } from "../../components/styles/Container";
 import { numberFormatCurrency } from "../../common/numberFormatCurrency";
 import Star from "../../components/Star/Star";
 import { ProductImage } from "components/ProductImage";
@@ -41,33 +40,31 @@ const Product = () => {
         <Wrapper>
             <AppLayout>
                 {singleProduct ? (
-                    <Grid container style={{ paddingTop: "2rem" }} spacing={3}>
+                    <Grid container style={{ paddingTop: "5rem" }} spacing={3}>
                         <Grid item xs={12} sm={4} md={4}>
                             <div className="product_images">
                                 <ProductImage img={image} />
                             </div>
                         </Grid>
 
-                        <Grid className="product-data" item xs={12} sm={6} md={6}>
-                            <div className="product-data">
-                                <Typography component="h2" variant="h2">
-                                    {title}
-                                </Typography>
-                                <Star stars={rating.rate} reviews={rating.count} />
+                        <Grid className="product-data" item xs={12} sm={6} md={6}>                         
+                            <Typography component="h2" variant="h2">
+                                {title}
+                            </Typography>
+                            <Star stars={rating.rate} reviews={rating.count} />
 
-                                <Typography className="product-data-price product-data-real-price">
-                                    {numberFormatCurrency.formatNumber(price)}
-                                </Typography>
-                                <Typography sx={{ fontSize: "15px" }}>
-                                    {description}
-                                </Typography>
+                            <Typography className="product-data-price product-data-real-price">
+                                {numberFormatCurrency.formatNumber(price)}
+                            </Typography>
+                            <Typography sx={{ fontSize: "15px" }}>
+                                {description}
+                            </Typography>
 
-                                <Typography component="h5" variant="h5">
+                            <Typography component="h5" variant="h5">
                     Categories: {category}
-                                </Typography>
+                            </Typography>
 
-                                <AddToCart product={singleProduct} />
-                            </div>
+                            <AddToCart product={singleProduct} />                           
                         </Grid>
                     </Grid>
                 ) : (

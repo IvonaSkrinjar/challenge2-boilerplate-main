@@ -86,28 +86,7 @@ export const GlobalStyle = createGlobalStyle`
       max-width: 120rem;
       margin: 0 auto;
     }
-
-    .grid {
-      display: grid;
-      gap: 9rem;
-    }
-
-    .grid-two-column {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .grid-three-column {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .grid-four-column{
-      grid-template-columns: 1fr 1.2fr .5fr .8fr ;
-    }
-
-    .grid-five-column{
-      grid-template-columns: repeat(5, 1fr);
-    }
-
+   
       .common-heading {
           font-size: 3.8rem;
           font-weight: 600;
@@ -165,13 +144,6 @@ export const GlobalStyle = createGlobalStyle`
           html {
           font-size: 50%;
         }
-
-    .grid{
-      gap: 3.2rem;
-    }
-          .grid-two-column , .grid-three-column, .grid-four-column{
-              grid-template-columns: 1fr;
-            }
-        }
+      }   
 
     `;

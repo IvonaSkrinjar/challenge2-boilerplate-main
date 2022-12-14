@@ -27,7 +27,7 @@ const Product = (product: IProduct) => {
                 width: "18rem",
                 height: "27rem",
                 margin: "0 auto",
-                padding: "0.1em",
+                padding: "0.1rem",
             }}
         >
             <Box>
@@ -36,7 +36,7 @@ const Product = (product: IProduct) => {
                         component="img"
                         alt="image"
                         sx={{
-                            padding: "1em 1em 0 1em",
+                            padding: "1rem 1rem 0 1rem",
                             height: "15rem",
                             objectFit: "contain",
                             "&:hover": {
