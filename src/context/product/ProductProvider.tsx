@@ -104,11 +104,6 @@ export const ProductProvider = ({ children }: props) => {
                 });
             });
     };
-    
-    useEffect(() => {
-        getProducts();
-        getProductsCategories();
-    }, []);
 
     return (
         <ProductContext.Provider

@@ -1,5 +1,5 @@
 import { ProductContext } from "context/product/ProductContext";
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 import { FilterContext } from "./FilterContext";
 import filterReducer from "./FilterReducer";
 
@@ -8,7 +8,7 @@ export interface FilterState {
   all_products: [];
   searched_products: [];
   grid_view: true;
-  sorting_value: "lowest";
+  sorting_value: string;
   filters: {
     text: "";
     category: "all";
@@ -19,12 +19,16 @@ export interface FilterState {
 }
 
 export type FilterContextProps = {
+  sorting_value: string;
   filterState: FilterState;
   setGridView(): void;
   setListView(): void;
   sorting(event: any): void;
   updateFilterValue(event: any): void;
   clearFilters(): void;
+  filterTrigger(): void;
+  loadProductWithMaxPrice(): void;
+  sortingProducts(): void;
   grid_view: any;
   filter_products: any;
   all_products: any;
@@ -49,7 +53,7 @@ interface props {
 }
 
 export const FilterProvider = ({ children }: props) => {
-    const { products, categories } = useContext(ProductContext);
+    const { products } = useContext(ProductContext);
 
     const [state, dispatch] = useReducer(filterReducer, INITIAL_STATE);
 
@@ -73,18 +77,22 @@ export const FilterProvider = ({ children }: props) => {
         return dispatch({ type: "updateFiltersValue", payload: { name, value } });
     };
 
-    const clearFilters = () => {
-        dispatch({ type: "clearFilters" });
+    const loadProductWithMaxPrice = () => {
+        dispatch({ type: "loadFilterProducts", payload: products });
     };
 
-    useEffect(() => {
-        dispatch({ type: "loadFilterProducts", payload: products });
-    }, [products]);
-
-    useEffect(() => {
+    const filterTrigger = () => {
         dispatch({ type: "filterProducts" });
+    };
+
+    const sortingProducts = () => {
         dispatch({ type: "sortingProducts" });
-    }, [products, categories, state.sorting_value, state.filters]);
+    };
+
+    const clearFilters = () => {
+        dispatch({ type: "clearFilters" });
+    };  
+  
 
     return (
         <FilterContext.Provider
@@ -95,6 +103,9 @@ export const FilterProvider = ({ children }: props) => {
                 sorting,
                 updateFilterValue,
                 clearFilters,
+                filterTrigger,
+                loadProductWithMaxPrice,
+                sortingProducts
             }}
         >
             {children}

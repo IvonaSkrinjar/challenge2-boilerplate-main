@@ -33,7 +33,9 @@ const Product = () => {
     }, []);
 
     if (singleProductLoading) {
-        return <CircularProgress className="page_loading" sx ={{width: "4rem", height: "4rem", justifyContent: "center"}}/>;
+        return  <AppLayout>
+            <CircularProgress className="page_loading" sx ={{width: "4rem", height: "4rem", justifyContent: "center"}}/>
+        </AppLayout>;
     }
 
     return (

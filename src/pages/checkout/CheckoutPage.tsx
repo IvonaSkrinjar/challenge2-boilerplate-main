@@ -40,6 +40,7 @@ const CheckoutPage = () => {
     const { clearCart } = useContext(CartContext);
     const { clearWishlist } = useContext(WishlistContext);
 
+
     const [activeStep, setActiveStep] = useState(0);
     const currentValidationSchema = validationSchema[activeStep];
     const isLastStep = activeStep === steps.length - 1;
@@ -59,7 +60,7 @@ const CheckoutPage = () => {
     function handleSubmit(values: any, actions: any) {
         if (isLastStep) {
             submitForm(values, actions);
-            clearCart();
+            clearCart();  
             clearWishlist();
         } else {
             setActiveStep(activeStep + 1);

@@ -1,11 +1,32 @@
+
 import FilterSection from "components/FilterSection";
 import { ProductList } from "components/ProductList";
 import { Sort } from "components/Sort";
 import styled from "styled-components";
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import { Grid } from "@mui/material";
+import { FilterContext } from "context/filter/FilterContext";
+import { ProductContext } from "context/product/ProductContext";
 
 const Products = () => {
+
+    const filterCtx = useContext(FilterContext);
+    const productCtx = useContext(ProductContext);
+    const { products, categories } = useContext(ProductContext);
+  
+    useEffect(() => {
+        productCtx.getProducts();
+        productCtx.getProductsCategories();
+    }, []);
+
+    useEffect(() => {
+        filterCtx.filterTrigger();
+    }, [products, categories, filterCtx.sorting_value, filterCtx.filters]);
+
+    useEffect(() => {
+        filterCtx.loadProductWithMaxPrice();
+    }, [products]);
+    
     return (
         <Wrapper>
             <Grid

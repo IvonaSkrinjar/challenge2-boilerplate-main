@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import GridViewIcon from "@mui/icons-material/GridView";
 import { FilterContext } from "context/filter/FilterContext";
@@ -6,9 +6,13 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import { FormControl, MenuItem, Select } from "@mui/material";
 
 const Sort = () => {
-    const { filter_products, grid_view, setGridView, setListView, sorting } =
+    const { filter_products,sortingProducts, grid_view, setGridView, setListView, sorting } =
     useContext(FilterContext);
-
+    
+    useEffect(() => {  
+        sortingProducts();
+    }, [filter_products]);
+  
     const [value, setValue] = useState("lowest");
 
     const handleValueChange = (event: any) => {

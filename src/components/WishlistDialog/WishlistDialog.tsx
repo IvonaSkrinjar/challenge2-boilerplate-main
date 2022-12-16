@@ -68,10 +68,13 @@ function WishlistDialog(props : any) {
                                     </Typography>
                                 }
                             />
-                            <IconButton edge="end" aria-label="delete">
+                            <IconButton
+                                edge="end"
+                                aria-label="delete"
+                                onClick={() => removeFavoriteItem(product.id)}
+                            >
                                 <DeleteTwoToneIcon
                                     sx={{ float: "right", marginTop: "-2rem" }}
-                                    onClick={() => removeFavoriteItem(product.id)}
                                 />
                             </IconButton>
                         </ListItem>
