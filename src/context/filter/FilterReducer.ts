@@ -1,7 +1,7 @@
 export const filterReducer = (state: any, action: any) => {
     switch (action.type) {
     case "loadFilterProducts":{
-        const priceArr = action.payload.map((product: { price: any; }) => product.price);
+        const priceArr = action.payload.map((product: { price: number; }) => product.price);
 
         const maxPrice = Math.max(...priceArr);
 

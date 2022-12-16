@@ -5,9 +5,10 @@ import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import React from "react";
+import { IProduct } from "interfaces";
 
 interface IProps {
-  product: any;
+  product: IProduct;
 }
 const AddToCart = ({ product }: IProps) => {
     const { addToCart } = useContext(CartContext);

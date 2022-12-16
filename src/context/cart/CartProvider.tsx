@@ -3,15 +3,13 @@ import { CartContext } from "./CartContext";
 import { cartReducer } from "./CartReducer";
 import {  ICartProduct, IProduct } from "interfaces";
 
-type PaymentMathodType = "cash_delivery" | "bank_transfer" | "paypal";
-
 export interface CartState {
   cart: ICartProduct[], 
-  shipping_fee: 5,
-  total_amount: 0,
-  total_items: 0,
-  paymentMethod: PaymentMathodType;
+  shippingFee: 5,
+  totalCartAmount: 0,
+  totalCartItems: 0,
 }
+
 const getLocalStorage = () => {
     const cart = localStorage.getItem("cart");
     if (cart === "undefined" || cart === null) {
@@ -28,17 +26,16 @@ export type CartContextProps = {
   countCartTotal: () => void;
   clearCart: () => void;
   toggleAmount: (id: number, value: string) => void;
-  total_amount: number;
-  shipping_fee: number;
-  total_items: number;
+  totalCartAmount: number;
+  shippingFee: number;
+  totalCartItems: number;
 };
 
 const INITIAL_STATE = {
     cart: getLocalStorage(),
-    total_items: 0,
-    shipping_fee: 5,
-    total_amount: 0,
-    paymentMethod: "cash_delivery",
+    totalCartItems: 0,
+    shippingFee: 5,
+    totalCartAmount: 0
 };
 
 interface props {

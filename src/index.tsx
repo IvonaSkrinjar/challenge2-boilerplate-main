@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ProductProvider } from "context/product/ProductProvider";
 import { FilterProvider } from "context/filter/FilterProvider";
 import { CartProvider } from "context/cart/CartProvider";
+import { WishlistProvider } from "context/wishlist/WishlistProvider";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -15,7 +16,9 @@ root.render(
         <ProductProvider>
             <FilterProvider>
                 <CartProvider>
-                    <App />
+                    <WishlistProvider>
+                        <App />
+                    </WishlistProvider>
                 </CartProvider>
             </FilterProvider>
         </ProductProvider>

@@ -15,3 +15,8 @@ export interface IProduct {
 export interface ICartProduct extends IProduct {
    amount: number;
  }
+
+export interface IWishlistProduct extends IProduct {
+   amount: number;
+}
+

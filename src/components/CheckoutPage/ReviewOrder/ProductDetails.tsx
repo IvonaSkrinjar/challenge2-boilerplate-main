@@ -6,7 +6,7 @@ import { Box, Grid } from "@mui/material";
 import numberFormatCurrency from "common/numberFormatCurrency";
 
 function ProductDetails() {
-    const { cart, total_amount, shipping_fee } = useContext(CartContext);
+    const { cart, totalCartAmount, shippingFee } = useContext(CartContext);
 
     return (
         <Box sx={{ marginTop: "3rem" }}>
@@ -73,7 +73,7 @@ function ProductDetails() {
                             flex: "1",
                         }}
                     >
-                        {numberFormatCurrency.formatNumber(total_amount)}
+                        {numberFormatCurrency.formatNumber(totalCartAmount)}
                     </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={9}>
@@ -93,7 +93,7 @@ function ProductDetails() {
                             flex: "1",
                         }}
                     >
-                        {numberFormatCurrency.formatNumber(shipping_fee)}
+                        {numberFormatCurrency.formatNumber(shippingFee)}
                     </Typography>
                 </Grid>
 
@@ -119,7 +119,7 @@ function ProductDetails() {
                             flex: "1",
                         }}
                     >
-                        {numberFormatCurrency.formatNumber(total_amount + shipping_fee)}
+                        {numberFormatCurrency.formatNumber(totalCartAmount + shippingFee)}
                     </Typography>
                 </Grid>
             </Grid>

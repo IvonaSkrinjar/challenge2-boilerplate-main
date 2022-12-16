@@ -6,11 +6,11 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const CartSummaryItem = () => {
-    const { total_amount, countCartTotal, shipping_fee } = useContext(CartContext);
+    const { totalCartAmount, countCartTotal, shippingFee } = useContext(CartContext);
     
     useEffect(() => {
         countCartTotal();   
-    }, [total_amount]);
+    }, [totalCartAmount]);
   
     return (
         <Wrapper>
@@ -37,7 +37,7 @@ const CartSummaryItem = () => {
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
                             <Typography variant="h6" component="div">
-                                {numberFormatCurrency.formatNumber(total_amount)}
+                                {numberFormatCurrency.formatNumber(totalCartAmount)}
                             </Typography>
                         </Grid>
                         <Grid item xs={11} sm={11} md={11} lg={11}>
@@ -47,7 +47,7 @@ const CartSummaryItem = () => {
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
                             <Typography variant="h6" component="div">
-                                {numberFormatCurrency.formatNumber(shipping_fee)}
+                                {numberFormatCurrency.formatNumber(shippingFee)}
                             </Typography>
                         </Grid>
                         <Grid item xs={11} sm={11} md={11} lg={11}>
@@ -57,7 +57,7 @@ const CartSummaryItem = () => {
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
                             <Typography variant="h6" component="div">
-                                {numberFormatCurrency.formatNumber(total_amount + shipping_fee)}
+                                {numberFormatCurrency.formatNumber(totalCartAmount + shippingFee)}
                             </Typography>
                         </Grid>
                     </Grid>

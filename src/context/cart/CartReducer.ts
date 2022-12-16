@@ -85,22 +85,22 @@ export const cartReducer = (state: any, action: any) => {
         };
     }
     case "countCartTotal":{
-        const { total_items, total_amount } = state.cart.reduce(
+        const { totalCartItems, totalCartAmount } = state.cart.reduce(
             (total: any, cartItem: ICartProduct) => {
                 const { amount, price } = cartItem;
-                total.total_items += amount;
-                total.total_amount += price * amount;
+                total.totalCartItems += amount;
+                total.totalCartAmount += price * amount;
                 return total;
             },
             {
-                total_items: 0,
-                total_amount: 0
+                totalCartItems: 0,
+                totalCartAmount: 0
             });
 
         return {
             ...state,
-            total_items,
-            total_amount,
+            totalCartItems,
+            totalCartAmount,
         };
     }
     default:

@@ -18,11 +18,12 @@ import { AppLayout } from "components/Layouts";
 import styled from "styled-components";
 import { Button, Container, Paper } from "@mui/material";
 import { CartContext } from "context/cart/CartContext";
+import { WishlistContext } from "context/wishlist/Wishlist";
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 const { formId, formField } = checkoutFormModel;
 
-function _renderStepContent(step: any) {
+function renderStepContent(step: any) {
     switch (step) {
     case 0:
         return <AddressForm formField={formField} />;
@@ -37,6 +38,7 @@ function _renderStepContent(step: any) {
 
 const CheckoutPage = () => {
     const { clearCart } = useContext(CartContext);
+    const { clearWishlist } = useContext(WishlistContext);
 
     const [activeStep, setActiveStep] = useState(0);
     const currentValidationSchema = validationSchema[activeStep];
@@ -58,6 +60,7 @@ const CheckoutPage = () => {
         if (isLastStep) {
             submitForm(values, actions);
             clearCart();
+            clearWishlist();
         } else {
             setActiveStep(activeStep + 1);
             actions.setTouched({});
@@ -85,7 +88,7 @@ const CheckoutPage = () => {
                             }}
                         >
                             <Typography component="h1" variant="h4" align="center">
-                  Checkout
+                           Checkout
                             </Typography>
 
                             <Stepper activeStep={activeStep} className="stepper">
@@ -108,7 +111,7 @@ const CheckoutPage = () => {
                                         {({ isSubmitting }) => (
                                             <Form id={formId}>
                                                 <div className="active-form">
-                                                    {_renderStepContent(activeStep)}
+                                                    {renderStepContent(activeStep)}
                                                 </div>
                                                 <div className="buttons">
                                                     {activeStep !== 0 && (
