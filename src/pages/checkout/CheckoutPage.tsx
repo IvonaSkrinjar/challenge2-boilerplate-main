@@ -18,7 +18,6 @@ import { AppLayout } from "components/Layouts";
 import styled from "styled-components";
 import { Button, Container, Paper } from "@mui/material";
 import { CartContext } from "context/cart/CartContext";
-import { WishlistContext } from "context/wishlist/Wishlist";
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 const { formId, formField } = checkoutFormModel;
@@ -38,8 +37,6 @@ function renderStepContent(step: any) {
 
 const CheckoutPage = () => {
     const { clearCart } = useContext(CartContext);
-    const { clearWishlist } = useContext(WishlistContext);
-
 
     const [activeStep, setActiveStep] = useState(0);
     const currentValidationSchema = validationSchema[activeStep];
@@ -51,7 +48,6 @@ const CheckoutPage = () => {
 
     async function submitForm(values: any, actions: any) {
         await sleep(1000);
-        alert(JSON.stringify(values, null, 2));
         actions.setSubmitting(false);
 
         setActiveStep(activeStep + 1);
@@ -60,8 +56,7 @@ const CheckoutPage = () => {
     function handleSubmit(values: any, actions: any) {
         if (isLastStep) {
             submitForm(values, actions);
-            clearCart();  
-            clearWishlist();
+            clearCart();
         } else {
             setActiveStep(activeStep + 1);
             actions.setTouched({});
@@ -89,7 +84,7 @@ const CheckoutPage = () => {
                             }}
                         >
                             <Typography component="h1" variant="h4" align="center">
-                           Checkout
+                Checkout
                             </Typography>
 
                             <Stepper activeStep={activeStep} className="stepper">
@@ -128,7 +123,7 @@ const CheckoutPage = () => {
                                                             disabled={isSubmitting}
                                                             type="submit"
                                                             variant="contained"
-                                                            className="button"                                                            
+                                                            className="button"
                                                         >
                                                             <span className="button-label">
                                                                 {isLastStep ? "Place order" : "Next"}
@@ -137,7 +132,7 @@ const CheckoutPage = () => {
                                                         {isSubmitting && (
                                                             <CircularProgress
                                                                 size={24}
-                                                                className="buttonProgress"                                                               
+                                                                className="buttonProgress"
                                                             />
                                                         )}
                                                     </div>
@@ -166,6 +161,13 @@ const Wrapper = styled.section`
     background-color: #1976d2;
   }
 
+  .MuiTypography-root {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    margin-left: 1rem;
+    font-weight: bold;
+  }
+  
   .MuiSvgIcon-root {
     color: #fff;
   }

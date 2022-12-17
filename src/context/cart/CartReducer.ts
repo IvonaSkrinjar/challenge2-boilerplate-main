@@ -3,13 +3,13 @@ import { ICartProduct } from "interfaces";
 export const cartReducer = (state: any, action: any) => {
     switch (action.type) {
     case "addToCart":{
-        const { id, amount, product } = action.payload;
+        const { amount, product } = action.payload;
 
-        const tempItem = state.cart.find((i: any) => i.id === id);
+        const tempItem = state.cart.find((i: any) => i.id === product.id);
 
         if (tempItem) {
             const tempCart = state.cart.map((cartItem: any) => {
-                if (cartItem.id === id) {
+                if (cartItem.id === product.id) {
                     const newAmount = cartItem.amount + amount;
 
                     return { ...cartItem, amount: newAmount };
@@ -22,7 +22,7 @@ export const cartReducer = (state: any, action: any) => {
 
         } else {
             const newItem = {
-                id: id,
+                id: product.id,
                 title: product.title,
                 amount,
                 image: product.image,

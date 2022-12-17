@@ -3,13 +3,13 @@ import { IWishlistProduct } from "interfaces";
 export const wishlistReducer = (state: any, action: any) => {
     switch (action.type) {
     case "addToWishlist":{
-        const { id,  product } = action.payload;
+        const { product } = action.payload;
 
-        const tempItem = state.wishlist.find((i: any) => i.id === id);
+        const tempItem = state.wishlist.find((i: any) => i.id === product.id);
 
         if (tempItem) {
             const tempWishlist = state.wishlist.map((item: any) => {
-                if (item.id === id) {                 
+                if (item.id === product.id) {                 
                     return { ...item};
                 }               
             });
@@ -17,7 +17,7 @@ export const wishlistReducer = (state: any, action: any) => {
 
         } else {
             const newItem = {
-                id: id,
+                id: product.id,
                 title: product.title,              
                 image: product.image,
                 price: product.price

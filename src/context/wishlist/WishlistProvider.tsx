@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useReducer } from "react";
 import { WishlistContext } from "./Wishlist";
 import { wishlistReducer } from "./WishlistReducer";
 import { IProduct, IWishlistProduct } from "interfaces";
@@ -19,7 +19,7 @@ const getLocalStorage = () => {
 
 export type WishlistContextProps = {
   wishlist: [];
-  addToWishlist: (id: number, item: IProduct) => void;
+  addToWishlist: (item: IProduct) => void;
   removeFavoriteItem: (id: number) => void;
   countWishlistTotal: () => void;
   clearWishlist: () => void;
@@ -40,33 +40,29 @@ interface props {
 export const WishlistProvider = ({ children }: props) => {
     const [state, dispatch] = useReducer(wishlistReducer, INITIAL_STATE);
 
-    const addToWishlist = (
-        id: number,       
+    const addToWishlist = (              
         product: IProduct
     ) => {
         dispatch({
             type: "addToWishlist",
-            payload: { id, product },
+            payload: { product },
         });
+        localStorage.setItem("wishlist", JSON.stringify(state.wishlist));
     };
 
     const removeFavoriteItem = (id: number) => {
         dispatch({ type: "removeFavoriteItem", payload: id });
+        localStorage.setItem("wishlist", JSON.stringify(state.wishlist));
     };   
 
     const clearWishlist = () => {
         dispatch({ type: "clearWishlist" });
+        localStorage.setItem("wishlist", JSON.stringify(state.wishlist));
     };
    
     const countWishlistTotal = () => {
         dispatch({ type: "countWishlistTotal" });
     };   
- 
-
-    useEffect(() => {
-        dispatch({ type: "countWishlistTotal" });
-        localStorage.setItem("wishlist", JSON.stringify(state.wishlist));
-    }, [state.wishlist]);
 
     return (
         <WishlistContext.Provider

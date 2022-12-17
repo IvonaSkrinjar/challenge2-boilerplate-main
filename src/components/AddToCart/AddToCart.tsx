@@ -12,7 +12,6 @@ interface IProps {
 }
 const AddToCart = ({ product }: IProps) => {
     const { addToCart } = useContext(CartContext);
-    const { id } = product;
     const [amount, setAmount] = useState(1);
 
     const setDecrease = () => {
@@ -43,7 +42,7 @@ const AddToCart = ({ product }: IProps) => {
                 to="/cart"
                 variant="contained"
                 className="button"
-                onClick={() => addToCart(id, amount, product)}
+                onClick={() => addToCart(amount, product)}
             >
                 <Typography fontSize="1.5rem" color="white">
                 Add To Cart

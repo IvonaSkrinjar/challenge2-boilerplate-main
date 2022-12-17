@@ -7,7 +7,7 @@ import Star from "../../components/Star/Star";
 import { ProductImage } from "components/ProductImage";
 import AddToCart from "components/AddToCart";
 import { NotFoundPage } from "pages";
-import { CircularProgress, Typography } from "@mui/material";
+import { CircularProgress, Stack, Typography } from "@mui/material";
 import { AppLayout } from "components/Layouts";
 import { Grid } from "@material-ui/core";
 
@@ -33,9 +33,14 @@ const Product = () => {
     }, []);
 
     if (singleProductLoading) {
-        return  <AppLayout>
-            <CircularProgress className="page_loading" sx ={{width: "4rem", height: "4rem", justifyContent: "center"}}/>
-        </AppLayout>;
+        return (
+            <AppLayout>         
+                <Stack gap={1} justifyContent="center" alignItems="center" marginTop="5rem">
+                    <CircularProgress color="inherit" />
+                    <Typography>Loading...</Typography>
+                </Stack>          
+            </AppLayout>
+        );
     }
 
     return (

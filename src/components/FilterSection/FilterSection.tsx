@@ -4,20 +4,19 @@ import React, { useContext, useState } from "react";
 import { FilterContext } from "context/filter/FilterContext";
 import { ProductContext } from "context/product/ProductContext";
 import {
-    Autocomplete,
+    Autocomplete,    
     Box,
     Button,
-    Checkbox,
-    CircularProgress,
-    FormControlLabel,
-    Slider,
+    Checkbox,    
+    FormControlLabel,  
+    Slider,  
     TextField,
     Typography,
 } from "@mui/material";
 import { IProduct } from "interfaces";
 
 const FilterSection = () => {
-    const { categories, products, productsLoading } = useContext(ProductContext);
+    const { categories, products } = useContext(ProductContext);
     const [value, setValue] = useState<IProduct | null>(null);
     const [checked] = useState([true, false]);
     const [inputValue, setInputValue] = useState("");
@@ -39,14 +38,7 @@ const FilterSection = () => {
         setValue(null);
         setInputValue("");
         clearFilters();
-    };
-    if (productsLoading) {
-        return (
-            <CircularProgress
-                sx={{ width: "4rem", height: "4rem", justifyContent: "center" }}
-            />
-        );
-    }
+    };   
 
     const defaultProps = {
         options: products,

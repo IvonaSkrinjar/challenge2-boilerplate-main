@@ -4,7 +4,7 @@ import { ProductList } from "components/ProductList";
 import { Sort } from "components/Sort";
 import styled from "styled-components";
 import React, {useContext, useEffect} from "react";
-import { Grid } from "@mui/material";
+import { CircularProgress, Grid, Stack, Typography } from "@mui/material";
 import { FilterContext } from "context/filter/FilterContext";
 import { ProductContext } from "context/product/ProductContext";
 
@@ -12,7 +12,8 @@ const Products = () => {
 
     const filterCtx = useContext(FilterContext);
     const productCtx = useContext(ProductContext);
-    const { products, categories } = useContext(ProductContext);
+    const { products, categories, productsLoading } =
+      useContext(ProductContext);
   
     useEffect(() => {
         productCtx.getProducts();
@@ -27,6 +28,15 @@ const Products = () => {
         filterCtx.loadProductWithMaxPrice();
     }, [products]);
     
+    if (productsLoading) {
+        return (
+            <Stack gap={1} justifyContent="center" alignItems="center" marginTop="5rem">
+                <CircularProgress color="inherit" />
+                <Typography>Loading...</Typography>
+            </Stack>
+        );
+    }
+     
     return (
         <Wrapper>
             <Grid

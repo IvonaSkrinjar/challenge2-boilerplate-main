@@ -27,9 +27,9 @@ function WishlistDialog(props: any) {
         onClose();
     };
 
-    const handleAddToCart = (id: number, product: IWishlistProduct) => {
+    const handleAddToCart = (product: IWishlistProduct) => {
         {
-            addToCart(id, 1, product);
+            addToCart(1, product);
             onClose();
         }
     };
@@ -78,7 +78,7 @@ function WishlistDialog(props: any) {
                             sx={{ ml: 2, fontSize: "12px" }}
                             component={NavLink}
                             to={"/cart"}
-                            onClick={() => handleAddToCart(product.id, product)}
+                            onClick={() => handleAddToCart(product)}
                         >
                 Add to cart
                         </Button>
@@ -115,7 +115,7 @@ function WishlistDialog(props: any) {
         </List>
     );
 
-    return (
+    return (       
         <Drawer open={open} anchor={"right"} onClose={handleClose}>
             <Typography
                 variant="h4"
@@ -127,12 +127,14 @@ function WishlistDialog(props: any) {
                     fontWeight: "bold",
                 }}
             >
-        Your Wishlist
+            Your Wishlist
             </Typography>
             <Divider />
             {list()}
-        </Drawer>
+        </Drawer>       
     );
 }
 
 export default WishlistDialog;
+
+

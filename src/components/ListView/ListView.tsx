@@ -20,11 +20,10 @@ const ListView = ({ products }: IProps) => {
     const { addToWishlist, wishlist, removeFavoriteItem } =
     useContext(WishlistContext);
 
-    const handleAddToCart = (
-        productId: number,
+    const handleAddToCart = (        
         amount: number,
         product: IProduct
-    ) => addToCart(productId, amount, product);
+    ) => addToCart(amount, product);
 
     return (
         <Wrapper className="section">
@@ -68,7 +67,7 @@ const ListView = ({ products }: IProps) => {
                             <Box>
                                 <IconButton
                                     aria-label="Add to Cart"
-                                    onClick={() => handleAddToCart(product.id, 1, product)}
+                                    onClick={() => handleAddToCart(1, product)}
                                 >
                                     <AddShoppingCart className="icon-button" />
                                 </IconButton>
@@ -81,7 +80,7 @@ const ListView = ({ products }: IProps) => {
                                         </IconButton>
                                     ) : (
                                         <IconButton
-                                            onClick={() => addToWishlist(product.id, product)}
+                                            onClick={() => addToWishlist(product)}
                                         >
                                             <FavoriteBorderRoundedIcon className="icon-button" />
                                         </IconButton>

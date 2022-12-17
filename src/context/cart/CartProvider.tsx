@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useReducer } from "react";
 import { CartContext } from "./CartContext";
 import { cartReducer } from "./CartReducer";
 import {  ICartProduct, IProduct } from "interfaces";
@@ -21,7 +21,7 @@ const getLocalStorage = () => {
 
 export type CartContextProps = {
   cart: [];
-  addToCart: (id: number, amount: number, item: IProduct) => void;
+  addToCart: (amount: number, item: IProduct) => void;
   removeItem: (id: number) => void;
   countCartTotal: () => void;
   clearCart: () => void;
@@ -46,20 +46,22 @@ export const CartProvider = ({ children }: props) => {
     const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
   
 
-    const addToCart = (id: number, amount: number, product: ICartProduct) => {
+    const addToCart = (amount: number, product: ICartProduct) => {
         dispatch({
             type: "addToCart",
-            payload: { id, amount, product },
+            payload: { amount, product },
         });
+
+        localStorage.setItem("cart", JSON.stringify(state.cart));
     };
 
     const removeItem = (id: number) => {
-        dispatch({ type: "removeItem", payload: id });   
+        dispatch({ type: "removeItem", payload: id }); 
+        localStorage.setItem("cart", JSON.stringify(state.cart));
     };
- 
-  
     const toggleAmount = (id: number, value: number) => {
         dispatch({ type: "toggleAmount", payload: {id, value }});
+        localStorage.setItem("cart", JSON.stringify(state.cart));
     };
  
     const clearCart = () => {
@@ -68,13 +70,7 @@ export const CartProvider = ({ children }: props) => {
 
     const countCartTotal = () => {
         dispatch({ type: "countCartTotal" });
-    };
-    
-    useEffect(() => {
-        countCartTotal();
-        localStorage.setItem("cart", JSON.stringify(state.cart));
-    }, [state.cart]);
-
+    };    
   
     return (
         <CartContext.Provider

@@ -21,7 +21,7 @@ import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 const Product = (product: IProduct) => {
     const { id, category, title, image, price } = product;
     const { addToCart } = useContext(CartContext);
-    const handleAddToCart = () => addToCart(product.id, 1, product);
+    const handleAddToCart = () => addToCart(1, product);
     const { addToWishlist, wishlist, removeFavoriteItem } =
     useContext(WishlistContext);
 
@@ -33,7 +33,7 @@ const Product = (product: IProduct) => {
         if (isFavorite) {
             removeFavoriteItem(product.id);
         } else {
-            addToWishlist(product.id, product);
+            addToWishlist(product);
         }
     }
 

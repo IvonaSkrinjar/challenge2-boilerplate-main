@@ -1,4 +1,4 @@
-import React, { memo, useContext } from "react";
+import React, { memo, useContext, useEffect } from "react";
 import logo from "../../assets/images/logo_transparent.png";
 import Container from "components/Container";
 import { AppBar, Badge, Box, IconButton, Toolbar } from "@mui/material";
@@ -13,8 +13,9 @@ import { WishlistDialog } from "components/WishlistDialog";
 
 export const Header = () => {
 
-    const {totalCartItems} = useContext(CartContext); 
-    const {totalFavoriteItems } = useContext(WishlistContext); 
+    const {cart, totalCartItems, countCartTotal} = useContext(CartContext); 
+    const { wishlist, totalFavoriteItems, countWishlistTotal } =
+      useContext(WishlistContext); 
   
     const [open, setOpen] = React.useState(false);
 
@@ -25,7 +26,15 @@ export const Header = () => {
     const handleClose = () => {
         setOpen(false);
     };   
-   
+
+    useEffect(() => {
+        countCartTotal();       
+    }, [cart]);
+
+    useEffect(() => {
+        countWishlistTotal();
+    }, [wishlist]);
+
 
     return (
         <Box sx={{ flexGrow: 1 }}>
