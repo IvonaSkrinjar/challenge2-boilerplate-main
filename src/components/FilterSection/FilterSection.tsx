@@ -30,21 +30,20 @@ const FilterSection = () => {
 
     const categoryData = ["all", ...categories];
 
+    const handleChanges = (event: any) => {
+        setValue(value);
+        updateFilterValue(event);
+    };
+
     const handleClearFilters = () => {
         setValue(null);
         setInputValue("");
         clearFilters();
     };
-
     if (productsLoading) {
         return (
             <CircularProgress
-                sx={{
-                    width: "4rem",
-                    height: "4rem",
-                    justifyContent: "center",
-                    padding: "5rem",
-                }}
+                sx={{ width: "4rem", height: "4rem", justifyContent: "center" }}
             />
         );
     }
@@ -119,9 +118,8 @@ const FilterSection = () => {
                                     control={
                                         <Checkbox
                                             checked={category === c.toLowerCase() ? true : false}
-                                            onChange={(_, value: any | null) => {
-                                                setValue(value);
-                                                updateFilterValue({
+                                            onChange={() => {
+                                                handleChanges({
                                                     target: {
                                                         name: "category",
                                                         checked: checked,

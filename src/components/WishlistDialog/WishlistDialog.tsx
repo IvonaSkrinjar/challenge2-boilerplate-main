@@ -1,13 +1,13 @@
 import {
-    Typography,    
-    Box,    
+    Typography,
+    Box,
     Button,
     List,
     ListItem,
     Drawer,
     ListItemText,
     Divider,
-    IconButton
+    IconButton,
 } from "@mui/material";
 import numberFormatCurrency from "common/numberFormatCurrency";
 import { CartContext } from "context/cart/CartContext";
@@ -18,16 +18,14 @@ import { NavLink } from "react-router-dom";
 import { IWishlistProduct } from "interfaces";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 
-
-function WishlistDialog(props : any) {
+function WishlistDialog(props: any) {
     const { wishlist, removeFavoriteItem } = useContext(WishlistContext);
     const { onClose, open } = props;
     const { addToCart } = useContext(CartContext);
 
-  
     const handleClose = () => {
         onClose();
-    };    
+    };
 
     const handleAddToCart = (id: number, product: IWishlistProduct) => {
         {
@@ -57,14 +55,12 @@ function WishlistDialog(props : any) {
                                 sx={{ paddingLeft: "3rem" }}
                                 primary={
                                     <Typography style={{ fontSize: "14px" }}>
-                                        {" "}
-                                        {product.title}{" "}
+                                        {product.title}
                                     </Typography>
                                 }
                                 secondary={
                                     <Typography style={{ fontSize: "14px" }}>
-                                        {" "}
-                                        {numberFormatCurrency.formatNumber(product.price)}{" "}
+                                        {numberFormatCurrency.formatNumber(product.price)}
                                     </Typography>
                                 }
                             />
@@ -89,30 +85,32 @@ function WishlistDialog(props : any) {
                     </Box>
                 ))
             ) : (
-                <ListItem>
-                    <FavoriteBorderRoundedIcon
-                        style={{ width: "50px", height: "50px", color: "grey" }}
-                    />
-                    <ListItemText
-                        sx={{ paddingLeft: "3rem" }}
-                        primary={
-                            <Typography style={{ fontSize: "14px" }}>
-                  There are no products on the wishlist!
-                            </Typography>
-                        }
-                        secondary={
-                            <Button
-                                component={NavLink}
-                                to={"/"}
-                                onClick={() => handleClose()}
-                            >
-                                <Typography fontSize="14px" color="#1976d2">
-                    Start Shopping
+                <Box>
+                    <ListItem>
+                        <FavoriteBorderRoundedIcon
+                            style={{ width: "50px", height: "50px", color: "grey" }}
+                        />
+                        <ListItemText
+                            sx={{ paddingLeft: "3rem" }}
+                            primary={
+                                <Typography style={{ fontSize: "14px" }}>
+                    There are no products on the wishlist!
                                 </Typography>
-                            </Button>
-                        }
-                    />
-                </ListItem>
+                            }
+                        />
+                    </ListItem>
+
+                    <Button
+                        sx={{ ml: "2rem" }}
+                        component={NavLink}
+                        to={"/"}
+                        onClick={() => handleClose()}
+                    >
+                        <Typography fontSize="14px" color="#1976d2">
+                Start Shopping
+                        </Typography>
+                    </Button>
+                </Box>
             )}
         </List>
     );
@@ -122,15 +120,19 @@ function WishlistDialog(props : any) {
             <Typography
                 variant="h4"
                 component="h4"
-                sx={{ marginTop: "3rem", marginBottom: "3rem", marginLeft: "1rem", fontWeight: "bold" }}
+                sx={{
+                    marginTop: "3rem",
+                    marginBottom: "3rem",
+                    marginLeft: "1rem",
+                    fontWeight: "bold",
+                }}
             >
-          Your Wishlist
+        Your Wishlist
             </Typography>
             <Divider />
             {list()}
         </Drawer>
     );
 }
-
 
 export default WishlistDialog;

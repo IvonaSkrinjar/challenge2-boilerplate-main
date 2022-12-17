@@ -1,22 +1,37 @@
-import { Box, Button, Typography } from "@mui/material";
-import { IProduct } from "interfaces";
+import { Box, Button, IconButton, Typography } from "@mui/material";
+import { IProduct, IWishlistProduct } from "interfaces";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import numberFormatCurrency from "../../common/numberFormatCurrency";
-import React from "react";
+import React, { useContext } from "react";
 import { Grid } from "@material-ui/core";
+import { AddShoppingCart } from "@mui/icons-material";
+import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
+import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
+import { WishlistContext } from "context/wishlist/Wishlist";
+import { CartContext } from "context/cart/CartContext";
 
 interface IProps {
   products: IProduct[];
 }
 const ListView = ({ products }: IProps) => {
+    const { addToCart } = useContext(CartContext);
+
+    const { addToWishlist, wishlist, removeFavoriteItem } =
+    useContext(WishlistContext);
+
+    const handleAddToCart = (
+        productId: number,
+        amount: number,
+        product: IProduct
+    ) => addToCart(productId, amount, product);
+
     return (
         <Wrapper className="section">
             <Grid container spacing={5}>
                 {products?.map((product) => (
-                    <>
+                    <Grid container key={product.id}>
                         <Grid
-                            key={product.id}
                             item
                             xs={12}
                             sm={3}
@@ -25,7 +40,7 @@ const ListView = ({ products }: IProps) => {
                                 justifyContent: "center",
                                 display: "flex",
                             }}
-                        >                          
+                        >
                             <Box
                                 component="img"
                                 sx={{
@@ -40,7 +55,7 @@ const ListView = ({ products }: IProps) => {
                                 src={product.image}
                             />
                         </Grid>
-                        <Grid  item xs={12} sm={8} md={8}>
+                        <Grid item xs={12} sm={8} md={8}>
                             <Typography component="h3" variant="h3">
                                 {product.title}
                             </Typography>
@@ -50,6 +65,28 @@ const ListView = ({ products }: IProps) => {
                             <Typography sx={{ fontSize: "15px" }}>
                                 {product.description.slice(0, 90)}...
                             </Typography>
+                            <Box>
+                                <IconButton
+                                    aria-label="Add to Cart"
+                                    onClick={() => handleAddToCart(product.id, 1, product)}
+                                >
+                                    <AddShoppingCart className="icon-button" />
+                                </IconButton>
+
+                                {wishlist.some(
+                                    (favorite: IWishlistProduct) => favorite.id === product.id
+                                ) ? (
+                                        <IconButton onClick={() => removeFavoriteItem(product.id)}>
+                                            <FavoriteRoundedIcon className="icon-button" />
+                                        </IconButton>
+                                    ) : (
+                                        <IconButton
+                                            onClick={() => addToWishlist(product.id, product)}
+                                        >
+                                            <FavoriteBorderRoundedIcon className="icon-button" />
+                                        </IconButton>
+                                    )}
+                            </Box>
                             <Button
                                 component={NavLink}
                                 to={`/product/${product.id}`}
@@ -61,7 +98,7 @@ const ListView = ({ products }: IProps) => {
                                 </Typography>
                             </Button>
                         </Grid>
-                    </>
+                    </Grid>
                 ))}
             </Grid>
         </Wrapper>
@@ -73,6 +110,11 @@ const Wrapper = styled.section`
   display: flex;
   .container {
     max-width: 120rem;
+  }
+
+  .icon-button {
+    width: 25px;
+    height: 25px;  
   }
 
   .button {
