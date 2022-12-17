@@ -14,52 +14,73 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
+import { IProduct } from "interfaces";
 
 const FilterSection = () => {
-    const { categories, products, productsLoading } =
-    useContext(ProductContext);
-    const [value, setValue] = useState("");
+    const { categories, products, productsLoading } = useContext(ProductContext);
+    const [value, setValue] = useState<IProduct | null>(null);
     const [checked] = useState([true, false]);
+    const [inputValue, setInputValue] = useState("");
 
     const {
         filters: { category, price, maxPrice, minPrice },
         updateFilterValue,
         clearFilters,
-    } = useContext(FilterContext);   
+    } = useContext(FilterContext);
 
     const categoryData = ["all", ...categories];
 
-    const handleSearchChanges = (event: any) => {
-        setValue(value);
-        updateFilterValue(event);
+    const handleClearFilters = () => {
+        setValue(null);
+        setInputValue("");
+        clearFilters();
     };
 
     if (productsLoading) {
-        return <CircularProgress sx ={{width: "4rem", height: "4rem", justifyContent: "center"}}/>;
+        return (
+            <CircularProgress
+                sx={{
+                    width: "4rem",
+                    height: "4rem",
+                    justifyContent: "center",
+                    padding: "5rem",
+                }}
+            />
+        );
     }
 
+    const defaultProps = {
+        options: products,
+        getOptionLabel: (option: IProduct) => option.title,
+    };
     return (
-        <Wrapper>    
+        <Wrapper>
             <Autocomplete
-                id="search"
-                getOptionLabel={(option) => option.title || ""}
-                options={products}
-                sx={{
-                    width: 300,  
-                }}         
-                clearOnEscape
-                onChange={(event: any, value: any | null) => {
-                    handleSearchChanges({ target: { name: "text", value: value } });
+                {...defaultProps}
+                value={value}
+                onChange={(e, value) => {
+                    setValue(value);
+                    updateFilterValue({
+                        target: { name: "text", value: value },
+                    });
+                }}
+                inputValue={inputValue}
+                onInputChange={(e, v) => {
+                    setInputValue(v);
                 }}
                 renderInput={(params) => (
-                    <TextField            
+                    <TextField
                         {...params}
-                        label={ <Typography  sx={{fontSize: "13px", color:"grey"}}> Search By Title </Typography>}
+                        label={
+                            <Typography sx={{ fontSize: "13px", color: "grey" }}>
+                Search By Title
+                            </Typography>
+                        }
                         variant="outlined"
-                        fullWidth              
+                        fullWidth
                     />
-                )}        
-            />     
+                )}
+            />
 
             <div className="filter_price">
                 <Typography variant="h4" component="h4">
@@ -98,8 +119,9 @@ const FilterSection = () => {
                                     control={
                                         <Checkbox
                                             checked={category === c.toLowerCase() ? true : false}
-                                            onChange={(event: any, value: any | null) => {
-                                                handleSearchChanges({
+                                            onChange={(_, value: any | null) => {
+                                                setValue(value);
+                                                updateFilterValue({
                                                     target: {
                                                         name: "category",
                                                         checked: checked,
@@ -126,7 +148,7 @@ const FilterSection = () => {
                 <Button
                     variant="contained"
                     className="clear-button"
-                    onClick={clearFilters}
+                    onClick={handleClearFilters}
                 >
                     <Typography fontSize="1.5rem" color="white">
             Clear Filters

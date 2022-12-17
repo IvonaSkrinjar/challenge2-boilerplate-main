@@ -14,26 +14,31 @@ const CartSummaryItem = () => {
   
     return (
         <Wrapper>
-            <Card className="root" elevation={15} >
+            <Card className="root" elevation={15}>
                 <CardContent>
-                    <Typography sx={{fontSize: "14px"}}
+                    <Typography
+                        sx={{ fontSize: "14px" }}
                         className="title"
                         color="textSecondary"
                         gutterBottom
                     >
-                     Shopping Cart
+              Shopping Cart
                     </Typography>
-                    <Typography variant="h3" component="h3" >     
-                     Order Summary
+                    <Typography variant="h3" component="h3">
+              Order Summary
                     </Typography>
                     <Typography variant="subtitle2">
                         <hr />
                     </Typography>
                     <Grid container>
                         <Grid item xs={11} sm={11} md={11} lg={11}>
-                            <Typography variant="body1" component="div" sx={{fontSize: "14px"}}>
-                            Subtotal:
-                            </Typography>             
+                            <Typography
+                                variant="body1"
+                                component="div"
+                                sx={{ fontSize: "14px" }}
+                            >
+                  Subtotal:
+                            </Typography>
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
                             <Typography variant="h6" component="div">
@@ -41,9 +46,13 @@ const CartSummaryItem = () => {
                             </Typography>
                         </Grid>
                         <Grid item xs={11} sm={11} md={11} lg={11}>
-                            <Typography variant="body1" component="div" sx={{fontSize: "14px"}}>
-                             Shipping:
-                            </Typography>             
+                            <Typography
+                                variant="body1"
+                                component="div"
+                                sx={{ fontSize: "14px" }}
+                            >
+                  Shipping:
+                            </Typography>
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
                             <Typography variant="h6" component="div">
@@ -51,29 +60,45 @@ const CartSummaryItem = () => {
                             </Typography>
                         </Grid>
                         <Grid item xs={11} sm={11} md={11} lg={11}>
-                            <Typography variant="body1" component="div" sx={{fontSize: "14px"}}>
-                            Order Total:
+                            <Typography
+                                variant="body1"
+                                component="div"
+                                sx={{ fontWeight: "bold", fontSize: "14px" }}
+                            >
+                  Order Total:
                             </Typography>
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
-                            <Typography variant="h6" component="div">
-                                {numberFormatCurrency.formatNumber(totalCartAmount + shippingFee)}
+                            <Typography
+                                style={{ fontWeight: "bold", fontSize: "14px" }}
+                                variant="h6"
+                                component="div"
+                            >
+                                {numberFormatCurrency.formatNumber(
+                                    totalCartAmount + shippingFee
+                                )}
                             </Typography>
                         </Grid>
                     </Grid>
-                </CardContent>       
+                </CardContent>
                 <CardActions>
-                    <Button component={NavLink}
+                    <Button
+                        component={NavLink}
                         to={"/checkout"}
                         variant="contained"
                         className="shopping-button"
-                        size="large">
-                        Proceed To Checkout
+                        size="large"
+                        sx={{
+                            fontSize: "12px",
+                            "&:hover": {
+                                opacity: 1,
+                            },
+                        }}
+                    >
+              Proceed To Checkout
                     </Button>
                 </CardActions>
             </Card>
-
-      
         </Wrapper>
     );
 };

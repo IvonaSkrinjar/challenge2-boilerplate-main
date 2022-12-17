@@ -128,7 +128,7 @@ const CheckoutPage = () => {
                                                             disabled={isSubmitting}
                                                             type="submit"
                                                             variant="contained"
-                                                            className="button"
+                                                            className="button"                                                            
                                                         >
                                                             <span className="button-label">
                                                                 {isLastStep ? "Place order" : "Next"}

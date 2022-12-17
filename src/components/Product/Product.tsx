@@ -18,19 +18,18 @@ import styled from "styled-components";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 
-
 const Product = (product: IProduct) => {
     const { id, category, title, image, price } = product;
     const { addToCart } = useContext(CartContext);
     const handleAddToCart = () => addToCart(product.id, 1, product);
-    const { addToWishlist, wishlist, removeFavoriteItem } = useContext(WishlistContext);
-    
+    const { addToWishlist, wishlist, removeFavoriteItem } =
+    useContext(WishlistContext);
+
     const isFavorite = wishlist.some(
         (favorite: IWishlistProduct) => favorite.id === product.id
-    ); 
-   
+    );
 
-    function handleWishlist () {
+    function handleWishlist() {
         if (isFavorite) {
             removeFavoriteItem(product.id);
         } else {
@@ -119,15 +118,20 @@ const Product = (product: IProduct) => {
                     >
                         <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
                             <AddShoppingCart
-                                style={{
-                                    width: "20px",
-                                    height: "20px",
-                                }}
+                                className="icon-button"             
                             />
                         </IconButton>
                         <IconButton onClick={handleWishlist}>
-                            {isFavorite ? <FavoriteRoundedIcon/> : <FavoriteBorderRoundedIcon/>}
-                        </IconButton>                      
+                            {isFavorite ? (
+                                <FavoriteRoundedIcon
+                                    className="icon-button"                 
+                                />
+                            ) : (
+                                <FavoriteBorderRoundedIcon
+                                    className="icon-button"                
+                                />
+                            )}
+                        </IconButton>
                     </CardActions>
                 </CardContent>
             </Card>
@@ -136,12 +140,9 @@ const Product = (product: IProduct) => {
 };
 
 const Wrapper = styled.section`
-  .filled-heart {
-    opacity: 1;
-  }
-
-  .outline-heart {
-    opacity: 0.51;
+  .icon-button {
+    width: 25px;
+    height: 25px;
   }
 `;
 

@@ -78,6 +78,9 @@ const Wrapper = styled.section`
     width: 45rem;
     height: 7rem;
   }
+  .start-button {
+    font-size: 14px;
+  }
 `;
 
 export default CartPage;

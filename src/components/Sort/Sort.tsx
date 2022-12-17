@@ -6,13 +6,19 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import { FormControl, MenuItem, Select } from "@mui/material";
 
 const Sort = () => {
-    const { filter_products,sortingProducts, grid_view, setGridView, setListView, sorting } =
-    useContext(FilterContext);
-    
-    useEffect(() => {  
+    const {
+        filter_products,
+        sortingProducts,
+        grid_view,
+        setGridView,
+        setListView,
+        sorting,
+    } = useContext(FilterContext);
+
+    useEffect(() => {
         sortingProducts();
     }, [filter_products]);
-  
+
     const [value, setValue] = useState("lowest");
 
     const handleValueChange = (event: any) => {
@@ -44,7 +50,7 @@ const Sort = () => {
                 {filter_products.length < 2 && (
                     <p>{`${filter_products.length} Product Available`}</p>
                 )}
-            </div>          
+            </div>
             <FormControl style={{ paddingRight: "5rem" }}>
                 <Select
                     name="sort"
@@ -54,15 +60,23 @@ const Sort = () => {
                     onChange={handleValueChange}
                     sx={{
                         fontSize: "13px",
-                        color: "grey"
+                        color: "grey",
                     }}
                 >
-                    <MenuItem value={"lowest"}>Sort By Price: low to high</MenuItem>
-                    <MenuItem value={"highest"}>Sort By Price: high to low</MenuItem>
-                    <MenuItem value={"asc"}>Sort by Title (a-z)</MenuItem>
-                    <MenuItem value={"desc"}>Sort by Title (z-a)</MenuItem>
+                    <MenuItem sx={{ fontSize: "13px" }} value={"lowest"}>
+              Sort By Price: low to high
+                    </MenuItem>
+                    <MenuItem sx={{ fontSize: "13px" }} value={"highest"}>
+              Sort By Price: high to low
+                    </MenuItem>
+                    <MenuItem sx={{ fontSize: "13px" }} value={"asc"}>
+              Sort by Title (a-z)
+                    </MenuItem>
+                    <MenuItem sx={{ fontSize: "13px" }} value={"desc"}>
+              Sort by Title (z-a)
+                    </MenuItem>
                 </Select>
-            </FormControl>           
+            </FormControl>
         </Wrapper>
     );
 };
@@ -72,10 +86,10 @@ const Wrapper = styled.section`
   justify-content: space-between;
   margin-top: 5rem;
   padding-bottom: 3rem;
-
+ 
   .sorting-list {
     display: flex;
-    gap: 2rem;   
+    gap: 2rem;
 
     .sort-btn {
       padding: 0.8rem 1rem;
@@ -93,7 +107,7 @@ const Wrapper = styled.section`
       background-color: #212529;
       color: #fff;
     }
-  }  
+  }
 `;
 
 export default Sort;

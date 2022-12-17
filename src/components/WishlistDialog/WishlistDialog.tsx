@@ -79,7 +79,7 @@ function WishlistDialog(props : any) {
                             </IconButton>
                         </ListItem>
                         <Button
-                            sx={{ ml: 2 }}
+                            sx={{ ml: 2, fontSize: "12px" }}
                             component={NavLink}
                             to={"/cart"}
                             onClick={() => handleAddToCart(product.id, product)}

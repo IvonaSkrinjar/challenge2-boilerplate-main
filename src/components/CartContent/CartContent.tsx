@@ -38,6 +38,12 @@ const CartContent = () => {
                             to={"/"}
                             variant="contained"
                             className="shopping-button"
+                            sx={{                
+                                fontSize: "12px",
+                                "&:hover": {                  
+                                    opacity: 1,
+                                },
+                            }}
                         >
                 Continue Shopping
                         </Button>
@@ -47,6 +53,7 @@ const CartContent = () => {
                                 height: "3rem",
                                 backgroundColor: "red",
                                 color: "white",
+                                fontSize: "12px",
                                 "&:hover": {
                                     backgroundColor: "#fff",
                                     color: "#3c52b2",
