@@ -21,7 +21,7 @@ import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 const Product = (product: IProduct) => {
     const { id, category, title, image, price } = product;
     const { addToCart } = useContext(CartContext);
-    const handleAddToCart = () => addToCart(1, product);
+   
     const { addToWishlist, wishlist, removeFavoriteItem } =
     useContext(WishlistContext);
 
@@ -29,6 +29,8 @@ const Product = (product: IProduct) => {
         (favorite: IWishlistProduct) => favorite.id === product.id
     );
 
+    const handleAddToCart = () => addToCart(1, product);
+   
     function handleWishlist() {
         if (isFavorite) {
             removeFavoriteItem(product.id);
@@ -117,19 +119,13 @@ const Product = (product: IProduct) => {
                         style={{ display: "flex", float: "right", marginTop: "-2rem" }}
                     >
                         <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
-                            <AddShoppingCart
-                                className="icon-button"             
-                            />
+                            <AddShoppingCart className="icon-button" />
                         </IconButton>
                         <IconButton onClick={handleWishlist}>
                             {isFavorite ? (
-                                <FavoriteRoundedIcon
-                                    className="icon-button"                 
-                                />
+                                <FavoriteRoundedIcon className="icon-button" />
                             ) : (
-                                <FavoriteBorderRoundedIcon
-                                    className="icon-button"                
-                                />
+                                <FavoriteBorderRoundedIcon className="icon-button" />
                             )}
                         </IconButton>
                     </CardActions>
