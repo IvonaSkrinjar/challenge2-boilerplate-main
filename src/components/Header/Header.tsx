@@ -1,4 +1,4 @@
-import React, { memo, useContext } from "react";
+import React, { memo, useContext, useEffect } from "react";
 import logo from "../../assets/images/logo_transparent.png";
 import Container from "components/Container";
 import { AppBar, Badge, Box, IconButton, Toolbar } from "@mui/material";
@@ -9,13 +9,15 @@ import { NavLink } from "react-router-dom";
 import { CartContext } from "context/cart/CartContext";
 import { WishlistContext } from "context/wishlist/Wishlist";
 import { WishlistDialog } from "components/WishlistDialog";
-
+import LoginIcon from "@mui/icons-material/Login";
+import { AuthContext } from "context/auth/AuthContext";
+import Dashboard from "components/Dashboard";
 
 export const Header = () => {
-
-    const {totalCartItems} = useContext(CartContext); 
-    const {totalFavoriteItems } = useContext(WishlistContext); 
-  
+    const { totalCartItems } = useContext(CartContext);   
+    const { totalFavoriteItems } = useContext(WishlistContext);   
+    const { isLoggedIn } = useContext(AuthContext);
+   
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -24,8 +26,7 @@ export const Header = () => {
 
     const handleClose = () => {
         setOpen(false);
-    };   
-   
+    };
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -56,7 +57,6 @@ export const Header = () => {
                                     />
                                 </Badge>
                             </IconButton>
-
                             <IconButton
                                 size="large"
                                 color="inherit"
@@ -67,8 +67,20 @@ export const Header = () => {
                                         style={{ width: "30px", height: "30px" }}
                                     />
                                 </Badge>
-                            </IconButton>                            
+                            </IconButton>
                             <WishlistDialog open={open} onClose={handleClose} />
+                            {!isLoggedIn ? (
+                                <IconButton
+                                    component={NavLink}
+                                    to="/login"
+                                    size="large"
+                                    color="inherit"
+                                >
+                                    <LoginIcon style={{ width: "30px", height: "30px" }} />
+                                </IconButton>
+                            ) : (
+                                <Dashboard />
+                            )}
                         </Box>
                     </Toolbar>
                 </AppBar>

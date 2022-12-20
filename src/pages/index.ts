@@ -1,5 +1,7 @@
 export { default as HomePage } from "./home";
-export { default as CartPage } from "./cart/CartPage";
+export { default as CartPage } from "./cart";
 export { default as NotFoundPage } from "./404";
 export { default as ProductPage } from "./product";
 export { default as CheckoutPage } from "./checkout";
+export { default as LoginPage } from "./login";
+export { default as ProfilePage } from "./profile";

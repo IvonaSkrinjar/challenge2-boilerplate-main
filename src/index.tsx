@@ -8,20 +8,23 @@ import { ProductProvider } from "context/product/ProductProvider";
 import { FilterProvider } from "context/filter/FilterProvider";
 import { CartProvider } from "context/cart/CartProvider";
 import { WishlistProvider } from "context/wishlist/WishlistProvider";
+import { AuthProvider } from "context/auth/AuthProvider";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
     <BrowserRouter>
-        <ProductProvider>
-            <FilterProvider>
-                <CartProvider>
-                    <WishlistProvider>
-                        <App />
-                    </WishlistProvider>
-                </CartProvider>
-            </FilterProvider>
-        </ProductProvider>
+        <AuthProvider>
+            <ProductProvider>
+                <FilterProvider>
+                    <CartProvider>
+                        <WishlistProvider>            
+                            <App />
+                        </WishlistProvider>
+                    </CartProvider>
+                </FilterProvider>
+            </ProductProvider>
+        </AuthProvider>
     </BrowserRouter>
 );
 

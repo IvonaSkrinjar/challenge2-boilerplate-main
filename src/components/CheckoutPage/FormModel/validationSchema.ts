@@ -96,5 +96,5 @@ export default [
                     return true;
                 }
             )     
-    })
+    }),
 ];

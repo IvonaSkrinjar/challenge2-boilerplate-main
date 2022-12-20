@@ -30,8 +30,13 @@ const Products = () => {
     
     if (productsLoading) {
         return (
-            <Stack gap={1} justifyContent="center" alignItems="center" marginTop="5rem">
-                <CircularProgress color="inherit" />
+            <Stack
+                gap={1}
+                justifyContent="center"
+                alignItems="center"
+                marginTop="5rem"
+            >
+                <CircularProgress style={{ color: "#1976d2" }} />
                 <Typography>Loading...</Typography>
             </Stack>
         );

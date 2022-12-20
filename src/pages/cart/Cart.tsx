@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import { CartContent } from "components/CartContent";
 import { Button } from "@mui/material";
 
-const CartPage = () => {
+const Cart = () => {
     const { cart } = useContext(CartContext);
     if (cart.length < 1) {
         return (
@@ -83,4 +83,4 @@ const Wrapper = styled.section`
   }
 `;
 
-export default CartPage;
+export default Cart;

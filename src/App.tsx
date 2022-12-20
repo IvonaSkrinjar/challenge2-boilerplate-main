@@ -1,17 +1,17 @@
 import { Routes, Route } from "react-router-dom";
-import { CartProvider } from "./context/cart/CartProvider";
-import { ProductProvider } from "./context/product/ProductProvider";
 import {
     HomePage,
     NotFoundPage,
     CartPage,
     ProductPage,
     CheckoutPage,
+    LoginPage,
+    ProfilePage
 } from "pages";
 import { GlobalStyle } from "GlobalStyle";
 import { ThemeProvider } from "styled-components";
-import { FilterProvider } from "context/filter/FilterProvider";
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { AuthContext } from "context/auth/AuthContext";
 
 
 function App() {
@@ -39,23 +39,29 @@ function App() {
             tab: "998px",
         },
     };
- 
+  
+   
+    const {  loadUser } = useContext(AuthContext);   
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if(token){
+            loadUser(token);
+        }
+    }, []);
+  
+     
     return (
         <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <ProductProvider>
-                <FilterProvider>
-                    <CartProvider>
-                        <Routes>
-                            <Route path="/" element={<HomePage />} />
-                            <Route path="/cart" element={<CartPage />} />
-                            <Route path="/product/:id" element={<ProductPage />} />
-                            <Route path="/checkout" element={<CheckoutPage />} />
-                            <Route path="*" element={<NotFoundPage />} />
-                        </Routes>
-                    </CartProvider>
-                </FilterProvider>
-            </ProductProvider>
+            <GlobalStyle />          
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/product/:id" element={<ProductPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="*" element={<NotFoundPage />} />
+            </Routes>                        
         </ThemeProvider>
     );
 }

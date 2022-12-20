@@ -27,9 +27,9 @@ const InputField = (props: any) => {
                         input: "input-field",
                     },
                 }}
-                InputLabelProps={{ style: { fontSize: 14} }}
+                InputLabelProps={{ style: { fontSize: 14 } }}
                 {...field}
-                {...rest}
+                {...rest}                
             />
         </Wrapper>
     );
@@ -38,7 +38,7 @@ const InputField = (props: any) => {
 const Wrapper = styled.section`
   .input-field {
     font-size: 14px;
-    text-transform: capitalize;
+    text-transform: none;
     padding: 1rem;
   }
   .MuiFormHelperText-root {

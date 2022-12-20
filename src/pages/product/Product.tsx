@@ -34,11 +34,16 @@ const Product = () => {
 
     if (singleProductLoading) {
         return (
-            <AppLayout>         
-                <Stack gap={1} justifyContent="center" alignItems="center" marginTop="5rem">
-                    <CircularProgress color="inherit" />
+            <AppLayout>
+                <Stack
+                    gap={1}
+                    justifyContent="center"
+                    alignItems="center"
+                    marginTop="5rem"
+                >
+                    <CircularProgress style={{ color: "#1976d2" }} />
                     <Typography>Loading...</Typography>
-                </Stack>          
+                </Stack>
             </AppLayout>
         );
     }
