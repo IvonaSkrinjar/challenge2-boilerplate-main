@@ -31,10 +31,13 @@ const CartItem = ({ id, image, title, price, amount }: IProps) => {
     };
 
     return (
-        <Card sx={{ display: "flex" }}>
+        <Card
+            elevation={15}       
+            sx={{ display: "flex", paddingRight: "3rem" }}
+        >
             <CardMedia
                 component="img"
-                sx={{ width: "15rem", objectFit: "contain" }}
+                sx={{ width: "15rem", objectFit: "contain", paddingLeft: "1rem" }}
                 image={image}
             />
             <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -42,10 +45,10 @@ const CartItem = ({ id, image, title, price, amount }: IProps) => {
                     <Typography variant="h4" component="h4">
                         {title}
                     </Typography>
-                    <Typography variant="h4" component="h4">                        
-                        <DeleteTwoToneIcon 
+                    <Typography variant="h4" component="h4">
+                        <DeleteTwoToneIcon
                             sx={{ float: "right", marginTop: "-2rem" }}
-                            onClick={() => removeItem(id)}                       
+                            onClick={() => removeItem(id)}
                         />
                     </Typography>
                     <Typography sx={{ width: "48rem" }} variant="subtitle2">

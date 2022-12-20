@@ -12,7 +12,7 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "context/auth/AuthContext";
 import { useContext } from "react";
 
-export default function AccountMenu() {
+export default function Dashboard() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const { logout } = useContext(AuthContext);
     const open = Boolean(anchorEl);
@@ -25,9 +25,7 @@ export default function AccountMenu() {
 
     return (
         <React.Fragment>
-            <Box
-                sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
-            >
+            <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
                 <IconButton
                     onClick={handleClick}
                     size="small"
@@ -64,11 +62,7 @@ export default function AccountMenu() {
                     transformOrigin={{ horizontal: "right", vertical: "top" }}
                     anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                 >
-                    <MenuItem
-                        sx={{ fontSize: "14px" }}
-                        component={NavLink}
-                        to="/profile"
-                    >
+                    <MenuItem sx={{ fontSize: "14px" }} component={NavLink} to="/profile">
                         <Avatar /> Profile
                     </MenuItem>
                     <Divider />
@@ -81,7 +75,7 @@ export default function AccountMenu() {
                         <ListItemIcon>
                             <Logout />
                         </ListItemIcon>
-              Logout
+            Logout
                     </MenuItem>
                 </Menu>
             </Box>

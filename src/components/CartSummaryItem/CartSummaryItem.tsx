@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, Grid, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Divider, Grid, Typography } from "@mui/material";
 import numberFormatCurrency from "common/numberFormatCurrency";
 import { CartContext } from "context/cart/CartContext";
 import React, { useContext, useEffect } from "react";
@@ -14,7 +14,7 @@ const CartSummaryItem = () => {
   
     return (
         <Wrapper>
-            <Card className="root" elevation={15}>
+            <Card elevation={15} sx={{ paddingRight: "3rem" }}>
                 <CardContent>
                     <Typography
                         sx={{ fontSize: "14px" }}
@@ -28,9 +28,9 @@ const CartSummaryItem = () => {
               Order Summary
                     </Typography>
                     <Typography variant="subtitle2">
-                        <hr />
+                        <Divider />
                     </Typography>
-                    <Grid container>
+                    <Grid container sx={{ paddingTop: "1rem" }}>
                         <Grid item xs={11} sm={11} md={11} lg={11}>
                             <Typography
                                 variant="body1"
