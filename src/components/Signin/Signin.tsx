@@ -1,39 +1,47 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
-
 import TextField from "@material-ui/core/TextField";
-import { Avatar, Button, Grid, Paper, Typography } from "@mui/material";
-import { NavLink, useLocation } from "react-router-dom";
+import {
+    Avatar,
+    Box,
+    Button,
+    Grid,
+    Paper,
+    Typography,
+} from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
 import formInitialValues from "./FormModel/formInitialValues";
 import signinFormModel from "./FormModel/signinFormModel";
 import signinValidationSchema from "./FormModel/validationSchema";
 import { AuthContext } from "context/auth/AuthContext";
 import LockIcon from "@mui/icons-material/Lock";
 import styled from "styled-components";
-import { Label } from "@mui/icons-material";
 
 const Signin = () => {
-    const { formId, formField } = signinFormModel;
-    const [username, setUserName] = useState("");
-
-    const [password, setPassword] = useState("");
-    const { login, errorMessage, isLoggedIn } = useContext(AuthContext);
-    const location = useLocation();
+    const { formField } = signinFormModel;
+    const { login, errorMessage } = useContext(AuthContext);
+    const location = useLocation(); 
+    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: formInitialValues,
         validationSchema: signinValidationSchema,
-        onSubmit: (values) => {
-            handleLogin();
+        onSubmit: () => {          
+            handleLogin();             
+          
+            if(location.state?.from){
+                navigate(location.state.from.pathname); 
+            }   
+            else{
+                navigate("/"); 
+            }                   
         },
     });
 
-    function handleLogin() {
-        setUserName(formik.values.username);
-        setPassword(formik.values.password);
-        const token = login(formik.values.username, formik.values.password);
+    function handleLogin() {       
+        login(formik.values.username, formik.values.password);
     }
-    
+
     return (
         <Wrapper>
             <Grid container>
@@ -64,8 +72,7 @@ const Signin = () => {
                         <Avatar
                             sx={{
                                 margin: "8px",
-                                backgroundColor: "#f50057",
-                            }}
+                                backgroundColor: "#f50057"                            }}
                         >
                             <LockIcon />
                         </Avatar>
@@ -84,7 +91,7 @@ const Signin = () => {
                             </Typography>
                             <TextField
                                 fullWidth
-                                id="username"
+                                id="username"                                
                                 name={formField.username.name}
                                 label={formField.username.label}
                                 onChange={formik.handleChange}
@@ -104,9 +111,7 @@ const Signin = () => {
                                 fullWidth
                                 id="password"
                                 name={formField.password.name}
-                                label={formField.password.label}
-                                type="password"
-                                value={formik.values.password}
+                                label={formField.password.label}                                                          
                                 onChange={formik.handleChange}
                                 style={{ marginTop: "2rem" }}
                                 InputProps={{
@@ -153,6 +158,10 @@ const Signin = () => {
                             ) : (
                                 ""
                             )}
+                            <Box sx={{ paddingTop: "1rem" }}>
+                                <Typography>johnd</Typography>
+                                <Typography>m38rmF$</Typography>
+                            </Box>
                         </form>
                     </Paper>
                 </Grid>
@@ -169,6 +178,9 @@ const Wrapper = styled.section`
   }
   .MuiFormHelperText-root {
     font-size: 12px;
+  }
+  .MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault{
+    margin-left: 20rem
   }
 `;
 

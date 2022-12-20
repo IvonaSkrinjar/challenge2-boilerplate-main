@@ -6,13 +6,13 @@ import {
     ProductPage,
     CheckoutPage,
     LoginPage,
-    ProfilePage
+    ProfilePage,
 } from "pages";
 import { GlobalStyle } from "GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import React, { useContext, useEffect } from "react";
 import { AuthContext } from "context/auth/AuthContext";
-
+import { PrivateRoute } from "components/PrivateRoute/PrivateRoute";
 
 function App() {
     const theme = {
@@ -39,29 +39,46 @@ function App() {
             tab: "998px",
         },
     };
-  
-   
-    const {  loadUser } = useContext(AuthContext);   
+
+    const { loadUser, isLoggedIn, loading } = useContext(AuthContext);
+
     useEffect(() => {
         const token = localStorage.getItem("token");
-        if(token){
+        if (token) {
             loadUser(token);
         }
     }, []);
-  
-     
+
     return (
         <ThemeProvider theme={theme}>
-            <GlobalStyle />          
+            <GlobalStyle />
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/product/:id" element={<ProductPage />} />
-                <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
+                <Route
+                    path="/checkout"
+                    element={
+                        !loading ? (
+                            <PrivateRoute isLoggedIn={isLoggedIn}>
+                                <CheckoutPage />
+                            </PrivateRoute>
+                        ) : null
+                    }
+                />
+                <Route
+                    path="/profile"
+                    element={
+                        !loading ? (
+                            <PrivateRoute isLoggedIn={isLoggedIn}>
+                                <ProfilePage />
+                            </PrivateRoute>
+                        ) : null
+                    }
+                />
                 <Route path="*" element={<NotFoundPage />} />
-            </Routes>                        
+            </Routes>
         </ThemeProvider>
     );
 }

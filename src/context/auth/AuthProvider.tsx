@@ -5,7 +5,7 @@ import { authReducer } from "./AuthReducer";
 import { authservices } from "services/auth.services";
 
 export interface AuthState {
-  user: IUser;
+  user: IUser | null;
   token: "";
   loading: false;
   errorMessage: null;
@@ -24,10 +24,9 @@ export type AuthContextProps = {
 };
 
 const accessToken = localStorage.getItem("token");
-//const token = accessToken ? JSON.parse(accessToken) : "";
 
 export const INITIAL_STATE = {
-    user: {},
+    user: null,
     token: accessToken,
     loading: false,
     errorMessage: null,
@@ -42,17 +41,21 @@ export const AuthProvider = ({ children }: props) => {
     const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
 
     const loadUser = async (token: string) => {
+        const jwtData = token.split(".")[1];
+        const decodedJwtJsonData = window.atob(jwtData);
+        const decodedJwtData = JSON.parse(decodedJwtJsonData);
+
         dispatch({
             type: "getUserRequest",
         });
         authservices
-            .getUser(1)
+            .getUser(decodedJwtData.sub)
             .then((response) => {
                 dispatch({
                     type: "getUserSuccess",
                     payload: {
                         user: response.data,
-                        token: token
+                        token: token,
                     },
                 });
             })
@@ -69,22 +72,22 @@ export const AuthProvider = ({ children }: props) => {
             type: "loginRequest",
         });
          
-        const token = await authservices.login(username, password);          
-        if (token) {
+        const response = await authservices.login(username, password);          
+        if (response.token) {
             dispatch({
                 type: "loginSuccess",
                 payload: {
-                    token: token,
+                    token: response.token,
                 },
             });
-            localStorage.setItem("token", JSON.stringify(token));
-            loadUser(token);
+            localStorage.setItem("token", JSON.stringify(response.token));
+            loadUser(response.token);
         } else {
             dispatch({
                 type: "loginError",
                 payload: {
-                    errorMessage: "Invalid Username or Password"
-                }
+                    errorMessage: "Invalid Username or Password",
+                },
             });
         }
     };
@@ -92,8 +95,7 @@ export const AuthProvider = ({ children }: props) => {
     const logout = async () => {
         dispatch({
             type: "logout",
-        });
-        localStorage.removeItem("user");
+        });    
         localStorage.removeItem("token");
     };
 

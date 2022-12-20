@@ -51,6 +51,7 @@ export const authReducer = (state: any, action: any) => {
             ...state,
             user: "",
             token: "",
+            loading: false,
             isLoggedIn: false
         };
     default:

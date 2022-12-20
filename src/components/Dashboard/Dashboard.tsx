@@ -9,21 +9,18 @@ import IconButton from "@mui/material/IconButton";
 import Logout from "@mui/icons-material/Logout";
 import PersonIcon from "@mui/icons-material/Person";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "context/auth/AuthContext";
+import { useContext } from "react";
 
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const { logout } = useContext(AuthContext);
     const open = Boolean(anchorEl);
     const handleClick = (event: any) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
-    };
-
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        //navigate
-        window.location.href = "/";
     };
 
     return (
@@ -67,16 +64,25 @@ export default function AccountMenu() {
                     transformOrigin={{ horizontal: "right", vertical: "top" }}
                     anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                 >
-                    <MenuItem component={NavLink} to="/profile">
+                    <MenuItem
+                        sx={{ fontSize: "14px" }}
+                        component={NavLink}
+                        to="/profile"
+                    >
                         <Avatar /> Profile
                     </MenuItem>
                     <Divider />
-                    <MenuItem onClick={handleLogout}>
+                    <MenuItem
+                        sx={{ fontSize: "14px" }}
+                        onClick={logout}
+                        component={NavLink}
+                        to="/"
+                    >
                         <ListItemIcon>
-                            <Logout fontSize="small" />
+                            <Logout />
                         </ListItemIcon>
               Logout
-                    </MenuItem>           
+                    </MenuItem>
                 </Menu>
             </Box>
         </React.Fragment>

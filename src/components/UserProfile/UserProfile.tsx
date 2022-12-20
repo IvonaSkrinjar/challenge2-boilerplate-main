@@ -1,51 +1,81 @@
 import React, { useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import styled from "styled-components";
 import { AuthContext } from "context/auth/AuthContext";
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
-    large: {
-        width: theme.spacing(20),
-        height: theme.spacing(20),
-    },
-}));
+import { CircularProgress } from "@material-ui/core";
+import { Box, Grid, Paper, Stack } from "@mui/material";
 
 const UserProfile = () => {
-    const classes = useStyles();
 
     const { user } = useContext(AuthContext);
 
+    if (!user)
+        return (
+            <Box sx={{ display: "flex" }}>
+                <CircularProgress />
+            </Box>
+        );
+
     return (
-        <Wrapper>           
-            <div className={classes.root}>            
-                <Card className={classes.root} variant="outlined">
-                    <CardContent>
-                        <Avatar className={classes.large} />
-                        <Typography variant="h5">
-            Welcome {user.name.firstname}
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </div>
-        </Wrapper>
+        <Grid container>
+            <Grid
+                item
+                xs={12}
+                md={12}
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                }}
+            >
+                <Paper
+                    component={Stack}
+                    direction="column"
+                    justifyContent="center"
+                    variant="outlined"
+                    square
+                    sx={{
+                        marginTop: "48px",
+                        marginBottom: "12rem",
+                        padding: "24px",
+                        boxShadow: "0px 1px 5px 0px rgb(0 0 0 / 20%)",
+                        width: "50rem",
+                    }}
+                >
+                    <Avatar style={{ marginLeft: "20rem" }}>                
+                    </Avatar>
+
+                    <Typography
+                        style={{
+                            paddingBottom: "3rem",
+                            display: "grid",
+                            justifyContent: "center",
+                            fontWeight: "bold",
+                            textTransform: "capitalize",
+                        }}
+                        component="h4"
+                        variant="h4"
+                    >
+                        {user.name.firstname} {user.name.lastname}
+                    </Typography>
+                    <Typography variant="h4" component="div">
+              Username: {user.username}
+                    </Typography>
+                    <Typography variant="h4" component="div">
+              Email: {user.email}
+                    </Typography>
+                    <Typography variant="h4" component="div">
+              Address: {user.address.street} {user.address.number}{" "}
+                        {user.address.city} {user.address.zipcode}
+                    </Typography>
+                    <Typography variant="h4" component="div">
+              Phone: {user.phone}
+                    </Typography>
+                </Paper>
+            </Grid>
+        </Grid>
     );
 };
 
-const Wrapper = styled.section`
-  
-`;
 
 export default UserProfile;

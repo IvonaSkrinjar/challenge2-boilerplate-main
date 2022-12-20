@@ -57,11 +57,11 @@ const Product = (product: IProduct) => {
                             component="img"
                             alt="image"
                             sx={{
-                                padding: "1rem 1rem 0 1rem",
+                                padding: "1rem 1rem 1rem 1rem",
                                 height: "15rem",
                                 objectFit: "contain",
                                 "&:hover": {
-                                    transform: "scale(1.2)",
+                                    transform: "scale(1.1)",
                                 },
                             }}
                             image={image}
