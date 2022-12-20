@@ -18,6 +18,7 @@ import { AppLayout } from "components/Layouts";
 import styled from "styled-components";
 import { Button, Container, Paper } from "@mui/material";
 import { CartContext } from "context/cart/CartContext";
+import { WishlistContext } from "context/wishlist/Wishlist";
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 const { formId, formField } = checkoutFormModel;
@@ -37,6 +38,7 @@ function renderStepContent(step: any) {
 
 const CheckoutPage = () => {
     const { clearCart } = useContext(CartContext);
+    const { clearWishlist } = useContext(WishlistContext);
 
     const [activeStep, setActiveStep] = useState(0);
     const currentValidationSchema = validationSchema[activeStep];
@@ -57,6 +59,7 @@ const CheckoutPage = () => {
         if (isLastStep) {
             submitForm(values, actions);
             clearCart();
+            clearWishlist();
         } else {
             setActiveStep(activeStep + 1);
             actions.setTouched({});
@@ -159,14 +162,7 @@ const Wrapper = styled.section`
   }
   .MuiToolbar-root {
     background-color: #1976d2;
-  }
-
-  .MuiTypography-root {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    margin-left: 1rem;
-    font-weight: bold;
-  }
+  }  
   
   .MuiSvgIcon-root {
     color: #fff;
