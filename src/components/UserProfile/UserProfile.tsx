@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import Typography from "@material-ui/core/Typography";
-import Avatar from "@material-ui/core/Avatar";
+import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
 import { AuthContext } from "context/auth/AuthContext";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress } from "@mui/material";
 import { Box, Grid, Paper, Stack } from "@mui/material";
 
 const UserProfile = () => {

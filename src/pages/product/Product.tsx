@@ -9,7 +9,7 @@ import AddToCart from "components/AddToCart";
 import { NotFoundPage } from "pages";
 import { CircularProgress, Stack, Typography } from "@mui/material";
 import { AppLayout } from "components/Layouts";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 
 const Product = () => {
     const { getSingleProduct, singleProduct, singleProductLoading } = useContext(ProductContext);

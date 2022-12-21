@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import numberFormatCurrency from "../../common/numberFormatCurrency";
 import React, { useContext } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import { AddShoppingCart } from "@mui/icons-material";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";

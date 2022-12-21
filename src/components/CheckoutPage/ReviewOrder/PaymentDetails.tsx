@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Grid } from "@material-ui/core";
+import { Typography, Grid } from "@mui/material";
 
 function PaymentDetails(props: any) {
     const { formValues } = props;

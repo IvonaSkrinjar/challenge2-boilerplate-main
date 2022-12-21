@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect } from "react";
+import React, { memo, useContext } from "react";
 import logo from "../../assets/images/logo_transparent.png";
 import Container from "components/Container";
 import { AppBar, Badge, Box, IconButton, Toolbar } from "@mui/material";
@@ -12,12 +12,16 @@ import { WishlistDialog } from "components/WishlistDialog";
 import LoginIcon from "@mui/icons-material/Login";
 import { AuthContext } from "context/auth/AuthContext";
 import Dashboard from "components/Dashboard";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import * as locales from "@mui/material/locale";
+
 
 export const Header = () => {
     const { totalCartItems } = useContext(CartContext);   
     const { totalFavoriteItems } = useContext(WishlistContext);   
     const { isLoggedIn } = useContext(AuthContext);
-   
+    const [locale, setLocale] = React.useState("enUS");
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -28,6 +32,9 @@ export const Header = () => {
         setOpen(false);
     };
 
+    
+
+    
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Container>
@@ -82,6 +89,21 @@ export const Header = () => {
                                 <Dashboard />
                             )}
                         </Box>
+                        <Autocomplete
+                            options={Object.keys(locales)}
+                            getOptionLabel={(key) =>
+                                `${key.substring(0, 2)}-${key.substring(2, 4)}`
+                            }
+                            style={{ width: 300 }}
+                            value={locale}
+                            disableClearable
+                            onChange={(event, newValue) => {
+                                setLocale(newValue);
+                            }}
+                            renderInput={(params) => (
+                                <TextField {...params} label="Locale" fullWidth />
+                            )}
+                        />
                     </Toolbar>
                 </AppBar>
             </Container>

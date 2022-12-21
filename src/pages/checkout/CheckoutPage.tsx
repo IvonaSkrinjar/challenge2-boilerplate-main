@@ -5,7 +5,7 @@ import {
     StepLabel,
     Typography,
     CircularProgress,
-} from "@material-ui/core";
+} from "@mui/material";
 import { Formik, Form } from "formik";
 import AddressForm from "../../components/CheckoutPage/Forms/AddressForm";
 import PaymentForm from "../../components/CheckoutPage/Forms/PaymentForm";
