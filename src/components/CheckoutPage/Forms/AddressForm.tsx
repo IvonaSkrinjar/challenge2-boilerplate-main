@@ -20,7 +20,7 @@ export default function AddressForm(props: any) {
             <Typography variant="h4" gutterBottom>
           Shipping address
             </Typography>
-            <Grid container spacing={3}>
+            <Grid container spacing={3} sx= {{paddingTop: "3rem"}}>
                 <Grid item xs={12} sm={6}>
                     <InputField
                         name={firstName.name}

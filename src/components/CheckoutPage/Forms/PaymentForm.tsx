@@ -9,10 +9,10 @@ export default function PaymentForm(props: any) {
 
     return (
         <React.Fragment>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h4" gutterBottom>
           Payment method
             </Typography>
-            <Grid container spacing={3}>
+            <Grid container spacing={3} sx={{paddingTop: "3rem"}}>
                 <Grid item xs={12} md={6}>
                     <InputField
                         name={nameOnCard.name}
