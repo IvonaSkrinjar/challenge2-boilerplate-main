@@ -23,11 +23,6 @@ const login = async (username: string, password: string) => {
                 return "";
             }
         } );
-    /*await apiClient.post("auth/login",
-        requestOptions)
-        .then(data => console.log(data.json())) ;*/
-    
-    
 };
 
 export const authservices = {
