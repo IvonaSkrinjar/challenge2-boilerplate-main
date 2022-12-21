@@ -4,6 +4,7 @@ import GridViewIcon from "@mui/icons-material/GridView";
 import { FilterContext } from "context/filter/FilterContext";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import { FormControl, MenuItem, Select } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const Sort = () => {
     const {
@@ -20,6 +21,7 @@ const Sort = () => {
     }, [filter_products]);
 
     const [value, setValue] = useState("lowest");
+    const { t } = useTranslation();
 
     const handleValueChange = (event: any) => {
         setValue(event.target.value);
@@ -44,11 +46,18 @@ const Sort = () => {
             </div>
 
             <div className="product-data">
-                {filter_products.length > 1 && (
-                    <p>{`${filter_products.length} Products Available`}</p>
+                {filter_products.length === 0 && (
+                    <p>{t("zero-products-available")}</p>
                 )}
-                {filter_products.length < 2 && (
-                    <p>{`${filter_products.length} Product Available`}</p>
+                {filter_products.length > 1 && (
+                    <p>
+                        {filter_products.length} {t("products-available")}
+                    </p>
+                )}
+                {filter_products.length === 1 && (
+                    <p>
+                        {filter_products.length} {t("product-available")}
+                    </p>
                 )}
             </div>
             <FormControl style={{ paddingRight: "5rem" }}>
@@ -63,17 +72,18 @@ const Sort = () => {
                         color: "grey",
                     }}
                 >
+         
                     <MenuItem sx={{ fontSize: "13px" }} value={"lowest"}>
-              Sort By Price: low to high
+                        {t("sort-price-low-high")}
                     </MenuItem>
                     <MenuItem sx={{ fontSize: "13px" }} value={"highest"}>
-              Sort By Price: high to low
+                        {t("sort-price-high-low")}
                     </MenuItem>
                     <MenuItem sx={{ fontSize: "13px" }} value={"asc"}>
-              Sort by Title (a-z)
+                        {t("sort-title-asc")}
                     </MenuItem>
                     <MenuItem sx={{ fontSize: "13px" }} value={"desc"}>
-              Sort by Title (z-a)
+                        {t("sort-title-desc")}
                     </MenuItem>
                 </Select>
             </FormControl>

@@ -7,11 +7,13 @@ import React, {useContext, useEffect} from "react";
 import { CircularProgress, Grid, Stack, Typography } from "@mui/material";
 import { FilterContext } from "context/filter/FilterContext";
 import { ProductContext } from "context/product/ProductContext";
+import { useTranslation } from "react-i18next";
 
 const Products = () => {
 
     const filterCtx = useContext(FilterContext);
     const productCtx = useContext(ProductContext);
+    const { t } = useTranslation();
     const { products, categories, productsLoading } =
       useContext(ProductContext);
   
@@ -37,7 +39,7 @@ const Products = () => {
                 marginTop="5rem"
             >
                 <CircularProgress style={{ color: "#1976d2" }} />
-                <Typography>Loading...</Typography>
+                <Typography>{t("loading")}</Typography>
             </Stack>
         );
     }

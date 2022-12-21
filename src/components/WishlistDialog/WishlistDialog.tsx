@@ -17,12 +17,13 @@ import { WishlistContext } from "context/wishlist/Wishlist";
 import { NavLink } from "react-router-dom";
 import { IWishlistProduct } from "interfaces";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
+import { useTranslation } from "react-i18next";
 
 function WishlistDialog(props: any) {
     const { wishlist, removeFavoriteItem } = useContext(WishlistContext);
     const { onClose, open } = props;
     const { addToCart } = useContext(CartContext);
-
+    const { t } = useTranslation();
     const handleClose = () => {
         onClose();
     };
@@ -68,11 +69,8 @@ function WishlistDialog(props: any) {
                                 edge="end"
                                 aria-label="delete"
                                 onClick={() => removeFavoriteItem(product.id)}
-                                
                             >
-                                <DeleteTwoToneIcon
-                                    sx={{ float: "right" }}
-                                />
+                                <DeleteTwoToneIcon sx={{ float: "right" }} />
                             </IconButton>
                         </ListItem>
                         <Button
@@ -81,7 +79,7 @@ function WishlistDialog(props: any) {
                             to={"/cart"}
                             onClick={() => handleAddToCart(product)}
                         >
-                Add to cart
+                            {t("add-to-cart")}
                         </Button>
                     </Box>
                 ))
@@ -95,7 +93,7 @@ function WishlistDialog(props: any) {
                             sx={{ paddingLeft: "3rem" }}
                             primary={
                                 <Typography style={{ fontSize: "14px" }}>
-                    There are no products on the wishlist!
+                                    {t("empty-wishlist")}
                                 </Typography>
                             }
                         />
@@ -108,7 +106,7 @@ function WishlistDialog(props: any) {
                         onClick={() => handleClose()}
                     >
                         <Typography fontSize="14px" color="#1976d2">
-                Start Shopping
+                            {t("start-shopping")}
                         </Typography>
                     </Button>
                 </Box>
@@ -116,7 +114,7 @@ function WishlistDialog(props: any) {
         </List>
     );
 
-    return (       
+    return (
         <Drawer open={open} anchor={"right"} onClose={handleClose}>
             <Typography
                 variant="h4"
@@ -128,11 +126,11 @@ function WishlistDialog(props: any) {
                     fontWeight: "bold",
                 }}
             >
-            Your Wishlist
+                {t("wishlist")}
             </Typography>
             <Divider />
             {list()}
-        </Drawer>       
+        </Drawer>
     );
 }
 

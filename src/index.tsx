@@ -9,6 +9,8 @@ import { FilterProvider } from "context/filter/FilterProvider";
 import { CartProvider } from "context/cart/CartProvider";
 import { WishlistProvider } from "context/wishlist/WishlistProvider";
 import { AuthProvider } from "context/auth/AuthProvider";
+import "./i18n";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

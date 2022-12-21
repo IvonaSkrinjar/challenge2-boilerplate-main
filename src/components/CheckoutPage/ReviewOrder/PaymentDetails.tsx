@@ -1,19 +1,23 @@
 import React from "react";
 import { Typography, Grid } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 function PaymentDetails(props: any) {
     const { formValues } = props;
     const { nameOnCard, cardNumber } = formValues;
+    const { t } = useTranslation();
+   
+     
     return (
         <Grid item container direction="column" xs={12} sm={6}>
             <Typography variant="h4" gutterBottom>
-          Payment details
+                {t("payment-details")}
             </Typography>
             <Grid container>
                 <React.Fragment>
                     <Grid item xs={6}>
                         <Typography style={{ fontSize: "14px" }} gutterBottom>
-                Card type
+                            {t("card-type")}
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
@@ -25,7 +29,7 @@ function PaymentDetails(props: any) {
                 <React.Fragment>
                     <Grid item xs={6}>
                         <Typography style={{ fontSize: "14px" }} gutterBottom>
-                Card Name
+                            {t("nameOnCard")}
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
@@ -37,11 +41,11 @@ function PaymentDetails(props: any) {
                 <React.Fragment>
                     <Grid item xs={6}>
                         <Typography style={{ fontSize: "14px" }} gutterBottom>
-                Card number
+                            {t("cardNumber")}
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                        <Typography style={{ fontSize: "14px" }}  gutterBottom>
+                        <Typography style={{ fontSize: "14px" }} gutterBottom>
                             {cardNumber}
                         </Typography>
                     </Grid>

@@ -1,36 +1,38 @@
 import React from "react";
 import { Grid, Typography } from "@mui/material";
 import { InputField } from "../../InputField";
+import { useTranslation } from "react-i18next";
 
 export default function PaymentForm(props: any) {
     const {
         formField: { nameOnCard, cardNumber, cvv, expiryDate },
     } = props;
 
+    const { t } = useTranslation();
     return (
         <React.Fragment>
             <Typography variant="h4" gutterBottom>
-          Payment method
+                {t("payment-method")}
             </Typography>
-            <Grid container spacing={3} sx={{paddingTop: "3rem"}}>
+            <Grid container spacing={3} sx={{ paddingTop: "3rem" }}>
                 <Grid item xs={12} md={6}>
                     <InputField
                         name={nameOnCard.name}
-                        label={nameOnCard.label}
+                        label={t("nameOnCard")}
                         fullWidth
                     />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <InputField
                         name={cardNumber.name}
-                        label={cardNumber.label}
+                        label={t("cardNumber")}
                         fullWidth
                     />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <InputField
                         name={expiryDate.name}
-                        label={expiryDate.label}
+                        label={t("expiryDate")}
                         fullWidth
                         inputProps={{
                             maxLength: 5,
@@ -40,7 +42,7 @@ export default function PaymentForm(props: any) {
                 <Grid item xs={12} md={6}>
                     <InputField
                         name={cvv.name}
-                        label={cvv.label}
+                        label={t("cvv")}
                         fullWidth
                         inputProps={{
                             maxLength: 3,

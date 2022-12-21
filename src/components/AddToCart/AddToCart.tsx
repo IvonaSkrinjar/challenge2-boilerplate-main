@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import React from "react";
 import { IProduct } from "interfaces";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   product: IProduct;
@@ -13,7 +14,7 @@ interface IProps {
 const AddToCart = ({ product }: IProps) => {
     const { addToCart } = useContext(CartContext);
     const [amount, setAmount] = useState(1);
-
+    const { t } = useTranslation();
     const setDecrease = () => {
         setAmount((oldAmount) => {
             let newAmount = oldAmount - 1;
@@ -45,7 +46,7 @@ const AddToCart = ({ product }: IProps) => {
                 onClick={() => addToCart(amount, product)}
             >
                 <Typography fontSize="1.5rem" color="white">
-                Add To Cart
+                    {t("add-to-cart")}
                 </Typography>
             </Button>
         </Wrapper>
@@ -84,7 +85,6 @@ const Wrapper = styled.section`
   }
 
   .button {
-    width: 15rem;
     height: 3rem;
   }
 `;

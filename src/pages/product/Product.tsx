@@ -10,11 +10,13 @@ import { NotFoundPage } from "pages";
 import { CircularProgress, Stack, Typography } from "@mui/material";
 import { AppLayout } from "components/Layouts";
 import { Grid } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const Product = () => {
     const { getSingleProduct, singleProduct, singleProductLoading } = useContext(ProductContext);
 
     const { id } = useParams();
+    const { t } = useTranslation();
 
     const {
         title,
@@ -42,7 +44,7 @@ const Product = () => {
                     marginTop="5rem"
                 >
                     <CircularProgress style={{ color: "#1976d2" }} />
-                    <Typography>Loading...</Typography>
+                    <Typography>{t("loading")}</Typography>
                 </Stack>
             </AppLayout>
         );

@@ -6,21 +6,25 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { CartContent } from "components/CartContent";
 import { Button } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const Cart = () => {
     const { cart } = useContext(CartContext);
+    const { t } = useTranslation();
+   
+
     if (cart.length < 1) {
         return (
             <Wrapper className="page-100">
                 <div className="empty">
-                    <h2>No products in the cart.</h2>
+                    <h2>{t("no-products")}</h2>
                     <Button
                         component={NavLink}
                         to={"/"}
                         variant="contained"
                         className="start-button"
                     >
-                        Start Shopping
+                        {t("start-shopping")}
                     </Button>
                 </div>
             </Wrapper>
@@ -30,7 +34,7 @@ const Cart = () => {
     return (
         <Wrapper className="page">
             <AppLayout>
-                <Headline title="Your Shopping Cart" />
+                <Headline title={t("your-shopping-cart")} />
                 <CartContent />
             </AppLayout>
         </Wrapper>

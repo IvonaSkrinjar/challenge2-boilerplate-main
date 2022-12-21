@@ -14,21 +14,23 @@ import {
     Typography,
 } from "@mui/material";
 import { IProduct } from "interfaces";
+import { useTranslation } from "react-i18next";
 
 const FilterSection = () => {
     const { categories, products } = useContext(ProductContext);
     const [value, setValue] = useState<IProduct | null>(null);
     const [checked] = useState([true, false]);
     const [inputValue, setInputValue] = useState("");
-
+    const { t } = useTranslation();
+    
     const {
         filters: { category, price, maxPrice, minPrice },
         updateFilterValue,
         clearFilters,
-    } = useContext(FilterContext);
+    } = useContext(FilterContext);    
 
     const categoryData = ["all", ...categories];
-
+       
     const handleChanges = (event: any) => {
         setValue(value);
         updateFilterValue(event);
@@ -64,7 +66,7 @@ const FilterSection = () => {
                         {...params}
                         label={
                             <Typography sx={{ fontSize: "13px", color: "grey" }}>
-                Search By Title
+                                {t("search")}
                             </Typography>
                         }
                         variant="outlined"
@@ -75,7 +77,7 @@ const FilterSection = () => {
 
             <div className="filter_price">
                 <Typography variant="h4" component="h4">
-          Filter By Price
+                    {t("filter-price")}
                 </Typography>
                 <Typography
                     sx={{
@@ -100,7 +102,7 @@ const FilterSection = () => {
             </div>
             <div className="filter-category">
                 <Typography variant="h4" component="h4">
-          Product Categories
+                    {t("filter-category")}
                 </Typography>
                 <Box>
                     <div className="category-button">
@@ -141,7 +143,7 @@ const FilterSection = () => {
                     onClick={handleClearFilters}
                 >
                     <Typography fontSize="1.5rem" color="white">
-            Clear Filters
+                        {t("clear-filters")}
                     </Typography>
                 </Button>
             </div>

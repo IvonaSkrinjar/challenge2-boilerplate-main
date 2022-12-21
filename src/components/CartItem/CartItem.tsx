@@ -11,6 +11,7 @@ import AmountButtons from "components/AmountButtons";
 import { CartContext } from "context/cart/CartContext";
 import React, { useContext } from "react";
 import DeleteTwoToneIcon from "@mui/icons-material/Delete";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   id: number;
@@ -30,11 +31,10 @@ const CartItem = ({ id, image, title, price, amount }: IProps) => {
         toggleAmount(id, "inc");
     };
 
+    const { t } = useTranslation();
+
     return (
-        <Card
-            elevation={15}       
-            sx={{ display: "flex", paddingRight: "3rem" }}
-        >
+        <Card elevation={15} sx={{ display: "flex", paddingRight: "3rem" }}>
             <CardMedia
                 component="img"
                 sx={{ width: "15rem", objectFit: "contain", paddingLeft: "1rem" }}
@@ -69,7 +69,7 @@ const CartItem = ({ id, image, title, price, amount }: IProps) => {
                                 component="div"
                                 sx={{ fontSize: "14px" }}
                             >
-                  Price
+                                {t("price")}
                             </Typography>
                         </Grid>
                         <Grid
@@ -90,7 +90,7 @@ const CartItem = ({ id, image, title, price, amount }: IProps) => {
                                 component="div"
                                 sx={{ fontSize: "14px" }}
                             >
-                  Quantity
+                                {t("quantity")}
                             </Typography>
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
@@ -112,7 +112,7 @@ const CartItem = ({ id, image, title, price, amount }: IProps) => {
                                 component="div"
                                 style={{ fontWeight: "bold", fontSize: "14px" }}
                             >
-                  Total Price
+                                {t("total-price")}
                             </Typography>
                         </Grid>
                         <Grid item xs={2} sm={2} md={2} lg={1}>

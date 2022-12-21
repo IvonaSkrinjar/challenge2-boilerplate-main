@@ -4,9 +4,11 @@ import { CartContext } from "context/cart/CartContext";
 import { ICartProduct } from "interfaces";
 import { Box, Grid } from "@mui/material";
 import numberFormatCurrency from "common/numberFormatCurrency";
+import { useTranslation } from "react-i18next";
 
 function ProductDetails() {
     const { cart, totalCartAmount, shippingFee } = useContext(CartContext);
+    const { t } = useTranslation();
 
     return (
         <Box sx={{ marginTop: "3rem" }}>
@@ -61,7 +63,7 @@ function ProductDetails() {
                         style={{ fontSize: "14px", float: "right", paddingRight: "2rem" }}
                         variant="subtitle1"
                     >
-            Subtotal:
+                        {t("subtotal")}:
                     </Typography>
                 </Grid>
                 <Grid item>
@@ -81,7 +83,7 @@ function ProductDetails() {
                         style={{ fontSize: "14px", float: "right", paddingRight: "2rem" }}
                         variant="subtitle1"
                     >
-            Shipping:
+                        {t("shipping")}:
                     </Typography>
                 </Grid>
                 <Grid item>
@@ -107,7 +109,7 @@ function ProductDetails() {
                         }}
                         variant="subtitle1"
                     >
-            Total Cost:
+                        {t("total-cost")}:
                     </Typography>
                 </Grid>
                 <Grid item>

@@ -5,12 +5,14 @@ import { CartContext } from "context/cart/CartContext";
 import { ICartProduct } from "interfaces";
 import React from "react";
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const CartContent = () => {
     const { cart, clearCart } = useContext(CartContext);
-
+    const { t } = useTranslation();
+  
     return (
         <Wrapper>
             <React.Fragment>
@@ -38,14 +40,14 @@ const CartContent = () => {
                             to={"/"}
                             variant="contained"
                             className="shopping-button"
-                            sx={{                
+                            sx={{
                                 fontSize: "12px",
-                                "&:hover": {                  
+                                "&:hover": {
                                     opacity: 1,
                                 },
                             }}
                         >
-                Continue Shopping
+                            {t("continue-shopping")}
                         </Button>
                         <Button
                             sx={{
@@ -62,7 +64,7 @@ const CartContent = () => {
                             }}
                             onClick={() => clearCart()}
                         >
-                Clear Shopping Cart
+                            {t("clear-cart")}
                         </Button>
                     </Box>
                 </Container>

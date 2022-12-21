@@ -16,12 +16,15 @@ import signinValidationSchema from "./FormModel/validationSchema";
 import { AuthContext } from "context/auth/AuthContext";
 import LockIcon from "@mui/icons-material/Lock";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 const Signin = () => {
     const { formField } = signinFormModel;
     const { login, errorMessage } = useContext(AuthContext);
     const location = useLocation(); 
     const navigate = useNavigate();
+    const { t } = useTranslation();
+   
 
     const formik = useFormik({
         initialValues: formInitialValues,
@@ -72,7 +75,8 @@ const Signin = () => {
                         <Avatar
                             sx={{
                                 margin: "8px",
-                                backgroundColor: "#f50057"                            }}
+                                backgroundColor: "#f50057",
+                            }}
                         >
                             <LockIcon />
                         </Avatar>
@@ -87,13 +91,13 @@ const Signin = () => {
                                 component="h4"
                                 variant="h4"
                             >
-                  Sign in
+                                {t("sign-in")}
                             </Typography>
                             <TextField
                                 fullWidth
-                                id="username"                                
+                                id="username"
                                 name={formField.username.name}
-                                label={formField.username.label}
+                                label={t("username")}
                                 onChange={formik.handleChange}
                                 InputProps={{
                                     disableUnderline: true,
@@ -111,7 +115,7 @@ const Signin = () => {
                                 fullWidth
                                 id="password"
                                 name={formField.password.name}
-                                label={formField.password.label}                                                          
+                                label={t("password")}
                                 onChange={formik.handleChange}
                                 style={{ marginTop: "2rem" }}
                                 InputProps={{
@@ -141,7 +145,7 @@ const Signin = () => {
                                     },
                                 }}
                             >
-                  Sign In
+                                {t("sign-in")}
                             </Button>
                             {errorMessage ? (
                                 <Typography

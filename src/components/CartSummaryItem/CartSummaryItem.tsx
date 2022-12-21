@@ -2,12 +2,14 @@ import { Button, Card, CardActions, CardContent, Divider, Grid, Typography } fro
 import numberFormatCurrency from "common/numberFormatCurrency";
 import { CartContext } from "context/cart/CartContext";
 import React, { useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const CartSummaryItem = () => {
     const { totalCartAmount, countCartTotal, shippingFee } = useContext(CartContext);
-    
+    const { t } = useTranslation();
+   
     useEffect(() => {
         countCartTotal();   
     }, [totalCartAmount]);
@@ -22,10 +24,10 @@ const CartSummaryItem = () => {
                         color="textSecondary"
                         gutterBottom
                     >
-              Shopping Cart
+                        {t("shopping-cart")}
                     </Typography>
                     <Typography variant="h3" component="h3">
-              Order Summary
+                        {t("order-summary")}
                     </Typography>
                     <Typography variant="subtitle2">
                         <Divider />
@@ -37,7 +39,7 @@ const CartSummaryItem = () => {
                                 component="div"
                                 sx={{ fontSize: "14px" }}
                             >
-                  Subtotal:
+                                {t("subtotal")}:
                             </Typography>
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
@@ -51,7 +53,7 @@ const CartSummaryItem = () => {
                                 component="div"
                                 sx={{ fontSize: "14px" }}
                             >
-                  Shipping:
+                                {t("shipping")}:
                             </Typography>
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
@@ -65,7 +67,7 @@ const CartSummaryItem = () => {
                                 component="div"
                                 sx={{ fontWeight: "bold", fontSize: "14px" }}
                             >
-                  Order Total:
+                                {t("order-total")}:
                             </Typography>
                         </Grid>
                         <Grid item xs={1} sm={1} md={1} lg={1}>
@@ -95,7 +97,7 @@ const CartSummaryItem = () => {
                             },
                         }}
                     >
-              Proceed To Checkout
+                        {t("proceed-checkout")}
                     </Button>
                 </CardActions>
             </Card>
