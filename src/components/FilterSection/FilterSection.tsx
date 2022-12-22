@@ -34,9 +34,9 @@ const FilterSection = () => {
     function sleep(ms: any) {
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
-    const handleChanges = async (event: any) => {
+    const handleChanges = async (event: any) => {       
+        await sleep(2000);
         setValue(value);
-        await sleep(1000);
         updateFilterValue(event);
     };
 
