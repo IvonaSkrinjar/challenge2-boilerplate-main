@@ -31,8 +31,12 @@ const FilterSection = () => {
 
     const categoryData = ["all", ...categories];
        
-    const handleChanges = (event: any) => {
+    function sleep(ms: any) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+    const handleChanges = async (event: any) => {
         setValue(value);
+        await sleep(1000);
         updateFilterValue(event);
     };
 
