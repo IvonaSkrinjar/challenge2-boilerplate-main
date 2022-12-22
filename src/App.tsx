@@ -1,18 +1,17 @@
 import { Routes, Route } from "react-router-dom";
-import {
-    HomePage,
-    NotFoundPage,
-    CartPage,
-    ProductPage,
-    CheckoutPage,
-    LoginPage,
-    ProfilePage,
-} from "pages";
 import { GlobalStyle } from "GlobalStyle";
 import { ThemeProvider } from "styled-components";
-import React, { useContext, useEffect } from "react";
+import React, { Suspense, lazy, useContext, useEffect } from "react";
 import { AuthContext } from "context/auth/AuthContext";
 import { PrivateRoute } from "components/PrivateRoute/PrivateRoute";
+
+const HomePage = lazy(() => import("pages/home"));
+const CartPage = lazy(() => import("pages/cart"));
+const ProductPage = lazy(() => import("pages/product"));
+const LoginPage = lazy(() => import("pages/login"));
+const CheckoutPage = lazy(() => import("pages/checkout"));
+const ProfilePage = lazy(() => import("pages/profile"));
+const NotFoundPage = lazy(() => import("pages/404"));
 
 function App() {
     const theme = {
@@ -52,33 +51,35 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/cart" element={<CartPage />} />
-                <Route path="/product/:id" element={<ProductPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route
-                    path="/checkout"
-                    element={
-                        !loading ? (
-                            <PrivateRoute isLoggedIn={isLoggedIn}>
-                                <CheckoutPage />
-                            </PrivateRoute>
-                        ) : null
-                    }
-                />
-                <Route
-                    path="/profile"
-                    element={
-                        !loading ? (
-                            <PrivateRoute isLoggedIn={isLoggedIn}>
-                                <ProfilePage />
-                            </PrivateRoute>
-                        ) : null
-                    }
-                />
-                <Route path="*" element={<NotFoundPage />} />
-            </Routes>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/cart" element={<CartPage />} />
+                    <Route path="/product/:id" element={<ProductPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route
+                        path="/checkout"
+                        element={
+                            !loading ? (
+                                <PrivateRoute isLoggedIn={isLoggedIn}>
+                                    <CheckoutPage />
+                                </PrivateRoute>
+                            ) : null
+                        }
+                    />
+                    <Route
+                        path="/profile"
+                        element={
+                            !loading ? (
+                                <PrivateRoute isLoggedIn={isLoggedIn}>
+                                    <ProfilePage />
+                                </PrivateRoute>
+                            ) : null
+                        }
+                    />
+                    <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+            </Suspense>
         </ThemeProvider>
     );
 }
