@@ -72,7 +72,6 @@ const Sort = () => {
                         color: "grey",
                     }}
                 >
-         
                     <MenuItem sx={{ fontSize: "13px" }} value={"lowest"}>
                         {t("sort-price-low-high")}
                     </MenuItem>
@@ -95,9 +94,8 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: space-between;
   margin-top: 5rem;
-  padding-bottom: 3rem;
-  padding-right: 10rem;
- 
+  padding-bottom: 3rem; 
+
   .sorting-list {
     display: flex;
     gap: 2rem;
