@@ -4,12 +4,12 @@ import React, { useContext, useState } from "react";
 import { FilterContext } from "context/filter/FilterContext";
 import { ProductContext } from "context/product/ProductContext";
 import {
-    Autocomplete,    
+    Autocomplete,
     Box,
     Button,
-    Checkbox,    
-    FormControlLabel,  
-    Slider,  
+    Checkbox,
+    FormControlLabel,
+    Slider,
     TextField,
     Typography,
 } from "@mui/material";
@@ -21,30 +21,30 @@ const FilterSection = () => {
     const [value, setValue] = useState<IProduct | null>(null);
     const [checked] = useState([true, false]);
     const [inputValue, setInputValue] = useState("");
+    const [sliderValue, setSliderValue] = useState(null); 
+   
     const { t } = useTranslation();
-    
+
     const {
         filters: { category, price, maxPrice, minPrice },
         updateFilterValue,
         clearFilters,
-    } = useContext(FilterContext);    
+    } = useContext(FilterContext);
+
+
 
     const categoryData = ["all", ...categories];
-       
-    function sleep(ms: any) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-    }
-    const handleChanges = async (event: any) => {       
-        await sleep(2000);
+   
+    const handleChanges = async (event: any) => {
         setValue(value);
         updateFilterValue(event);
     };
 
     const handleClearFilters = () => {
-        setValue(null);
+        setValue(null); 
         setInputValue("");
         clearFilters();
-    };   
+    };
 
     const defaultProps = {
         options: products,
@@ -96,12 +96,19 @@ const FilterSection = () => {
                     sx={{
                         maxWidth: "33rem",
                     }}
-                    name="price"
                     defaultValue={maxPrice}
+                    step={10}
                     min={minPrice}
                     max={maxPrice}
                     value={price}
-                    onChange={updateFilterValue}
+                    onChange={(e, value: any) => {
+                        setSliderValue(value);
+                    }}
+                    onChangeCommitted={(e, value) => {
+                        updateFilterValue({
+                            target: { name: "price", value: value },
+                        });
+                    }}
                 />
             </div>
             <div className="filter-category">
