@@ -156,7 +156,7 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  margin-left: -15rem;   
+  margin-left: 2rem;   
  
   .filter_price {    
       margin: 5.5rem 0 1rem 0;

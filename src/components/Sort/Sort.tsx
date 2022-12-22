@@ -96,6 +96,7 @@ const Wrapper = styled.section`
   justify-content: space-between;
   margin-top: 5rem;
   padding-bottom: 3rem;
+  padding-right: 10rem;
  
   .sorting-list {
     display: flex;

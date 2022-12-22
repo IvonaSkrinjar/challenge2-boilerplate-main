@@ -48,13 +48,14 @@ const Products = () => {
         <Wrapper>
             <Grid
                 container
-                style={{ paddingTop: "2rem", paddingLeft: "17rem"}}
+                style={{ paddingTop: "2rem"  
+                }}
                 spacing={3}
             >
-                <Grid item xs={12} sm={3} md={3} sx={{ display: "flex" }}>
+                <Grid item  sm={4} md={3} sx={{ display: "flex", height: "115em" }}>
                     <FilterSection />
                 </Grid>
-                <Grid item xs={12} sm={8} md={8} >
+                <Grid item xs={12} sm={10} md={8} >
                     <Sort />
                     <ProductList />
                 </Grid>
