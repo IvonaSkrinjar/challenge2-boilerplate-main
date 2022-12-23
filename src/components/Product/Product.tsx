@@ -51,8 +51,8 @@ const Product = (product: IProduct) => {
                     padding: "0.1rem",
                 }}
             >
-                <Box>
-                    <NavLink to={`/product/${id}`}>
+                <NavLink to={`/product/${id}`}>
+                    <Box>
                         <CardMedia
                             component="img"
                             alt="image"
@@ -66,10 +66,8 @@ const Product = (product: IProduct) => {
                             }}
                             image={image}
                         />
-                    </NavLink>
-                </Box>
-                <CardContent>
-                    <NavLink style={{ color: "black" }} to={`/product/${id}`}>
+                    </Box>
+                    <CardContent>
                         <Typography
                             gutterBottom
                             variant="h5"
@@ -98,38 +96,39 @@ const Product = (product: IProduct) => {
                                 WebkitLineClamp: "1",
                                 WebkitBoxOrient: "vertical",
                                 fontWeight: "bold",
+                                color: "black",
                             }}
                         >
                             {title}
                         </Typography>
-                    </NavLink>
-                    <Typography
-                        gutterBottom
-                        variant="h5"
-                        component="h5"
-                        sx={{
-                            color: "grey",
-                            display: "flex",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        {numberFormatCurrency.formatNumber(price)}
-                    </Typography>
-                    <CardActions
-                        style={{ display: "flex", float: "right", marginTop: "-2rem" }}
-                    >
-                        <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
-                            <AddShoppingCart className="icon-button" />
-                        </IconButton>
-                        <IconButton onClick={handleWishlist}>
-                            {isFavorite ? (
-                                <FavoriteRoundedIcon className="icon-button" />
-                            ) : (
-                                <FavoriteBorderRoundedIcon className="icon-button" />
-                            )}
-                        </IconButton>
-                    </CardActions>
-                </CardContent>
+                        <Typography
+                            gutterBottom
+                            variant="h5"
+                            component="h5"
+                            sx={{
+                                color: "grey",
+                                display: "flex",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            {numberFormatCurrency.formatNumber(price)}
+                        </Typography>
+                        <CardActions
+                            style={{ display: "flex", float: "right", marginTop: "-2rem" }}
+                        >
+                            <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
+                                <AddShoppingCart className="icon-button" />
+                            </IconButton>
+                            <IconButton onClick={handleWishlist}>
+                                {isFavorite ? (
+                                    <FavoriteRoundedIcon className="icon-button" />
+                                ) : (
+                                    <FavoriteBorderRoundedIcon className="icon-button" />
+                                )}
+                            </IconButton>
+                        </CardActions>
+                    </CardContent>
+                </NavLink>
             </Card>
         </Wrapper>
     );

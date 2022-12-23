@@ -1,4 +1,4 @@
-import React, { memo, useContext, useState } from "react";
+import React, { memo, useContext } from "react";
 import logo from "../../assets/images/logo_transparent.png";
 import Container from "components/Container";
 import {
@@ -37,7 +37,7 @@ export const Header = () => {
     };
 
     const { t, i18n } = useTranslation();
-    const changeLanguage = (lng: any) => {       
+    const changeLanguage = (lng: string) => {       
         i18n.changeLanguage(lng);
     };
 

@@ -6,34 +6,22 @@ import { numberFormatCurrency } from "../../common/numberFormatCurrency";
 import Star from "../../components/Star/Star";
 import { ProductImage } from "components/ProductImage";
 import AddToCart from "components/AddToCart";
-import { NotFoundPage } from "pages";
 import { CircularProgress, Stack, Typography } from "@mui/material";
 import { AppLayout } from "components/Layouts";
 import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 const Product = () => {
-    const { getSingleProduct, singleProduct, singleProductLoading } = useContext(ProductContext);
+    const { getSingleProduct, singleProduct, singleProductLoading } =
+    useContext(ProductContext);
 
     const { id } = useParams();
     const { t } = useTranslation();
 
-    const {
-        title,
-        price,
-        description,
-        category,
-        rating = {
-            rate: 0,
-            count: 0,
-        },
-        image,
-    } = singleProduct;
-
     useEffect(() => {
-        getSingleProduct(id);
+        getSingleProduct(Number(id));
     }, []);
-
+ 
     if (singleProductLoading) {
         return (
             <AppLayout>
@@ -48,45 +36,49 @@ const Product = () => {
                 </Stack>
             </AppLayout>
         );
-    }
+    }     
 
     return (
         <Wrapper>
-            <AppLayout>
-                {singleProduct ? (
+            {singleProduct && (
+                <AppLayout>
                     <Grid container style={{ paddingTop: "5rem" }} spacing={3}>
                         <Grid item xs={12} sm={4} md={4}>
                             <div className="product_images">
-                                <ProductImage img={image} />
+                                <ProductImage img={singleProduct.image} />
                             </div>
                         </Grid>
 
-                        <Grid className="product-data" item xs={12} sm={6} md={6}>                         
+                        <Grid className="product-data" item xs={12} sm={6} md={6}>
                             <Typography component="h2" variant="h2">
-                                {title}
+                                {singleProduct.title}
                             </Typography>
-                            <Star stars={rating.rate} reviews={rating.count} />
+                            <Star
+                                stars={singleProduct.rating.rate}
+                                reviews={singleProduct.rating.count}
+                            />
 
                             <Typography className="product-data-price product-data-real-price">
-                                {numberFormatCurrency.formatNumber(price)}
+                                {numberFormatCurrency.formatNumber(singleProduct.price)}
                             </Typography>
                             <Typography sx={{ fontSize: "15px" }}>
-                                {description}
+                                {singleProduct.description}
                             </Typography>
 
                             <Typography component="h5" variant="h5">
-                    Categories: {category}
+                  Categories: {singleProduct.category}
                             </Typography>
 
-                            <AddToCart product={singleProduct} />                           
+                            <AddToCart product={singleProduct} />
                         </Grid>
                     </Grid>
-                ) : (
-                    <NotFoundPage />
-                )}
-            </AppLayout>
+                </AppLayout>
+            )}
         </Wrapper>
     );
+     
+
+  
 };
 
 const Wrapper = styled.section`

@@ -60,7 +60,13 @@ const resources = {
             "username": "Username",
             "password": "Password",
             "wishlist":"Your Wishlist",
-            "empty-wishlist": "There are no products on the wishlist!"
+            "empty-wishlist": "There are no products on the wishlist!",
+            "contact": "Contact",
+            "offices": "Offices",
+            "explore": "Explore",
+            "career": "Career",
+            "solutions": "Solutions",
+            "industries": "Industries"
         }
     },
     rs: {
@@ -120,7 +126,13 @@ const resources = {
             "username": "Korisničko ime",
             "password": "Lozinka",
             "wishlist": "Omiljeni proizvodi",
-            "empty-wishlist": "Lista želja je prazna!"
+            "empty-wishlist": "Lista želja je prazna!",
+            "contact": "Kontakt",
+            "offices": "Kancelarije",
+            "explore": "Pronađi",
+            "career": "Karijera",
+            "solutions": "Rešenja",
+            "industries": "Industrija"
         }
     }
 };

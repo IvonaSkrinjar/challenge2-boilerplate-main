@@ -3,6 +3,7 @@ import { ProductContext } from "./ProductContext";
 import { IProduct } from "interfaces";
 import { productReducer } from "./ProductReducer";
 import { productServices } from "services/product.services";
+import { useNavigate } from "react-router-dom";
 
 export interface ProductState {
   products: IProduct[];
@@ -14,7 +15,7 @@ export interface ProductState {
 
 export type ProductContextProps = {
   productState: ProductState;
-  getSingleProduct(id: any): IProduct;
+  getSingleProduct(id: number): IProduct;
   singleProduct: IProduct;
   products: IProduct[];
   featureProducts: IProduct[];
@@ -27,7 +28,7 @@ export type ProductContextProps = {
 
 const INITIAL_STATE = {
     products: [],
-    singleProduct: {},
+    singleProduct: null,
     categories: [],
     singleProductLoading: false,
     productsLoading: false,
@@ -39,7 +40,8 @@ interface props {
 
 export const ProductProvider = ({ children }: props) => {
     const [state, dispatch] = useReducer(productReducer, INITIAL_STATE);
-
+    const navigate = useNavigate();
+    
     const getProducts = async () => {
         dispatch({
             type: "getProductsRequest",
@@ -69,12 +71,15 @@ export const ProductProvider = ({ children }: props) => {
         await productServices
             .getById(productId)
             .then((response) => {
+                if (!response.data){                   
+                    navigate("*");
+                }
                 dispatch({
                     type: "getProductSuccess",
                     payload: {
                         singleProduct: response.data,
                     },
-                });
+                });              
             })
             .catch(() => {
                 dispatch({
