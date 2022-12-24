@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 function PaymentDetails(props: any) {
     const { formValues } = props;
-    const { firstName, lastName, address } = formValues;
+    const { firstName, lastName, address, city, country, zipcode } = formValues;
     const { t } = useTranslation();
 
     return (
@@ -16,10 +16,12 @@ function PaymentDetails(props: any) {
                 style={{ fontSize: "14px" }}
                 gutterBottom
             >{`${firstName} ${lastName}`}</Typography>
-            <Typography
-                style={{ fontSize: "14px" }}
-                gutterBottom
-            >{`${address}`}</Typography>
+            <Typography style={{ fontSize: "14px" }} gutterBottom>
+                {`${address}`} {`${city}`}
+            </Typography>
+            <Typography style={{ fontSize: "14px" }} gutterBottom>
+                {`${zipcode}`} {`${country}`}
+            </Typography>
         </Grid>
     );
 }

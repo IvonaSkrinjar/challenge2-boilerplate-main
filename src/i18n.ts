@@ -38,7 +38,7 @@ const resources = {
             "email": "Email",
             "address": "Address",
             "city": "City",
-            "country": "County",
+            "country": "Country",
             "zipcode": "Zipcode",
             "nameOnCard": "Name on card",
             "cardNumber": "Card number",

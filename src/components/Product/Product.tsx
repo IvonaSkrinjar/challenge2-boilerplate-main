@@ -51,8 +51,8 @@ const Product = (product: IProduct) => {
                     padding: "0.1rem",
                 }}
             >
-                <NavLink to={`/product/${id}`}>
-                    <Box>
+                <Box>
+                    <NavLink to={`/product/${id}`}>
                         <CardMedia
                             component="img"
                             alt="image"
@@ -66,8 +66,10 @@ const Product = (product: IProduct) => {
                             }}
                             image={image}
                         />
-                    </Box>
-                    <CardContent>
+                    </NavLink>
+                </Box>
+                <CardContent>
+                    <NavLink to={`/product/${id}`}>
                         <Typography
                             gutterBottom
                             variant="h5"
@@ -101,34 +103,34 @@ const Product = (product: IProduct) => {
                         >
                             {title}
                         </Typography>
-                        <Typography
-                            gutterBottom
-                            variant="h5"
-                            component="h5"
-                            sx={{
-                                color: "grey",
-                                display: "flex",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            {numberFormatCurrency.formatNumber(price)}
-                        </Typography>
-                        <CardActions
-                            style={{ display: "flex", float: "right", marginTop: "-2rem" }}
-                        >
-                            <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
-                                <AddShoppingCart className="icon-button" />
-                            </IconButton>
-                            <IconButton onClick={handleWishlist}>
-                                {isFavorite ? (
-                                    <FavoriteRoundedIcon className="icon-button" />
-                                ) : (
-                                    <FavoriteBorderRoundedIcon className="icon-button" />
-                                )}
-                            </IconButton>
-                        </CardActions>
-                    </CardContent>
-                </NavLink>
+                    </NavLink>
+                    <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="h5"
+                        sx={{
+                            color: "grey",
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        {numberFormatCurrency.formatNumber(price)}
+                    </Typography>
+                    <CardActions
+                        style={{ display: "flex", float: "right", marginTop: "-2rem" }}
+                    >
+                        <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
+                            <AddShoppingCart className="icon-button" />
+                        </IconButton>
+                        <IconButton onClick={handleWishlist}>
+                            {isFavorite ? (
+                                <FavoriteRoundedIcon className="icon-button" />
+                            ) : (
+                                <FavoriteBorderRoundedIcon className="icon-button" />
+                            )}
+                        </IconButton>
+                    </CardActions>
+                </CardContent>
             </Card>
         </Wrapper>
     );
