@@ -11,12 +11,12 @@ export interface CartState {
 }
 
 const getLocalStorage = () => {
-    const cart = localStorage.getItem("cart");
-    if (cart === "undefined" || cart === null) {
-        return [];
-    } else {
-        return JSON.parse(cart);
-    }
+  const cart = localStorage.getItem("cart");
+  if (cart === "undefined" || cart === null) {
+    return [];
+  } else {
+    return JSON.parse(cart);
+  }
 };
 
 export type CartContextProps = {
@@ -32,10 +32,10 @@ export type CartContextProps = {
 };
 
 const INITIAL_STATE = {
-    cart: getLocalStorage(),
-    totalCartItems: 0,
-    shippingFee: 5,
-    totalCartAmount: 0
+  cart: getLocalStorage(),
+  totalCartItems: 0,
+  shippingFee: 5,
+  totalCartAmount: 0
 };
 
 interface props {
@@ -43,50 +43,50 @@ interface props {
 }
 
 export const CartProvider = ({ children }: props) => {  
-    const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);  
+  const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);  
 
-    const addToCart = (amount: number, product: ICartProduct) => {
-        dispatch({
-            type: "addToCart",
-            payload: { amount, product },
-        });
-    };
+  const addToCart = (amount: number, product: ICartProduct) => {
+    dispatch({
+      type: "addToCart",
+      payload: { amount, product },
+    });
+  };
 
-    const removeItem = (id: number) => {
-        dispatch({ type: "removeItem", payload: id });   
-    };
+  const removeItem = (id: number) => {
+    dispatch({ type: "removeItem", payload: id });   
+  };
  
   
-    const toggleAmount = (id: number, value: number) => {
-        dispatch({ type: "toggleAmount", payload: {id, value }});
-    };
+  const toggleAmount = (id: number, value: number) => {
+    dispatch({ type: "toggleAmount", payload: {id, value }});
+  };
  
-    const clearCart = () => {
-        dispatch({ type: "clearCart" });
-    };
+  const clearCart = () => {
+    dispatch({ type: "clearCart" });
+  };
 
-    const countCartTotal = () => {
-        dispatch({ type: "countCartTotal" });
-    };
+  const countCartTotal = () => {
+    dispatch({ type: "countCartTotal" });
+  };
     
-    useEffect(() => {
-        countCartTotal();
-        localStorage.setItem("cart", JSON.stringify(state.cart));
-    }, [state.cart]);
+  useEffect(() => {
+    countCartTotal();
+    localStorage.setItem("cart", JSON.stringify(state.cart));
+  }, [state.cart]);
 
   
-    return (
-        <CartContext.Provider
-            value={{
-                ...state,   
-                addToCart,
-                removeItem,        
-                toggleAmount,
-                clearCart,
-                countCartTotal
-            }}
-        >
-            {children}
-        </CartContext.Provider>
-    );
+  return (
+    <CartContext.Provider
+      value={{
+        ...state,   
+        addToCart,
+        removeItem,        
+        toggleAmount,
+        clearCart,
+        countCartTotal
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 };

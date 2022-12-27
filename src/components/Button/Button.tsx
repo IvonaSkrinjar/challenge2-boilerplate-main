@@ -7,12 +7,12 @@ interface IProps extends HTMLAttributes<HTMLButtonElement>{
 }
 
 const Button:React.FC<IProps> = ({ children, className="", ...props}) => {
-    const classes = classNames(styles.btn, className);
-    return (
-        <button className={classes} {...props}>
-            { children }
-        </button>
-    );
+  const classes = classNames(styles.btn, className);
+  return (
+    <button className={classes} {...props}>
+      { children }
+    </button>
+  );
 };
 
 export default Button;

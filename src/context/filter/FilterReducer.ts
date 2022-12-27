@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 export const filterReducer = (state: any, action: any) => {
     switch (action.type) {
     case "loadFilterProducts":{

@@ -12,70 +12,72 @@ import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 const Product = () => {
-    const { getSingleProduct, singleProduct, singleProductLoading } =
+  const { getSingleProduct, singleProduct, isSingleProductLoading } =
     useContext(ProductContext);
 
-    const { id } = useParams();
-    const { t } = useTranslation();
+  const { id } = useParams();
+  const { t } = useTranslation();
 
-    useEffect(() => {
-        getSingleProduct(Number(id));
-    }, []);
+  useEffect(() => {
+    getSingleProduct(Number(id));
+  }, []);
  
-    if (singleProductLoading) {
-        return (
-            <AppLayout>
-                <Stack
-                    gap={1}
-                    justifyContent="center"
-                    alignItems="center"
-                    marginTop="5rem"
-                >
-                    <CircularProgress style={{ color: "#1976d2" }} />
-                    <Typography>{t("loading")}</Typography>
-                </Stack>
-            </AppLayout>
-        );
-    }     
-
+  if (isSingleProductLoading) {
     return (
-        <Wrapper>
-            {singleProduct && (
-                <AppLayout>
-                    <Grid container style={{ paddingTop: "5rem" }} spacing={3}>
-                        <Grid item xs={12} sm={4} md={4}>
-                            <div className="product_images">
-                                <ProductImage img={singleProduct.image} />
-                            </div>
-                        </Grid>
-
-                        <Grid className="product-data" item xs={12} sm={6} md={6}>
-                            <Typography component="h2" variant="h2">
-                                {singleProduct.title}
-                            </Typography>
-                            <Star
-                                stars={singleProduct.rating.rate}
-                                reviews={singleProduct.rating.count}
-                            />
-
-                            <Typography className="product-data-price product-data-real-price">
-                                {numberFormatCurrency.formatNumber(singleProduct.price)}
-                            </Typography>
-                            <Typography sx={{ fontSize: "15px" }}>
-                                {singleProduct.description}
-                            </Typography>
-
-                            <Typography component="h5" variant="h5">
-                  Categories: {singleProduct.category}
-                            </Typography>
-
-                            <AddToCart product={singleProduct} />
-                        </Grid>
-                    </Grid>
-                </AppLayout>
-            )}
-        </Wrapper>
+      <AppLayout>
+        <Stack
+          gap={1}
+          justifyContent="center"
+          alignItems="center"
+          marginTop="5rem"
+        >
+          <CircularProgress style={{ color: "#1976d2" }} />
+          <Typography>{t("loading")}</Typography>
+        </Stack>
+      </AppLayout>
     );
+  }     
+
+  return (
+    <Wrapper>
+      {singleProduct && (
+        <AppLayout>
+          <Grid container style={{ paddingTop: "5rem" }} spacing={3}>
+            <Grid item xs={12} sm={4} md={4}>
+              <div className="product_images">
+                <ProductImage img={singleProduct.image} />
+              </div>
+            </Grid>
+
+            <Grid className="product-data" item xs={12} sm={6} md={6}>
+              <Typography component="h2" variant="h2">
+                {singleProduct.title}
+              </Typography>
+              <Star
+                stars={singleProduct.rating.rate}
+                reviews={singleProduct.rating.count}
+              />
+
+              <Typography               
+                className="product-data-price product-data-real-price"
+              >
+                {numberFormatCurrency.formatNumber(singleProduct.price)}
+              </Typography>
+              <Typography sx={{ fontSize: "15px" }}>
+                {singleProduct.description}
+              </Typography>
+
+              <Typography component="h5" variant="h5">
+                Categories: {singleProduct.category}
+              </Typography>
+
+              <AddToCart product={singleProduct} />
+            </Grid>
+          </Grid>
+        </AppLayout>
+      )}
+    </Wrapper>
+  );
      
 
   

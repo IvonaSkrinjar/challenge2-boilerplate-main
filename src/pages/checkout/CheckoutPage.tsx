@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import {
-    Stepper,
-    Step,
-    StepLabel,
-    Typography,
-    CircularProgress,
+  Stepper,
+  Step,
+  StepLabel,
+  Typography,
+  CircularProgress,
 } from "@mui/material";
 import { Formik, Form } from "formik";
 import AddressForm from "../../components/CheckoutPage/Forms/AddressForm";
@@ -27,138 +27,138 @@ import { useTranslation } from "react-i18next";
 const { formId, formField } = checkoutFormModel;
 
 function renderStepContent(step: any) {
-    switch (step) {
-    case 0:
-        return <AddressForm formField={formField} />;
-    case 1:
-        return <PaymentForm formField={formField} />;
-    case 2:
-        return <ReviewOrder />;
-    default:
-        return <div>Not Found</div>;
-    }
+  switch (step) {
+  case 0:
+    return <AddressForm formField={formField} />;
+  case 1:
+    return <PaymentForm formField={formField} />;
+  case 2:
+    return <ReviewOrder />;
+  default:
+    return <div>Not Found</div>;
+  }
 }
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
 const CheckoutPage = () => {
-    const { clearCart } = useContext(CartContext);
-    const { clearWishlist } = useContext(WishlistContext);
+  const { clearCart } = useContext(CartContext);
+  const { clearWishlist } = useContext(WishlistContext);
   
-    const { t } = useTranslation();   
+  const { t } = useTranslation();   
    
-    const [activeStep, setActiveStep] = useState(0);
-    const currentValidationSchema = validationSchema[activeStep];
-    const isLastStep = activeStep === steps.length - 1;
+  const [activeStep, setActiveStep] = useState(0);
+  const currentValidationSchema = validationSchema[activeStep];
+  const isLastStep = activeStep === steps.length - 1;
 
-    function sleep(ms: any) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
+  function sleep(ms: any) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function submitForm(values: any, actions: any) {
+    await sleep(1000);
+    actions.setSubmitting(false);
+
+    setActiveStep(activeStep + 1);
+  }
+
+  function handleSubmit(values: any, actions: any) {
+    if (isLastStep) {
+      submitForm(values, actions);
+      clearCart();
+      clearWishlist();
+    } else {
+      setActiveStep(activeStep + 1);
+      actions.setTouched({});
+      actions.setSubmitting(false);
     }
+  }
 
-    async function submitForm(values: any, actions: any) {
-        await sleep(1000);
-        actions.setSubmitting(false);
+  function handleBack() {
+    setActiveStep(activeStep - 1);
+  }
 
-        setActiveStep(activeStep + 1);
-    }
+  return (
+    <Wrapper>
+      <React.Fragment>
+        <AppLayout>                  
+          <Container>
+            <Paper
+              variant="outlined"
+              square
+              sx={{
+                marginTop: "48px",
+                marginBottom: "48px",
+                padding: "24px",
+                boxShadow: "0px 1px 5px 0px rgb(0 0 0 / 20%)",
+              }}
+            >
+              <Typography component="h1" variant="h4" align="center">
+                {t("checkout")}
+              </Typography>
 
-    function handleSubmit(values: any, actions: any) {
-        if (isLastStep) {
-            submitForm(values, actions);
-            clearCart();
-            clearWishlist();
-        } else {
-            setActiveStep(activeStep + 1);
-            actions.setTouched({});
-            actions.setSubmitting(false);
-        }
-    }
+              <Stepper activeStep={activeStep} className="stepper">
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel className="stepper-label">{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
 
-    function handleBack() {
-        setActiveStep(activeStep - 1);
-    }
-
-    return (
-        <Wrapper>
-            <React.Fragment>
-                <AppLayout>                  
-                    <Container>
-                        <Paper
-                            variant="outlined"
-                            square
-                            sx={{
-                                marginTop: "48px",
-                                marginBottom: "48px",
-                                padding: "24px",
-                                boxShadow: "0px 1px 5px 0px rgb(0 0 0 / 20%)",
-                            }}
-                        >
-                            <Typography component="h1" variant="h4" align="center">
-                                {t("checkout")}
-                            </Typography>
-
-                            <Stepper activeStep={activeStep} className="stepper">
-                                {steps.map((label) => (
-                                    <Step key={label}>
-                                        <StepLabel className="stepper-label">{label}</StepLabel>
-                                    </Step>
-                                ))}
-                            </Stepper>
-
-                            <React.Fragment>
-                                {activeStep === steps.length ? (
-                                    <CheckoutSuccess />
-                                ) : (
-                                    <Formik
-                                        initialValues={formInitialValues}
-                                        validationSchema={currentValidationSchema}
-                                        onSubmit={handleSubmit}
-                                    >
-                                        {({ isSubmitting }) => (
-                                            <Form id={formId}>
-                                                <div className="active-form">
-                                                    {renderStepContent(activeStep)}
-                                                </div>
-                                                <div className="buttons">
-                                                    {activeStep !== 0 && (
-                                                        <Button
-                                                            onClick={handleBack}
-                                                            className="back-button"
-                                                        >
-                                                            <span className="button-label">
-                                                                {t("back")}
-                                                            </span>
-                                                        </Button>
-                                                    )}
-                                                    <div className="wrapper">
-                                                        <Button
-                                                            disabled={isSubmitting}
-                                                            type="submit"
-                                                            variant="contained"
-                                                            className="button"
-                                                        >
-                                                            <span className="button-label">
-                                                                {isLastStep ? t("place-order") : t("next")}
-                                                            </span>
-                                                        </Button>
-                                                        {isSubmitting && (
-                                                            <CircularProgress
-                                                                size={24}
-                                                                className="buttonProgress"
-                                                            />
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            </Form>
-                                        )}
-                                    </Formik>
-                                )}
-                            </React.Fragment>
-                        </Paper>
-                    </Container>                    
-                </AppLayout>
-            </React.Fragment>
-        </Wrapper>
-    );
+              <React.Fragment>
+                {activeStep === steps.length ? (
+                  <CheckoutSuccess />
+                ) : (
+                  <Formik
+                    initialValues={formInitialValues}
+                    validationSchema={currentValidationSchema}
+                    onSubmit={handleSubmit}
+                  >
+                    {({ isSubmitting }) => (
+                      <Form id={formId}>
+                        <div className="active-form">
+                          {renderStepContent(activeStep)}
+                        </div>
+                        <div className="buttons">
+                          {activeStep !== 0 && (
+                            <Button
+                              onClick={handleBack}
+                              className="back-button"
+                            >
+                              <span className="button-label">
+                                {t("back")}
+                              </span>
+                            </Button>
+                          )}
+                          <div className="wrapper">
+                            <Button
+                              disabled={isSubmitting}
+                              type="submit"
+                              variant="contained"
+                              className="button"
+                            >
+                              <span className="button-label">
+                                {isLastStep ? t("place-order") : t("next")}
+                              </span>
+                            </Button>
+                            {isSubmitting && (
+                              <CircularProgress
+                                size={24}
+                                className="buttonProgress"
+                              />
+                            )}
+                          </div>
+                        </div>
+                      </Form>
+                    )}
+                  </Formik>
+                )}
+              </React.Fragment>
+            </Paper>
+          </Container>                    
+        </AppLayout>
+      </React.Fragment>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`

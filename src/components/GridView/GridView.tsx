@@ -8,15 +8,15 @@ interface IProps {
 }
 
 const GridView = ({ products }: IProps) => {
-    return (      
-        <Grid container spacing={3} columnSpacing={2}>
-            {products?.map((item) => (
-                <Grid item  key={item.id}>
-                    <Product {...item} />
-                </Grid>
-            ))}
+  return (      
+    <Grid container spacing={3} columnSpacing={2}>
+      {products?.map((item) => (
+        <Grid item  key={item.id}>
+          <Product {...item} />
         </Grid>
-    );
+      ))}
+    </Grid>
+  );
 };
 
 

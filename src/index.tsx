@@ -15,19 +15,19 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-    <HashRouter>
-        <AuthProvider>
-            <ProductProvider>
-                <FilterProvider>
-                    <CartProvider>
-                        <WishlistProvider>
-                            <App />
-                        </WishlistProvider>
-                    </CartProvider>
-                </FilterProvider>
-            </ProductProvider>
-        </AuthProvider>
-    </HashRouter>
+  <HashRouter>
+    <AuthProvider>
+      <ProductProvider>
+        <FilterProvider>
+          <CartProvider>
+            <WishlistProvider>
+              <App />
+            </WishlistProvider>
+          </CartProvider>
+        </FilterProvider>
+      </ProductProvider>
+    </AuthProvider>
+  </HashRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -5,34 +5,34 @@ import styled from "styled-components";
 import { TextField } from "@mui/material";
 
 const InputField = (props: any) => {
-    const { ...rest } = props;
-    const [field, meta] = useField(props);
+  const { ...rest } = props;
+  const [field, meta] = useField(props);
 
-    function handleHelperText() {
-        const [touched, error] = at(meta, "touched", "error");
-        if (touched && error) {
-            return error;
-        }
+  function handleHelperText() {
+    const [touched, error] = at(meta, "touched", "error");
+    if (touched && error) {
+      return error;
     }
+  }
 
-    return (
-        <Wrapper>
-            <TextField
-                type="text"
-                error={meta.touched && meta.error && true}
-                helperText={handleHelperText()}
-                InputProps={{
-                    disableUnderline: true,
-                    classes: {
-                        input: "input-field",
-                    },
-                }}
-                InputLabelProps={{ style: { fontSize: 14 } }}
-                {...field}
-                {...rest}                
-            />
-        </Wrapper>
-    );
+  return (
+    <Wrapper>
+      <TextField
+        type="text"
+        error={meta.touched && meta.error && true}
+        helperText={handleHelperText()}
+        InputProps={{
+          disableUnderline: true,
+          classes: {
+            input: "input-field",
+          },
+        }}
+        InputLabelProps={{ style: { fontSize: 14 } }}
+        {...field}
+        {...rest}                
+      />
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`

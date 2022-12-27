@@ -5,14 +5,14 @@ import { AppLayout } from "components/Layouts";
 import Headline from "components/Headline";
 
 const Profile = () => {
-    return (
-        <Wrapper className="page">
-            <AppLayout >
-                <Headline title="Profile" />
-                <UserProfile />
-            </AppLayout>
-        </Wrapper>
-    );
+  return (
+    <Wrapper className="page">
+      <AppLayout >
+        <Headline title="Profile" />
+        <UserProfile />
+      </AppLayout>
+    </Wrapper>
+  );
 };
 const Wrapper = styled.section`
   

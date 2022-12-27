@@ -8,15 +8,15 @@ interface IProps {
 }
 
 const AppLayout: React.FC<IProps> = ({ children }) => {
-    return (
-        <>
-            <Header />
-            <main className={styles.app_layout_main}>
-                <Container>{children}</Container>
-            </main>
-            <Footer />
-        </>
-    );
+  return (
+    <>
+      <Header />
+      <main className={styles.app_layout_main}>
+        <Container>{children}</Container>
+      </main>
+      <Footer />
+    </>
+  );
 };
 
 export default AppLayout;

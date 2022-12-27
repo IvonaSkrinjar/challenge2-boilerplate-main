@@ -1,0 +1,18 @@
+.cart_button {
+  display: grid;
+  max-width: 140px;
+}
+
+.amount_toggle {
+  display: flex;
+}
+.amount_button {
+  border: none;
+  color: #000;
+  cursor: pointer;
+}
+
+.amount_style {
+  font-size: 15px;
+  color: #1976d2;
+}

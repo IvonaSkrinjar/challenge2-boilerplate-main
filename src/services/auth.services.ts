@@ -2,32 +2,32 @@ import BaseHttpService from "./base-http.service";
 
 const apiClient =  BaseHttpService();
 const getUser = async (id:number) => {
-    return await apiClient.get(`users/${id}`);    
+  return await apiClient.get(`users/${id}`);    
 };
 
 const login = async (username: string, password: string) => {
-    const requestOptions = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
-        },
-        body: JSON.stringify({username: username, password: password}),
-    };
-    return fetch("https://fakestoreapi.com/auth/login", requestOptions)
-        .then(response => {
-            if(response.status === 200){
-                return response.json();
-            }
-            else {               
-                return "";
-            }
-        } );
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    body: JSON.stringify({username: username, password: password}),
+  };
+  return fetch("https://fakestoreapi.com/auth/login", requestOptions)
+    .then(response => {
+      if(response.status === 200){
+        return response.json();
+      }
+      else {               
+        return "";
+      }
+    } );
 };
 
 export const authservices = {
-    getUser,
-    login   
+  getUser,
+  login   
 };
 
 export default authservices;

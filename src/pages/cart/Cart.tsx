@@ -5,40 +5,42 @@ import { CartContext } from "context/cart/CartContext";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { CartContent } from "components/CartContent";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 const Cart = () => {
-    const { cart } = useContext(CartContext);
-    const { t } = useTranslation();
+  const { cart } = useContext(CartContext);
+  const { t } = useTranslation();
    
 
-    if (cart.length < 1) {
-        return (
-            <Wrapper className="page-100">
-                <div className="empty">
-                    <h2>{t("no-products")}</h2>
-                    <Button
-                        component={NavLink}
-                        to={"/"}
-                        variant="contained"
-                        className="start-button"
-                    >
-                        {t("start-shopping")}
-                    </Button>
-                </div>
-            </Wrapper>
-        );
-    }
-
+  if (cart.length < 1) {
     return (
-        <Wrapper className="page">
-            <AppLayout>
-                <Headline title={t("your-shopping-cart")} />
-                <CartContent />
-            </AppLayout>
-        </Wrapper>
+      <Wrapper className="page-100">
+        <div className="empty">
+          <Typography component="h2" variant="h2" className="title">
+            {t("no-products")}
+          </Typography>
+          <Button
+            component={NavLink}
+            to={"/"}
+            variant="contained"
+            className="start-button"
+          >
+            {t("start-shopping")}
+          </Button>
+        </div>
+      </Wrapper>
     );
+  }
+
+  return (
+    <Wrapper className="page">
+      <AppLayout>
+        <Headline title={t("your-shopping-cart")} />
+        <CartContent />
+      </AppLayout>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`
@@ -69,6 +71,13 @@ const Wrapper = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+  .title {   
+      color: rgb(24 24 29);
+      font-size: 4.4rem;
+      font-weight: 300;
+      white-space: normal;
+    
   }
 
   @media only screen and (max-width: 1024px) {

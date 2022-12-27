@@ -36,79 +36,79 @@ export type FilterContextProps = {
 };
 
 const INITIAL_STATE = {
-    filter_products: [],
-    all_products: [],
-    grid_view: true,
-    sorting_value: "lowest",
-    filters: {
-        text: "",
-        category: "all",
-        maxPrice: 0,
-        price: 0,
-        minPrice: 0,
-    },
+  filter_products: [],
+  all_products: [],
+  grid_view: true,
+  sorting_value: "lowest",
+  filters: {
+    text: "",
+    category: "all",
+    maxPrice: 0,
+    price: 0,
+    minPrice: 0,
+  },
 };
 interface props {
   children: JSX.Element;
 }
 
 export const FilterProvider = ({ children }: props) => {
-    const { products } = useContext(ProductContext);
+  const { products } = useContext(ProductContext);
 
-    const [state, dispatch] = useReducer(filterReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(filterReducer, INITIAL_STATE);
 
-    const setGridView = () => {
-        return dispatch({ type: "setGridView" });
-    };
+  const setGridView = () => {
+    return dispatch({ type: "setGridView" });
+  };
 
-    const setListView = () => {
-        return dispatch({ type: "setListView" });
-    };
+  const setListView = () => {
+    return dispatch({ type: "setListView" });
+  };
 
-    const sorting = (event: any) => {
-        const userValue = event.target.value;
-        dispatch({ type: "getSortValue", payload: userValue });
-    };
+  const sorting = (event: any) => {
+    const userValue = event.target.value;
+    dispatch({ type: "getSortValue", payload: userValue });
+  };
 
-    const updateFilterValue = (event: any) => {
-        const name = event.target.name;
-        const value = event.target.value;
+  const updateFilterValue = (event: any) => {
+    const name = event.target.name;
+    const value = event.target.value;
 
-        return dispatch({ type: "updateFiltersValue", payload: { name, value } });
-    };
+    return dispatch({ type: "updateFiltersValue", payload: { name, value } });
+  };
 
-    const loadProductWithMaxPrice = () => {
-        dispatch({ type: "loadFilterProducts", payload: products });
-    };
+  const loadProductWithMaxPrice = () => {
+    dispatch({ type: "loadFilterProducts", payload: products });
+  };
 
-    const filterTrigger = () => {
-        dispatch({ type: "filterProducts" });
-    };
+  const filterTrigger = () => {
+    dispatch({ type: "filterProducts" });
+  };
 
-    const sortingProducts = () => {
-        dispatch({ type: "sortingProducts" });
-    };
+  const sortingProducts = () => {
+    dispatch({ type: "sortingProducts" });
+  };
 
-    const clearFilters = () => {
-        dispatch({ type: "clearFilters" });
-    };  
+  const clearFilters = () => {
+    dispatch({ type: "clearFilters" });
+  };  
   
 
-    return (
-        <FilterContext.Provider
-            value={{
-                ...state,
-                setGridView,
-                setListView,
-                sorting,
-                updateFilterValue,
-                clearFilters,
-                filterTrigger,
-                loadProductWithMaxPrice,
-                sortingProducts
-            }}
-        >
-            {children}
-        </FilterContext.Provider>
-    );
+  return (
+    <FilterContext.Provider
+      value={{
+        ...state,
+        setGridView,
+        setListView,
+        sorting,
+        updateFilterValue,
+        clearFilters,
+        filterTrigger,
+        loadProductWithMaxPrice,
+        sortingProducts
+      }}
+    >
+      {children}
+    </FilterContext.Provider>
+  );
 };

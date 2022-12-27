@@ -1,10 +1,9 @@
-.headline{
-    height: 7rem;
-    width: 100%;
-    background-color: #fafafa;
-    font-size: 25px;   
-    padding-left: 3rem;
+.headline{   
+    background-color: #fafafa;     
+    padding: 1.5rem 0 0.5rem 1rem;
 }
-h1{
-    padding-top: 2rem;;
+.headline_box {
+ font-weight: 800;
+ font-family: "Work Sans", sans-serif;
+ font-size: 25px;
 }

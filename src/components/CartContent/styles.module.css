@@ -1,0 +1,23 @@
+.cart_container {
+  padding-top: 2rem;
+  margin-left: 2rem;
+}
+
+.cart_buttons {
+  padding-bottom: 5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.continue_shopping {
+  font-size: 12px;
+}
+
+.continue_shopping:hover {
+  opacity: 1;
+}
+
+.summary_items {
+  display: flex;
+  justify-content: start;
+}

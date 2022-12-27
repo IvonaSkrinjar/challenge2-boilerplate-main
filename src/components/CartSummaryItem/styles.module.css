@@ -1,0 +1,24 @@
+.card_summary {
+  max-width: 65rem;
+  max-height: 25rem;
+  top: 1rem;
+  width: 400px;
+}
+
+.card_action {
+  justify-content: flex-end;
+  display: flex;
+}
+
+.card_total {
+  justify-content: flex-end;
+  display: flex;
+  font-weight: bold;
+}
+.card_title {
+  font-weight: bold;
+}
+
+.container {
+  padding-top: 3rem;
+}

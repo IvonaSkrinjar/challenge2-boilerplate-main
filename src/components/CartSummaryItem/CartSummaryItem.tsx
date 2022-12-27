@@ -1,124 +1,107 @@
-import { Button, Card, CardActions, CardContent, Divider, Grid, Typography } from "@mui/material";
+import React, { useContext, useEffect } from "react";
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Divider,
+  Grid,
+  Typography,
+} from "@mui/material";
 import numberFormatCurrency from "common/numberFormatCurrency";
 import { CartContext } from "context/cart/CartContext";
-import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import styles from "./styles.module.css";
 
 const CartSummaryItem = () => {
-    const { totalCartAmount, countCartTotal, shippingFee } = useContext(CartContext);
-    const { t } = useTranslation();
-   
-    useEffect(() => {
-        countCartTotal();   
-    }, [totalCartAmount]);
-  
-    return (
-        <Wrapper>
-            <Card elevation={15} sx={{ paddingRight: "3rem" }}>
-                <CardContent>
-                    <Typography
-                        sx={{ fontSize: "14px" }}
-                        className="title"
-                        color="textSecondary"
-                        gutterBottom
-                    >
-                        {t("shopping-cart")}
-                    </Typography>
-                    <Typography variant="h3" component="h3">
-                        {t("order-summary")}
-                    </Typography>
-                    <Typography variant="subtitle2">
-                        <Divider />
-                    </Typography>
-                    <Grid container sx={{ paddingTop: "1rem" }}>
-                        <Grid item xs={11} sm={11} md={11} lg={11}>
-                            <Typography
-                                variant="body1"
-                                component="div"
-                                sx={{ fontSize: "14px" }}
-                            >
-                                {t("subtotal")}:
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1} sm={1} md={1} lg={1}>
-                            <Typography variant="h6" component="div">
-                                {numberFormatCurrency.formatNumber(totalCartAmount)}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={11} sm={11} md={11} lg={11}>
-                            <Typography
-                                variant="body1"
-                                component="div"
-                                sx={{ fontSize: "14px" }}
-                            >
-                                {t("shipping")}:
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1} sm={1} md={1} lg={1}>
-                            <Typography variant="h6" component="div">
-                                {numberFormatCurrency.formatNumber(shippingFee)}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={11} sm={11} md={11} lg={11}>
-                            <Typography
-                                variant="body1"
-                                component="div"
-                                sx={{ fontWeight: "bold", fontSize: "14px" }}
-                            >
-                                {t("order-total")}:
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1} sm={1} md={1} lg={1}>
-                            <Typography
-                                style={{ fontWeight: "bold", fontSize: "14px" }}
-                                variant="h6"
-                                component="div"
-                            >
-                                {numberFormatCurrency.formatNumber(
-                                    totalCartAmount + shippingFee
-                                )}
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </CardContent>
-                <CardActions>
-                    <Button
-                        component={NavLink}
-                        to={"/checkout"}
-                        variant="contained"
-                        className="shopping-button"
-                        size="large"
-                        sx={{
-                            fontSize: "12px",
-                            "&:hover": {
-                                opacity: 1,
-                            },
-                        }}
-                    >
-                        {t("proceed-checkout")}
-                    </Button>
-                </CardActions>
-            </Card>
-        </Wrapper>
-    );
+  const { totalCartAmount, countCartTotal, shippingFee } =
+    useContext(CartContext);
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    countCartTotal();
+  }, [totalCartAmount]);
+
+  return (
+    <Card elevation={15} className={styles.card_summary}>
+      <CardContent>
+        <Typography
+          variant="h5"
+          component="h5"
+          color="textSecondary"
+          gutterBottom
+        >
+          {t("shopping-cart")}
+        </Typography>
+        <Typography variant="h3" component="h3">
+          {t("order-summary")}
+        </Typography>
+        <Divider />
+        <Grid container className={styles.container} spacing={1}>
+          <Grid item xs={11} sm={11} md={10}>
+            <Typography variant="h5" component="h5">
+              {t("subtotal")}:
+            </Typography>
+          </Grid>
+          <Grid item xs={1} sm={1} md={2}>
+            <Typography
+              variant="h5"
+              component="div"
+              className={styles.card_action}
+            >
+              {numberFormatCurrency.formatNumber(totalCartAmount)}
+            </Typography>
+          </Grid>
+          <Grid item xs={11} sm={11} md={10}>
+            <Typography variant="h5" component="h5">
+              {t("shipping")}:
+            </Typography>
+          </Grid>
+          <Grid item xs={1} sm={1} md={2}>
+            <Typography
+              className={styles.card_action}
+              variant="h5"
+              component="div"
+            >
+              {numberFormatCurrency.formatNumber(shippingFee)}
+            </Typography>
+          </Grid>
+          <Grid item xs={11} sm={11} md={10}>
+            <Typography variant="h5" component="h5">
+              <Box className={styles.card_title}>{t("order-total")}:</Box>
+            </Typography>
+          </Grid>
+          <Grid item xs={1} sm={1} md={2}>
+            <Typography variant="h5" component="div">
+              <Box className={styles.card_total}>
+                {numberFormatCurrency.formatNumber(
+                  totalCartAmount + shippingFee
+                )}
+              </Box>
+            </Typography>
+          </Grid>
+        </Grid>
+      </CardContent>
+      <CardActions className={styles.card_action}>
+        <Button
+          component={NavLink}
+          to={"/checkout"}
+          variant="contained"
+          size="large"
+          sx={{
+            fontSize: "12px",
+            "&:hover": {
+              opacity: 1,
+            },
+          }}
+        >
+          {t("proceed-checkout")}
+        </Button>
+      </CardActions>
+    </Card>
+  );
 };
 
-const Wrapper = styled.section`
-
-.root{
- 
-  position: sticky;
-  top: 1rem;
-width: 400px;
-}
-.title: {
-  font-size: 24px
-},
-.shopping-button: {
-  margin-bottom: 12px
-  padding: 1rem
-}
-`;
 export default CartSummaryItem;

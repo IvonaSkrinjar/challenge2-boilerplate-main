@@ -7,11 +7,11 @@ interface IProps {
 }
 
 const PageNavigation = ({ title }: IProps) => {
-    return (
-        <Wrapper>
-            <NavLink to="/">Home</NavLink>/{title}
-        </Wrapper>
-    );
+  return (
+    <Wrapper>
+      <NavLink to="/">Home</NavLink>/{title}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`

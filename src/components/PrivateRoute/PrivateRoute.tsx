@@ -7,16 +7,16 @@ interface IProps {
 }
 
 export function PrivateRoute({ isLoggedIn, children }: IProps): JSX.Element {
-    const location = useLocation();
-    return (
-        <>
-            {isLoggedIn ? (
-                children
-            ) : (
-                <Navigate to="/login" replace  state={{ from: location }} />
-            )}
-        </>
-    );
+  const location = useLocation();
+  return (
+    <>
+      {isLoggedIn ? (
+        children
+      ) : (
+        <Navigate to="/login" replace  state={{ from: location }} />
+      )}
+    </>
+  );
 }
 
 export default PrivateRoute;

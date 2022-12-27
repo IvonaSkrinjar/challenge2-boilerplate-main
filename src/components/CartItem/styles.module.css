@@ -1,0 +1,42 @@
+.card_item {
+  display: flex;
+}
+
+.card_media {
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+
+
+.card_content {
+  display: flex;
+  flex-direction: column;
+}
+
+.card_container {
+  padding-top: 1rem;
+}
+
+.card_item_title {
+  font-weight: bold;
+}
+
+.card_item_total {
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card_total_price {
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+  color: #1976d2;
+}
+
+.remove_item {
+  display: flex;
+  justify-content: flex-end;
+}

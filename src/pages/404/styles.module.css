@@ -1,4 +1,8 @@
 .title {
     text-align: center;
     text-transform: uppercase;
+    padding-top: 2rem;
+}
+.title_box {
+    font-weight: 800;
 }

@@ -1,0 +1,50 @@
+.product_available {
+  font-size: 1.65rem;
+  color: grey;
+}
+
+.sorting_list {
+  display: flex;
+  gap: 2rem;
+}
+
+.icon {
+  font-size: 1.6rem;
+}
+
+.active_sort_btn {
+  background-color: #212529;
+  color: #fff;
+  width: 4rem;
+  height: 5rem;
+}
+
+.sort_btn {
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 4rem;
+  height: 5rem;
+}
+
+.sorting {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5rem;
+  padding-bottom: 3rem;
+}
+
+.form_sorting {
+  padding-right: 5rem;
+}
+
+.select_sorting {
+  font-size: 13px;
+  color: grey;
+}
+
+.sorting_item {
+  font-size: 13px;
+}

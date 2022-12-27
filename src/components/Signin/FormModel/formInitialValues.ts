@@ -1,13 +1,13 @@
 
 import signinFormModel from "./signinFormModel";
 const {
-    formField: {     
-        username,
-        password        
-    }
+  formField: {     
+    username,
+    password        
+  }
 } = signinFormModel;
 
 export default {   
-    [username.name]: "",
-    [password.name]: "",
+  [username.name]: "",
+  [password.name]: "",
 };

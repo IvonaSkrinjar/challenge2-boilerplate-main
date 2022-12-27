@@ -15,93 +15,95 @@ interface IProps {
   products: IProduct[];
 }
 const ListView = ({ products }: IProps) => {
-    const { addToCart } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
 
-    const { addToWishlist, wishlist, removeFavoriteItem } =
+  const { addToWishlist, wishlist, removeFavoriteItem } =
     useContext(WishlistContext);
 
-    const handleAddToCart = (        
-        amount: number,
-        product: IProduct
-    ) => addToCart(amount, product);
+  const handleAddToCart = (        
+    amount: number,
+    product: IProduct
+  ) => addToCart(amount, product);
 
-    return (
-        <Wrapper className="section">
-            <Grid container spacing={5}>
-                {products?.map((product) => (
-                    <Grid container key={product.id}>
-                        <Grid
-                            item
-                            xs={12}
-                            sm={3}
-                            md={3}
-                            style={{
-                                justifyContent: "center",
-                                display: "flex",
-                            }}
-                        >
-                            <Box
-                                component="img"
-                                sx={{
-                                    padding: "1rem 1rem 1rem 1rem",
-                                    height: "15rem",
-                                    objectFit: "contain",
-                                    "&:hover": {
-                                        transform: "scale(1.2)",
-                                    },
-                                }}
-                                alt="image"
-                                src={product.image}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={8} md={8}>
-                            <Typography component="h3" variant="h3">
-                                {product.title}
-                            </Typography>
-                            <Typography sx={{ fontSize: "15px", color: "grey" }}>
-                                {numberFormatCurrency.formatNumber(product.price)}
-                            </Typography>
-                            <Typography sx={{ fontSize: "15px" }}>
-                                {product.description.slice(0, 90)}...
-                            </Typography>
-                            <Box>
-                                <IconButton
-                                    aria-label="Add to Cart"
-                                    onClick={() => handleAddToCart(1, product)}
-                                >
-                                    <AddShoppingCart className="icon-button" />
-                                </IconButton>
-
-                                {wishlist.some(
-                                    (favorite: IWishlistProduct) => favorite.id === product.id
-                                ) ? (
-                                        <IconButton onClick={() => removeFavoriteItem(product.id)}>
-                                            <FavoriteRoundedIcon className="icon-button" />
-                                        </IconButton>
-                                    ) : (
-                                        <IconButton
-                                            onClick={() => addToWishlist(product)}
-                                        >
-                                            <FavoriteBorderRoundedIcon className="icon-button" />
-                                        </IconButton>
-                                    )}
-                            </Box>
-                            <Button
-                                component={NavLink}
-                                to={`/product/${product.id}`}
-                                variant="contained"
-                                className="button"
-                            >
-                                <Typography fontSize="1.5rem" color="white">
-                    Read More
-                                </Typography>
-                            </Button>
-                        </Grid>
-                    </Grid>
-                ))}
+  return (
+    <Wrapper className="section">
+      <Grid container spacing={5}>
+        {products?.map((product) => (
+          <Grid container key={product.id}>
+            <Grid
+              item
+              xs={12}
+              sm={3}
+              md={3}
+              style={{
+                justifyContent: "center",
+                display: "flex",
+              }}
+            >
+              <Box
+                component="img"
+                sx={{
+                  padding: "1rem 1rem 1rem 1rem",
+                  height: "15rem",
+                  objectFit: "contain",
+                  "&:hover": {
+                    transform: "scale(1.2)",
+                  },
+                }}
+                alt="image"
+                src={product.image}
+              />
             </Grid>
-        </Wrapper>
-    );
+            <Grid item xs={12} sm={8} md={8}>
+              <Typography component="h3" variant="h3">
+                {product.title}
+              </Typography>
+              <Typography
+                variant="h5"
+                component="div"              
+                sx={{ color: "grey" }}
+              >
+                {numberFormatCurrency.formatNumber(product.price)}
+              </Typography>
+              <Typography sx={{ fontSize: "15px" }}>
+                {product.description.slice(0, 90)}...
+              </Typography>
+              <Box>
+                <IconButton
+                  aria-label="Add to Cart"
+                  onClick={() => handleAddToCart(1, product)}
+                >
+                  <AddShoppingCart className="icon-button" />
+                </IconButton>
+
+                {wishlist.some(
+                  (favorite: IWishlistProduct) => favorite.id === product.id
+                ) ? (
+                    <IconButton onClick={() => removeFavoriteItem(product.id)}>
+                      <FavoriteRoundedIcon className="icon-button" />
+                    </IconButton>
+                  ) : (
+                    <IconButton onClick={() => addToWishlist(product)}>
+                      <FavoriteBorderRoundedIcon className="icon-button" />
+                    </IconButton>
+                  )}
+              </Box>
+              <Button
+                component={NavLink}
+                to={`/product/${product.id}`}
+                variant="contained"
+                className="button"
+              >
+                <Typography fontSize="1.5rem" color="white">
+                  Read More
+                </Typography>
+              </Button>
+            </Grid>
+          </Grid>
+        ))}
+      </Grid>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`
