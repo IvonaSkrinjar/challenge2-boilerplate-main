@@ -13,16 +13,24 @@ const CartContent = () => {
   const { cart, clearCart } = useContext(CartContext);
   const { t } = useTranslation();
 
+
   return (
     <Grid container className={styles.cart_container}>
-      <Grid item xs={12} sm={12} md={6}>
+      <Grid item xs={12} sm={12} md={6} lg={6}>
         <Grid container spacing={3}>
           {cart?.map((item: ICartProduct) => (
             <Grid item key={item.id}>
               <CartItem key={item.id} {...item} />
             </Grid>
           ))}
-          <Grid className={styles.cart_buttons} item xs={5} sm={5} md={5}>
+          <Grid
+            className={styles.cart_buttons}
+            item
+            xs={5}
+            sm={5}
+            md={5}
+            lg={5}
+          >
             <Button
               className={styles.continue_shopping}
               sx={{
@@ -35,7 +43,14 @@ const CartContent = () => {
               {t("continue-shopping")}
             </Button>
           </Grid>
-          <Grid className={styles.cart_buttons} item xs={5} sm={5} md={6}>
+          <Grid
+            className={styles.cart_buttons}
+            item
+            xs={5}
+            sm={5}
+            md={5}
+            lg={5}
+          >
             <Button
               className={styles.clear_cart}
               sx={{
@@ -55,7 +70,7 @@ const CartContent = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid className={styles.summary_items} item xs={12} sm={12} md={6}>
+      <Grid className={styles.summary_items} item xs={12} sm={12} md={6} lg={6}>
         <CartSummaryItem />
       </Grid>
     </Grid>
