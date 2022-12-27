@@ -7,14 +7,14 @@ import Headline from "components/Headline";
 
 const Login = () => { 
    
-    return (
-        <Wrapper className="page">
-            <AppLayout>
-                <Headline title="Login" />
-                <Signin />
-            </AppLayout>
-        </Wrapper>
-    );
+  return (
+    <Wrapper className="page">
+      <AppLayout>
+        <Headline title="Login" />
+        <Signin />
+      </AppLayout>
+    </Wrapper>
+  );
 };
 const Wrapper = styled.section`
 
