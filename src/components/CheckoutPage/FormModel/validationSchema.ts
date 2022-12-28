@@ -16,9 +16,10 @@ const {
   }
 } = checkoutFormModel;
 
-const visaRegEx = /^(?<!\d)\d{16}(?!\d)|(?<!\d[ _-])(?<!\d)\d{4}(?:[_ -]\d{4}){3}(?![_ -]?\d)$/;
+
 const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 const cvvRegEx = /^[0-9]{3}$/;
+const creditTypeRegEx = /^(?:4[0-9]{12}(?:[0-9]{3}){0,2})|(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/;
 
 export default [
   Yup.object().shape({
@@ -40,7 +41,8 @@ export default [
     [nameOnCard.name]: Yup.string().required(`${nameOnCard.requiredErrorMsg}`),
     [cardNumber.name]: Yup.string()
       .required(`${cardNumber.requiredErrorMsg}`)
-      .matches(visaRegEx, cardNumber.invalidErrorMsg),      
+      .max(16, cardNumber.invalidLengthErrorMsg )
+      .matches(creditTypeRegEx, cardNumber.invalidErrorMsg),       
     [cvv.name]: Yup.string()
       .required(`${cvv.requiredErrorMsg}`)
       .matches(cvvRegEx, cvv.invalidErrorMsg),

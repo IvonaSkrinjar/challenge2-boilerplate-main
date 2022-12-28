@@ -1,6 +1,10 @@
 .product_available {
   font-size: 1.65rem;
   color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
 }
 
 .sorting_list {
@@ -37,7 +41,7 @@
 }
 
 .form_sorting {
-  padding-right: 5rem;
+  padding-left: 2rem;
 }
 
 .select_sorting {
@@ -48,3 +52,5 @@
 .sorting_item {
   font-size: 13px;
 }
+
+

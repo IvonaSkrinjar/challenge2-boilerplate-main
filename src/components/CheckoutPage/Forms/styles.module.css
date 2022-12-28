@@ -1,0 +1,21 @@
+.address_form {
+  padding-top: 3rem;
+}
+.payment_method {
+  display: inline-block;
+}
+
+.credit_cards {
+  padding-bottom: 1rem;
+}
+
+.visa_card {
+  width: 4.5rem;
+  height: 4.5rem;
+  padding-right: 1rem;
+  margin-left: 1rem;
+}
+.master_card {
+  width: 4.5rem;
+  height: 4rem;
+}

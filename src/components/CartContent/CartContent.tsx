@@ -15,9 +15,8 @@ const CartContent = () => {
 
 
   return (
-    <Grid container columnSpacing={5} sx={{  paddingTop: "2rem",
-      marginLeft: "2rem"}}>
-      <Grid item xs={12} sm={12} md={5} lg={5} >
+    <Grid container columnSpacing={5} className={styles.cart_container}>
+      <Grid item xs={12} sm={12} md={5} lg={5}>
         <Grid container spacing={3}>
           {cart?.map((item: ICartProduct) => (
             <Grid item key={item.id}>

@@ -5,46 +5,53 @@ import { ICartProduct } from "interfaces";
 import { Box, Grid } from "@mui/material";
 import numberFormatCurrency from "common/numberFormatCurrency";
 import { useTranslation } from "react-i18next";
+import styles from "./styles.module.css";
 
 function ProductDetails() {
   const { cart, totalCartAmount, shippingFee } = useContext(CartContext);
   const { t } = useTranslation();
 
   return (
-    <Box sx={{ marginTop: "3rem" }}>
-      <Grid container>
+    <Box className={styles.product_details}>
+      <Grid container >
         {cart.map((item: ICartProduct) => (
           <Grid
+            className={styles.product_details_container}
             container
             direction="row"
             justifyContent="space-between"
             alignItems="center"
             key={item.id}
-            sx={{ paddingTop: "3rem", justifyContent: "flex-start" }}
           >
             <Grid item xs={12} sm={2} md={2} key={item.id}>
               <Box
+                className={styles.product_details_image}
                 component="img"
                 sx={{
-                  paddingLeft: "2rem",
-                  maxHeight: { xs: 180, md: 100 },
-                  maxWidth: { xs: 3200, md: 100 },
-                  objectFit: "contain",
+                  maxHeight: { xs: 100, md: 100 },
+                  maxWidth: { xs: 100, md: 100 },
                 }}
                 alt="image"
                 src={item.image}
               />
             </Grid>
-            <Grid item sx={{ paddingRight: "35rem" }}>
+            <Grid
+              item
+              xs={12}
+              sm={7}
+              md={7}
+              className={styles.product_details_title}
+            >
               <Typography
-                style={{ fontSize: "14px", width: "300px" }}
-                variant="h6"
+                className={styles.product_details_title_amount}
+                variant="h5"
+                component="h5"
               >
                 {item.title} x {item.amount}
               </Typography>
             </Grid>
-            <Grid item>
-              <Typography variant="h6" style={{ fontWeight: "bold" }}>
+            <Grid item xs={12} sm={3} md={3} className={styles.product_price}>
+              <Typography variant="h5" component="h5">
                 {numberFormatCurrency.formatNumber(item.price * item.amount)}
               </Typography>
             </Grid>
@@ -53,73 +60,68 @@ function ProductDetails() {
       </Grid>
       <Grid
         container
+        className={styles.subtotal_container}
         direction="row"
         justifyContent="space-between"
         alignItems="center"
-        sx={{ paddingTop: "3rem", justifyContent: "flex-start" }}
       >
-        <Grid item xs={12} sm={7} md={9}>
+        <Grid item xs={6} sm={7} md={9}>
           <Typography
-            style={{ fontSize: "14px", float: "right", paddingRight: "2rem" }}
-            variant="subtitle1"
+            className={styles.subtotal}
+            variant="h5"
+            component="h5"
+            gutterBottom
           >
             {t("subtotal")}:
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item xs={6} sm={7} md={3}>
           <Typography
-            variant="h6"
-            style={{
-              fontWeight: "bold",
-              paddingLeft: "1rem",
-              flex: "1",
-            }}
+            className={styles.amount}
+            variant="h5"
+            component="h5"
+            gutterBottom
           >
             {numberFormatCurrency.formatNumber(totalCartAmount)}
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={12} md={9}>
+        <Grid item xs={6} sm={7} md={9}>
           <Typography
-            style={{ fontSize: "14px", float: "right", paddingRight: "2rem" }}
-            variant="subtitle1"
+            className={styles.shipping}
+            gutterBottom
+            variant="h5"
+            component="h5"
           >
             {t("shipping")}:
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item xs={6} sm={7} md={3}>
           <Typography
-            variant="h6"
-            style={{
-              fontWeight: "bold",
-              paddingLeft: "1rem",
-              flex: "1",
-            }}
+            className={styles.amount}
+            gutterBottom
+            variant="h5"
+            component="h5"
           >
             {numberFormatCurrency.formatNumber(shippingFee)}
           </Typography>
         </Grid>
 
-        <Grid item xs={12} sm={7} md={9}>
+        <Grid item xs={6} sm={7} md={9}>
           <Typography
-            style={{
-              fontSize: "14px",
-              fontWeight: "bold",
-              float: "right",
-              paddingRight: "2rem",
-            }}
-            variant="subtitle1"
+            className={styles.total_cost}
+            gutterBottom
+            variant="h5"
+            component="h5"
           >
             {t("total-cost")}:
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item xs={6} sm={7} md={3}>
           <Typography
-            variant="h6"
-            style={{
-              fontWeight: "bold",
-              paddingLeft: "1rem",
-              flex: "1",
-            }}
+            className={styles.amount}
+            gutterBottom
+            variant="h5"
+            component="h5"
           >
             {numberFormatCurrency.formatNumber(totalCartAmount + shippingFee)}
           </Typography>

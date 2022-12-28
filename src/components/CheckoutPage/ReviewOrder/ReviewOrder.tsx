@@ -5,6 +5,7 @@ import ProductDetails from "./ProductDetails";
 import ShippingDetails from "./ShippingDetails";
 import PaymentDetails from "./PaymentDetails";
 import { useTranslation } from "react-i18next";
+import styles from "./styles.module.css";
 
 export default function ReviewOrder() {
   const { values: formValues } = useFormikContext();
@@ -16,7 +17,7 @@ export default function ReviewOrder() {
         {t("order-summary")}
       </Typography>
       <ProductDetails />
-      <Grid container spacing={2} style={{ paddingTop: "3rem" }}>
+      <Grid container spacing={2} className= {styles.review_order}>
         <ShippingDetails formValues={formValues} />
         <PaymentDetails formValues={formValues} />
       </Grid>

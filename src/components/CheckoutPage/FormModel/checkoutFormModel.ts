@@ -47,8 +47,10 @@ export default {
       name: "cardNumber",
       label: "Card number*",
       requiredErrorMsg: "Card number is required",
-      invalidErrorMsg: "Card number is not valid (e.g. 1234123412341234)"
-    },       
+      invalidErrorMsg: "Card number is not valid for Visa or Master card",
+      invalidLengthErrorMsg: "Card number cannot be longer than 16 characters"
+
+    }, 
     cvv: {
       name: "cvv",
       label: "CVV*",

@@ -7,7 +7,7 @@ const resources = {
     translation: {
       "home": "Home",
       "products-title": "Products",
-      "search": "Search By Tytle",
+      "search": "Search By Title",
       "filter-price": "Filter By Price",
       "filter-category": "Product Categories",
       "products-available": "Products Available",

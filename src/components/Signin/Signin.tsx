@@ -17,6 +17,7 @@ import { AuthContext } from "context/auth/AuthContext";
 import LockIcon from "@mui/icons-material/Lock";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import styles from "./styles.module.css";
 
 const Signin = () => {
   const { formField } = signinFormModel;
@@ -47,47 +48,15 @@ const Signin = () => {
 
   return (
     <Wrapper>
-      <Grid container>
-        <Grid
-          item
-          xs={12}
-          md={12}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Paper
-            variant="outlined"
-            square
-            sx={{
-              marginTop: "48px",
-              marginBottom: "12rem",
-              padding: "24px",
-              boxShadow: "0px 1px 5px 0px rgb(0 0 0 / 20%)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              width: "50rem",
-            }}
-          >
-            <Avatar
-              sx={{
-                margin: "8px",
-                backgroundColor: "#f50057",
-              }}
-            >
+      <Grid container className={styles.signin}>
+        <Grid item xs={12} md={12}>
+          <Paper className={styles.paper} variant="outlined" square>
+            <Avatar className={styles.avatar}>
               <LockIcon />
             </Avatar>
             <form onSubmit={formik.handleSubmit}>
               <Typography
-                sx={{
-                  paddingBottom: "3rem",
-                  display: "flex",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                }}
+                className={styles.signin_header}
                 component="h4"
                 variant="h4"
               >
@@ -98,12 +67,10 @@ const Signin = () => {
                 id="username"
                 name={formField.username.name}
                 label={t("username")}
+                variant="standard"
                 onChange={formik.handleChange}
                 InputProps={{
-                  disableUnderline: true,
-                  classes: {
-                    input: "input-field",
-                  },
+                  className: styles.input_field,
                 }}
                 InputLabelProps={{ style: { fontSize: 14 } }}
                 error={
@@ -118,11 +85,9 @@ const Signin = () => {
                 label={t("password")}
                 onChange={formik.handleChange}
                 style={{ marginTop: "2rem" }}
+                variant="standard"
                 InputProps={{
-                  disableUnderline: true,
-                  classes: {
-                    input: "input-field",
-                  },
+                  className: styles.input_field,
                 }}
                 InputLabelProps={{ style: { fontSize: 14 } }}
                 error={
@@ -131,31 +96,19 @@ const Signin = () => {
                 helperText={formik.touched.password && formik.errors.password}
               />
               <Button
+                className={styles.signin_button}
                 type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
-                sx={{
-                  fontSize: "12px",
-                  mt: "3rem",
-                  width: "10rem",
-                  height: "3rem",
-                  "&:hover": {
-                    opacity: 1,
-                  },
-                }}
               >
                 {t("sign-in")}
               </Button>
               {errorMessage ? (
                 <Typography
+                  className={styles.signin_validation}
                   variant="body1"
-                  component="div"
-                  sx={{
-                    fontSize: "12px",
-                    color: "red",
-                    paddingTop: "1rem",
-                  }}
+                  component="div"                
                 >
                   {errorMessage}
                 </Typography>
@@ -174,12 +127,7 @@ const Signin = () => {
   );
 };
 
-const Wrapper = styled.section`
-  .input-field {
-    font-size: 14px;
-    text-transform: none;
-    padding: 1rem;
-  }
+const Wrapper = styled.section` 
   .MuiFormHelperText-root {
     font-size: 12px;
   }

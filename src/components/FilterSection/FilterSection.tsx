@@ -9,6 +9,7 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
+  Grid,
   Slider,
   TextField,
   Typography,
@@ -52,112 +53,112 @@ const FilterSection = () => {
   };
   return (
     <Wrapper>
-      <Autocomplete
-        {...defaultProps}
-        value={value}
-        onChange={(e, value) => {
-          setValue(value);
-          updateFilterValue({
-            target: { name: "text", value: value },
-          });
-        }}
-        inputValue={inputValue}
-        onInputChange={(e, v) => {
-          setInputValue(v);
-        }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label={
-              <Typography sx={{ fontSize: "13px", color: "grey" }}>
-                {t("search")}
-              </Typography>
-            }
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
-
-      <div className="filter_price">
-        <Typography variant="h4" component="h4">
-          {t("filter-price")}
-        </Typography>
-        <Typography
-          sx={{
-            fontSize: "1.5rem",
-            float: "right",
-            marginTop: "3rem",
-          }}
-        >
-          {numberFormatCurrency.formatNumber(price)}
-        </Typography>
-        <Slider
-          sx={{
-            maxWidth: "33rem",
-          }}
-          defaultValue={maxPrice}
-          step={10}
-          min={minPrice}
-          max={maxPrice}
-          value={price}
-          onChange={(e, value: any) => {
-            setSliderValue(value);
-          }}
-          onChangeCommitted={(e, value) => {
+      <Grid item xs={12} sm={8} md={8}>
+        <Autocomplete
+          {...defaultProps}
+          value={value}
+          onChange={(e, value) => {
+            setValue(value);
             updateFilterValue({
-              target: { name: "price", value: value },
+              target: { name: "text", value: value },
             });
           }}
+          inputValue={inputValue}
+          onInputChange={(e, v) => {
+            setInputValue(v);
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label={
+                <Typography sx={{ fontSize: "13px", color: "grey" }}>
+                  {t("search")}
+                </Typography>
+              }
+              variant="outlined"
+              fullWidth
+            />
+          )}
         />
-      </div>
-      <div className="filter-category">
-        <Typography variant="h4" component="h4">
-          {t("filter-category")}
-        </Typography>
-        <Box>
-          <div className="category-button">
-            {categoryData.map((c, index) => {
-              return (
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={category === c.toLowerCase() ? true : false}
-                      onChange={() => {
-                        handleChanges({
-                          target: {
-                            name: "category",
-                            checked: checked,
-                            value: c,
-                          },
-                        });
-                      }}
-                    />
-                  }
-                  label={
-                    <Typography fontSize="1.5rem" color="grey">
-                      {c}
-                    </Typography>
-                  }
-                  key={index}
-                />
-              );
-            })}
-          </div>
-        </Box>
-      </div>
-
-      <div className="filter-clear">
-        <Button
-          variant="contained"
-          className="clear-button"
-          onClick={handleClearFilters}
-        >
-          <Typography fontSize="1.5rem" color="white">
-            {t("clear-filters")}
+      </Grid>
+      <Grid item xs={12} sm={8} md={8}>
+        <div className="filter_price">
+          <Typography variant="h4" component="h4">
+            {t("filter-price")}
           </Typography>
-        </Button>
-      </div>
+          <Typography
+            sx={{
+              fontSize: "1.5rem",
+              float: "right",
+              marginTop: "3rem",
+            }}
+          >
+            {numberFormatCurrency.formatNumber(price)}
+          </Typography>
+          <Slider
+           
+            defaultValue={maxPrice}
+            step={10}
+            min={minPrice}
+            max={maxPrice}
+            value={price}
+            onChange={(e, value: any) => {
+              setSliderValue(value);
+            }}
+            onChangeCommitted={(e, value) => {
+              updateFilterValue({
+                target: { name: "price", value: value },
+              });
+            }}
+          />
+        </div>
+      </Grid>
+      <Grid item xs={12} sm={12} md={12}>
+        <div className="filter-category">
+          <Typography variant="h4" component="h4">
+            {t("filter-category")}
+          </Typography>
+          <Box>
+            <div className="category-button">
+              {categoryData.map((c, index) => {
+                return (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={category === c.toLowerCase() ? true : false}
+                        onChange={() => {
+                          handleChanges({
+                            target: {
+                              name: "category",
+                              checked: checked,
+                              value: c,
+                            },
+                          });
+                        }}
+                      />
+                    }
+                    label={
+                      <Typography fontSize="1.5rem" color="grey">
+                        {c}
+                      </Typography>
+                    }
+                    key={index}
+                  />
+                );
+              })}
+            </div>
+          </Box>
+        </div>
+      </Grid>
+      <Grid item xs={12} sm={12} md={12}>
+        <div className="filter-clear">
+          <Button variant="contained" onClick={handleClearFilters}>
+            <Typography fontSize="1.5rem" color="white">
+              {t("clear-filters")}
+            </Typography>
+          </Button>
+        </div>
+      </Grid>
     </Wrapper>
   );
 };
@@ -207,11 +208,7 @@ const Wrapper = styled.section`
     opacity: 1;
   } 
   } 
-
-  .clear-button { 
-    width: 35rem;
-    height: 3rem;
-  }
+ 
 `;
 
 export default FilterSection;

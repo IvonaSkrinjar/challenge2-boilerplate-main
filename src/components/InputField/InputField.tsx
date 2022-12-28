@@ -3,7 +3,9 @@ import { at } from "lodash";
 import { useField } from "formik";
 import styled from "styled-components";
 import { TextField } from "@mui/material";
+import styles from "./styles.module.css";
 
+  
 const InputField = (props: any) => {
   const { ...rest } = props;
   const [field, meta] = useField(props);
@@ -19,28 +21,22 @@ const InputField = (props: any) => {
     <Wrapper>
       <TextField
         type="text"
+        className={styles.root}
+        variant="standard"
         error={meta.touched && meta.error && true}
         helperText={handleHelperText()}
         InputProps={{
-          disableUnderline: true,
-          classes: {
-            input: "input-field",
-          },
+          className: styles.input_field,
         }}
         InputLabelProps={{ style: { fontSize: 14 } }}
         {...field}
-        {...rest}                
+        {...rest}
       />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.section`
-  .input-field {
-    font-size: 14px;
-    text-transform: none;
-    padding: 1rem;
-  }
   .MuiFormHelperText-root {
     font-size: 12px;
   }

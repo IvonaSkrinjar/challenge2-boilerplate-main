@@ -43,11 +43,16 @@ const Products = () => {
 
   return (
     <Wrapper>
-      <Grid container style={{ paddingTop: "2rem" }} spacing={3}>
-        <Grid item sm={4} md={3} sx={{ display: "flex" }}>
+      <Grid
+        container
+        style={{ paddingTop: "2rem", paddingLeft: "3rem", paddingBottom: "15rem" }}
+        spacing={1}
+        columnSpacing={1}
+      >
+        <Grid item sm={4} md={4} lg={4}>
           <FilterSection />
         </Grid>
-        <Grid item xs={12} sm={10} md={8} sx={{ marginLeft: "5rem" }}>
+        <Grid item xs={12} sm={8} md={8} lg={8}>
           <Sort />
           <ProductList />
         </Grid>
