@@ -53,7 +53,7 @@ const FilterSection = () => {
   };
   return (
     <Wrapper>
-      <Grid item xs={12} sm={8} md={8}>
+      <Grid item xs={12} sm={8} md={9}>
         <Autocomplete
           {...defaultProps}
           value={value}
@@ -66,6 +66,11 @@ const FilterSection = () => {
           inputValue={inputValue}
           onInputChange={(e, v) => {
             setInputValue(v);
+          }}        
+          sx={{
+            "& .MuiAutocomplete-input": {
+              fontSize: 14,
+            },
           }}
           renderInput={(params) => (
             <TextField
@@ -81,7 +86,7 @@ const FilterSection = () => {
           )}
         />
       </Grid>
-      <Grid item xs={12} sm={8} md={8}>
+      <Grid item xs={12} sm={8} md={9}>
         <div className="filter_price">
           <Typography variant="h4" component="h4">
             {t("filter-price")}
@@ -96,7 +101,6 @@ const FilterSection = () => {
             {numberFormatCurrency.formatNumber(price)}
           </Typography>
           <Slider
-           
             defaultValue={maxPrice}
             step={10}
             min={minPrice}

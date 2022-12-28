@@ -49,10 +49,10 @@ const Products = () => {
         spacing={1}
         columnSpacing={1}
       >
-        <Grid item sm={4} md={4} lg={4}>
+        <Grid item sm={4} md={3}>
           <FilterSection />
         </Grid>
-        <Grid item xs={12} sm={8} md={8} lg={8}>
+        <Grid item xs={12} sm={8} md={8}>
           <Sort />
           <ProductList />
         </Grid>
