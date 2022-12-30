@@ -12,7 +12,8 @@ const Products = () => {
   const filterCtx = useContext(FilterContext);
   const productCtx = useContext(ProductContext);
   const { t } = useTranslation();
-  const { products, categories, areProductsLoading } = useContext(ProductContext);
+  const { products, categories, areProductsLoading } =
+    useContext(ProductContext);
 
   useEffect(() => {
     productCtx.getProducts();
@@ -21,7 +22,14 @@ const Products = () => {
 
   useEffect(() => {
     filterCtx.filterTrigger();
-  }, [products, categories, filterCtx.sorting_value, filterCtx.filters]);
+    filterCtx.sortingProducts();
+  }, [
+    products,
+    categories,
+    filterCtx.filter_products,
+    filterCtx.sorting_value,
+    filterCtx.filters,
+  ]);
 
   useEffect(() => {
     filterCtx.loadProductWithMaxPrice();
@@ -45,7 +53,11 @@ const Products = () => {
     <Wrapper>
       <Grid
         container
-        style={{ paddingTop: "2rem", paddingLeft: "3rem", paddingBottom: "15rem" }}
+        style={{
+          paddingTop: "2rem",
+          paddingLeft: "3rem",
+          paddingBottom: "15rem",
+        }}
         spacing={1}
         columnSpacing={1}
       >

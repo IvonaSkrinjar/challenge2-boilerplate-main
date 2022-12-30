@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import GridViewIcon from "@mui/icons-material/GridView";
 import { FilterContext } from "context/filter/FilterContext";
 import ViewListIcon from "@mui/icons-material/ViewList";
@@ -9,16 +9,11 @@ import styles from "./styles.module.css";
 const Sort = () => {
   const {
     filter_products,
-    sortingProducts,
     grid_view,
     setGridView,
     setListView,
     sorting,
-  } = useContext(FilterContext);
-
-  useEffect(() => {
-    sortingProducts();
-  }, [filter_products]);
+  } = useContext(FilterContext);  
 
   const [value, setValue] = useState("lowest");
   const { t } = useTranslation();
