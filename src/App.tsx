@@ -23,7 +23,7 @@ function App() {
   }, []);
 
   return (  
-    <Suspense fallback={<div>isLoading...</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<CartPage />} />
